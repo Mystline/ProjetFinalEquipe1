@@ -1,4 +1,11 @@
-angular.module('projetequipe1', ['ngRoute'])
+angular.module('projetequipe1', ['ngRoute', 'uiGmapgoogle-maps'])
+.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+})
 .run(['$rootScope', '$location', function ($rootScope, $location) {
 
 	$rootScope.changeView = function(view){
