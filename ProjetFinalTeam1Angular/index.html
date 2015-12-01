@@ -30,7 +30,14 @@
 
 	<body ng-app="projetequipe1" style="background-color:#F1F1F6;">
 	
-			test
+        
+        <div class="btn-group">
+            <button ng-click="changeView('/voyages')" class="btn btn-primary">Voyages</button>
+			<button ng-click="changeView('/activites')" class="btn btn-primary">Activites</button>
+	        <button ng-click="changeView('/jours')" class="btn btn-primary">Jours</button> 
+            <button ng-click="changeView('/transports')" class="btn btn-primary">Transports</button>
+            <button ng-click="changeView('/utilisateurs')" class="btn btn-primary">Utilisateurs</button>
+		</div>	
 	
             <ng-view></ng-view>
          

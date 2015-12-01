@@ -1,5 +1,5 @@
 angular.module('projetequipe1', ['ngRoute'])
-.run(['$rootScope', function ($rootScope, $location) {
+.run(['$rootScope', '$location', function ($rootScope, $location) {
 
 	$rootScope.changeView = function(view){
         $location.path(view); // path not hash
