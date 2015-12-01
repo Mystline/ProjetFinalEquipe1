@@ -1,8 +1,9 @@
+<script src="/Login/login.js"></script>
 <link href="/Styles/style.css" rel="stylesheet" />
 <div id="content" ng-controller="LoginController">
     <div class="left">
         <h2 style="margin-left:0px; margin-right:0px;">Utiliser votre compte pour se connecter</h2>
-        <form method="post">
+        <form>
             <label>Nom d'utilisateur</label>
             <div style="clear:both;"></div>
             <input type="text" name="user" ng-model="siUser" />
@@ -13,11 +14,9 @@
             <div style="clear:both;"></div>
             <input type="submit" value="Se connecter" ng-click="login()" style="vertical-align:top;" /> 
             <div style="clear:both;"></div>
-            <a href="#signup" id="signuplink">ou créer un compte</a>
         </form>
-        <div id="lefterror"></div>
     </div>
-    <div class="right" id="signup">
+    <div class="right">
         <h2 style="margin-left:0px; margin-right:0px;">Inscrivez-vous sur le site</h2>
         <form>
             <label>Adresse courriel</label>
@@ -26,14 +25,25 @@
             <div style="clear:both;"></div>
             <label>Mot de passe</label>
             <div style="clear:both;"></div>
-            <input type="password" name="pass" ng-model="suPass" id="login-pass" />
+            <input type="password" name="pass" ng-model="suPass"  />
             <div style="clear:both;"></div>
             <label>Réécrivez le mot de passe</label>
             <div style="clear:both;"></div>
-            <input type="password" name="pass" ng-model="suPassC" id="login-pass-r" />
+            <input type="password" name="pass" ng-model="suPassC"  />
             <div style="clear:both;"></div>
             <input type="submit" value="Inscription" ng-click="register()" />
         </form>
-        <ul id="righterror"></ul>
     </div>
+    
+    
+    
+    <form>
+        <label for="selectName">Email:</label>
+        <input type="text" id="selectName" ng-model="suUser">
+        <label for="selectPassword">Password:</label>
+        <input type="password" id="selectPassword" ng-model="suPass">
+        <label for="selectPassword">Check Password:</label>
+        <input type="password" id="selectCheckPassword" ng-model="suPassC">
+        <button class="btn btn-default" type="submit" ng-click="register()">REGISTER</button>
+    </form>
 </div>

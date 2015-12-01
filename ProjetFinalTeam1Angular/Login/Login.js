@@ -1,4 +1,4 @@
-function LoginController($rootScope, $scope, $http, $location) {
+function LoginController($rootScope, $scope, $http, $location, $window, dataService) {
   
     $scope.TOKEN_KEY = "TOKEN";
 
@@ -15,7 +15,7 @@ function LoginController($rootScope, $scope, $http, $location) {
         if ($scope.valCheckPassword == $scope.valPassword) {
             $http({
                 method: 'POST',
-                url: "http://localhost:15676/api/Account/Register",
+                url: "http://localhost:3216/api/Account/Register",
                 data:
                 {
                     Email: $scope.suUser,
@@ -36,7 +36,7 @@ function LoginController($rootScope, $scope, $http, $location) {
     $scope.login = function () {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:15676/Token',
+            url: 'http://localhost:3216/Token',
             data: {
                 grant_type: 'password',
                 username: $scope.siUser,
