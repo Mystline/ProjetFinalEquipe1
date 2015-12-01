@@ -13,7 +13,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce)
                 
             $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+position.coords.latitude+','+position.coords.longitude+'&key=AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM')
             .success(function(data){
-                console.log(date);
+                console.log(data);
                 
                 $scope.belleAdresse = data.results[0].formatted_address;
                 loc = data.results[0].geometry.location;

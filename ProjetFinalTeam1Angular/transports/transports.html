@@ -1,20 +1,12 @@
 <div ng-controller="TransportController">
     transport
-    
-    <div class="container">
-    
-    <div class="col-md-4 col-sm-4"></div>
-        
-    <div class="col-md-4 col-sm-4" >
+
         <ui-gmap-google-map center='center' zoom='8' bounds='bounds'>
-            <ui-gmap-marker ng-if="location" idKey='0' coords='location'>
+            <ui-gmap-marker ng-if="location" idKey='1' coords='location'>
             </ui-gmap-marker>
         </ui-gmap-google-map>
-    </div>
-        
-    <div class="col-md-4 col-sm-4"></div>
 
-    </div>
+
 </div>
 
 
