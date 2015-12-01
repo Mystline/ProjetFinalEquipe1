@@ -22,5 +22,8 @@ angular.module('projetequipe1', ['ngRoute'])
 	$routeProvider.when('/utilisateurs', {
         templateUrl: 'utilisateurs/utilisateurs.html',
     });
+    $routeProvider.when('/Login', {
+        templateUrl: 'Login/Login.html',
+    });
     $routeProvider.otherwise({ redirectTo: '/voyages' });
 }]);

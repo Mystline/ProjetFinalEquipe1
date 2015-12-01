@@ -1,0 +1,738 @@
+﻿@font-face {
+    font-family: montserrat_b;
+    src: url(../Fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: montserrat_t;
+    src: url(../Fonts/Montserrat-Light.ttf);
+}
+
+input {
+    outline: none;
+}
+
+
+body {
+    background-color: #ecf0f1;
+    padding: 0px;
+    margin: 0px;
+    overflow-y: scroll;
+    height: calc(100% - 60px);
+}
+
+html {
+    min-width: 877px;
+    height: 100%;
+}
+
+.angular-google-map-container {
+    height: 400px;
+    width: calc(100% + 20px);
+    margin-left: -10px;
+}
+
+.marginleftright {
+    margin: 0px 20px 0px 20px;
+    min-width: 820px;
+}
+
+#connected {
+    display: none;
+    width: 192px;
+    text-align: right;
+    color: white;
+    font-family: montserrat_b;
+    font-size: 14px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    #connected a {
+        color: #e74c3c;
+    }
+
+#loading {
+    display: none;
+}
+
+header {
+    background-color: #1abc9c;
+    width: 100%;
+    height: 60px;
+    margin-top: -60px;
+    position: fixed;
+    vertical-align: top;
+    z-index: 10;
+}
+
+    header #c-logo {
+        float: left;
+        margin: 0;
+    }
+
+        header #c-logo #logo {
+            height: 60px;
+            display: table-cell;
+            vertical-align: middle;
+            color: white;
+            font-family: montserrat_b;
+            font-size: 24px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+    header #c-nav {
+        float: left;
+        min-width: 268px;
+    }
+
+        header #c-nav ul {
+            margin: 0px 0px 0px 0px;
+            padding-left: 24px;
+            height: 60px;
+            text-transform: uppercase;
+        }
+
+            header #c-nav ul li {
+                display: inline-block;
+                height: 60px;
+                transition: background-color linear 0.2s;
+                margin-left: -4px;
+            }
+
+                header #c-nav ul li:hover {
+                    background-color: #16A085;
+                }
+
+                header #c-nav ul li a {
+                    text-decoration: none;
+                }
+
+                    header #c-nav ul li a div {
+                        height: 60px;
+                        display: table-cell;
+                        vertical-align: middle;
+                        padding: 3px 7.5px 0px 7.5px;
+                        color: #fff;
+                        font-family: montserrat_b;
+                        font-size: 13px;
+                        -webkit-touch-callout: none;
+                        -webkit-user-select: none;
+                        -khtml-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                    }
+
+
+    header #c-search {
+        float: right;
+        width: 300px;
+    }
+
+        header #c-search form {
+            height: 60px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+            header #c-search form input[type='text'] {
+                height: 20px;
+                border: 1px solid #fff;
+                background-color: #fff;
+                padding: 5px;
+                width: 190px;
+                font-family: montserrat_t;
+                color: #1abc9c;
+            }
+
+            header #c-search form input[type='submit'] {
+                height: 32px;
+                width: 85px;
+                border: 1px solid #e74c3c;
+                background-color: #e74c3c;
+                color: white;
+                font-family: montserrat_b;
+                margin-left: -4px;
+                vertical-align: top;
+                cursor: pointer;
+            }
+
+    header #c-user {
+        float: right;
+    }
+
+        header #c-user #user-connect {
+            height: 60px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+
+/*header #c-user #user-connect button {
+                height: 32px;
+                color: white;
+                font-family: montserrat_b;
+                margin-left: 4px;
+                cursor: pointer;
+            }
+
+            header #c-user #user-connect .button1 {
+                border: 1px solid #16A085;
+                background-color: #16A085;
+            }
+
+            header #c-user #user-connect .button2 {
+                border: 1px solid #333;
+                background-color: #333;
+            }*/
+#addVoyages {
+    background-color: #333;
+    margin-left: -10px;
+    width: calc(100% + 20px);
+    float: left;
+    padding-bottom: 40px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+    #addVoyages h2 {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+        color: white !important;
+        border-bottom: 1px solid white !important;
+    }
+
+    #addVoyages #formaddvoyage {
+        margin-left: 20px;
+        margin-top: 10px;
+        margin-right: 20px;
+        overflow: auto;
+    }
+
+        #addVoyages #formaddvoyage .i {
+            float: left;
+            padding-right: 20px;
+            margin-bottom: 10px;
+        }
+
+            #addVoyages #formaddvoyage .i .label {
+                float: left;
+                color: white;
+                font-family: montserrat_b;
+                padding-right: 20px;
+                margin-top: 14px;
+                width: 100px;
+            }
+
+            #addVoyages #formaddvoyage .i .notfirst {
+                padding-left: 20px;
+            }
+
+
+    #addVoyages input {
+        height: 35px;
+        padding: 5px;
+        font-family: montserrat_t;
+        border: 1px solid #333;
+        width: 200px;
+        color: #333;
+    }
+
+        #addVoyages input[type='submit'] {
+            margin-left: 121px;
+            height: 47px;
+            background-color: #e74c3c;
+            width: 210px;
+            color: white;
+            border: 1px solid #e74c3c;
+        }
+
+    #addVoyages .l {
+        padding-left: 40px;
+    }
+
+.shaking {
+    -webkit-animation-name: spaceboots;
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    z-index: 1;
+}
+
+.accepter {
+    height: 47px;
+    background-color: #1abc9c;
+    width: 210px;
+    color: white;
+    border: 1px solid #1abc9c;
+    transition: all linear 0.2s;
+    margin-left: 50px;
+}
+
+    .accepter:hover {
+        background-color: #16a085;
+        border: 1px solid #16a085;
+    }
+
+.selectedItem {
+    transition: margin-top linear 0.1s;
+}
+
+    .selectedItem:hover {
+        margin-top: -10px;
+    }
+
+#content {
+    margin-top: 60px;
+    height: 100%;
+    padding: 0px 10px 0px 10px;
+    min-width: 820px;
+}
+
+    #content #journee-informations table {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    #content #journee-informations .label {
+        font-family: montserrat_b;
+        color: #333;
+    }
+
+    #content #journee-informations .input {
+        font-family: montserrat_t;
+        height: 35px;
+        padding: 5px;
+        width: 100%;
+    }
+
+
+    #content #transport-informations table {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    #content #transport-informations .label {
+        font-family: montserrat_b;
+        color: #333;
+    }
+
+    #content #transport-informations .input {
+        font-family: montserrat_t;
+        height: 35px;
+        padding: 5px;
+        width: 100%;
+    }
+
+    #content h2 {
+        color: #333;
+        font-family: montserrat_b;
+        padding-top: 20px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-bottom: 1px solid #333;
+    }
+
+    #content .c-item {
+        width: calc(12.5% - 20px);
+        height: 230px;
+        padding: 10px;
+        float: left;
+    }
+
+        #content .c-item .itemH, #content .c-item .item {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        #content .c-item .itemH {
+            background-color: #e74c3c;
+        }
+
+        #content .c-item .item {
+            background-color: #16A085;
+        }
+
+            #content .c-item .item .i-name, #content .itemH .i-name {
+                margin-top: -15px;
+                margin-bottom: 0px;
+                color: white;
+                font-family: montserrat_b;
+                font-size: 120px;
+                text-align: center;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            #content .c-item .item .name, #content .itemH .name {
+                color: white;
+                font-family: montserrat_b;
+                font-size: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                text-align: center;
+                background-color: #333;
+                display: inline-block;
+                width: calc(100% - 10px);
+                padding-left: 5px;
+                padding-right: 5px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            #content .c-item .item .delete {
+                color: white;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                margin-right: 5px;
+                text-align: right;
+                font-size: 20px;
+                font-family: montserrat_b;
+                visibility: hidden;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+                #content .c-item .item .delete:hover {
+                    color: #333;
+                }
+
+        #content .c-item .journeeH, #content .c-item .journee {
+            background-color: #e74c3c;
+        }
+
+        #content .c-item .voyageH, #content .c-item .voyage {
+            background-color: #16A085;
+        }
+
+        #content .c-item .transportH, #content .c-item .transport {
+            background-color: #16A085;
+        }
+
+    #content .left {
+        border-right: 1px solid #333;
+    }
+
+    #content .left, #content .right {
+        float: left;
+        width: calc(50% - 301px);
+        margin-top: 60px;
+        padding-left: 150px;
+        padding-bottom: 60px;
+        padding-right: 150px;
+    }
+
+        #content .left h2, #content .right h2 {
+            font-family: montserrat_b;
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        #content .left label, #content .right label {
+            font-family: montserrat_t;
+            font-size: 12px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
+        }
+
+        #content .left input[type='text'], #content .left input[type='password'], #content .right input[type='text'], #content .right input[type='password'] {
+            width: calc(100% - 13px);
+            height: 20px;
+            padding: 5px;
+            border: 1px solid #333;
+            max-width: 620px;
+        }
+
+        #content .left input[type='submit'], #content .right input[type='submit'] {
+            width: 40%;
+            height: 45px;
+            border: 1px solid #1abc9c;
+            background-color: #1abc9c;
+            color: white;
+            font-family: montserrat_b;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-right: 2px;
+            transition: all linear 0.1s;
+            cursor: pointer;
+            max-width: 260px;
+        }
+
+            #content .left input[type='submit']:hover {
+                border: 1px solid #333;
+                background-color: #333;
+            }
+
+            #content .right input[type='submit']:hover {
+                border: 1px solid #333;
+                background-color: #333;
+            }
+
+        #content .left a {
+            font-family: montserrat_t;
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            display: block;
+        }
+
+#signuplink {
+    visibility: hidden;
+}
+
+#lefterror, #righterror {
+    float: left;
+    font-family: montserrat_t;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+#righterror {
+    padding-left: 0px;
+}
+
+    #righterror li {
+        list-style: none;
+    }
+
+    #righterror .green {
+        color: #1abc9c;
+    }
+
+    #righterror .red {
+        color: #e74c3c;
+    }
+
+.notconnected #relativeparent {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+    .notconnected #relativeparent #absolutechild {
+        width: 50%;
+        height: 80px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        font-family: montserrat_b;
+        font-size: 20px;
+        color: #7f8c8d;
+    }
+
+.notconnected button {
+    height: 32px;
+    color: white;
+    font-family: montserrat_b;
+    margin-left: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.notconnected .button1 {
+    border: 1px solid #16A085;
+    background-color: #16A085;
+}
+
+.notconnected .button2 {
+    border: 1px solid #333;
+    background-color: #333;
+}
+
+@media screen and (max-width: 1550px) {
+    header {
+        height: 170px;
+        margin-top: -170px;
+    }
+
+
+        header #c-logo #logo {
+            font-size: 32px;
+        }
+
+        header #c-all {
+            max-width: 1250px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            text-align: center;
+            margin: auto;
+        }
+
+            header #c-all #c-c {
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        header #c-nav ul {
+            padding-left: 0px;
+        }
+
+        header #c-logo {
+            margin: auto;
+            width: 615px;
+            float: none;
+        }
+
+        header #c-nav {
+            text-align: left;
+            min-width: 530px;
+        }
+
+        header #c-user {
+            margin: 2px 0px 0px 25px;
+            float: left;
+        }
+
+        header #c-all #c-c1 {
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header #c-search {
+            float: left;
+            width: 500px;
+            margin-top: -10px;
+            margin-right: 0px;
+            display: inline-block;
+        }
+
+            header #c-search form input[type='text'] {
+                width: 400px;
+            }
+
+    #content {
+        margin-top: 170px;
+    }
+
+        #content .left, #content .right {
+            float: none;
+            padding-top: 60px;
+        }
+
+        #content .left {
+            border-right: none;
+            height: calc(100% - 120px);
+            width: calc(100% - 300px);
+        }
+
+        #content .right {
+            margin-top: 0px;
+            background-color: #E8E8E8;
+            height: calc(100% - 120px);
+            margin-left: -10px;
+            width: calc(100% - 280px);
+        }
+
+            #content .right form, #content .right h2, #righterror {
+                padding-left: 10px;
+            }
+
+    #addVoyages {
+        padding-bottom: 10px;
+    }
+
+    #signuplink {
+        visibility: visible;
+    }
+
+    body {
+        height: calc(100% - 170px);
+    }
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1200px) {
+    #content .c-item {
+        width: calc(16.666666666% - 20px);
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1000px) {
+    #content .c-item {
+        width: calc(20% - 20px);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #content .c-item {
+        width: calc(25% - 20px);
+    }
+}
+
+@-webkit-keyframes spaceboots {
+    0% {
+        -webkit-transform: translate(2px, 1px) rotate(0deg);
+    }
+
+    10% {
+        -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        -webkit-transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        -webkit-transform: translate(0px, 2px) rotate(0deg);
+    }
+
+    40% {
+        -webkit-transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        -webkit-transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        -webkit-transform: translate(2px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        -webkit-transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        -webkit-transform: translate(2px, 2px) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translate(1px, -2px) rotate(-1deg);
+    }
+}

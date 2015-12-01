@@ -1,0 +1,39 @@
+<link href="/Styles/style.css" rel="stylesheet" />
+<div id="content" ng-controller="LoginController">
+    <div class="left">
+        <h2 style="margin-left:0px; margin-right:0px;">Utiliser votre compte pour se connecter</h2>
+        <form method="post">
+            <label>Nom d'utilisateur</label>
+            <div style="clear:both;"></div>
+            <input type="text" name="user" ng-model="siUser" />
+            <div style="clear:both;"></div>
+            <label>Mot de passe</label>
+            <div style="clear:both;"></div>
+            <input type="password" name="pass" ng-model="siPass" />
+            <div style="clear:both;"></div>
+            <input type="submit" value="Se connecter" ng-click="login()" style="vertical-align:top;" /> 
+            <div style="clear:both;"></div>
+            <a href="#signup" id="signuplink">ou créer un compte</a>
+        </form>
+        <div id="lefterror"></div>
+    </div>
+    <div class="right" id="signup">
+        <h2 style="margin-left:0px; margin-right:0px;">Inscrivez-vous sur le site</h2>
+        <form>
+            <label>Adresse courriel</label>
+            <div style="clear:both;"></div>
+            <input type="text" name="user" ng-model="suUser" />
+            <div style="clear:both;"></div>
+            <label>Mot de passe</label>
+            <div style="clear:both;"></div>
+            <input type="password" name="pass" ng-model="suPass" id="login-pass" />
+            <div style="clear:both;"></div>
+            <label>Réécrivez le mot de passe</label>
+            <div style="clear:both;"></div>
+            <input type="password" name="pass" ng-model="suPassC" id="login-pass-r" />
+            <div style="clear:both;"></div>
+            <input type="submit" value="Inscription" ng-click="register()" />
+        </form>
+        <ul id="righterror"></ul>
+    </div>
+</div>
