@@ -1,4 +1,8 @@
-function LoginController($rootScope, $scope, $http, $location, $window, dataService) {
+angular
+    .module('projetequipe1')
+    .controller('LoginController',['$rootScope', '$scope', '$http', '$location', '$window',
+
+function LoginController($rootScope, $scope, $http, $location, $window) {
   
     $scope.TOKEN_KEY = "TOKEN";
 
@@ -58,4 +62,4 @@ function LoginController($rootScope, $scope, $http, $location, $window, dataServ
         localStorage.removeItem($scope.TOKEN_KEY)
     }
 
-};
+}]);

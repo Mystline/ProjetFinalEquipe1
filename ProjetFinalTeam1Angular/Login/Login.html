@@ -1,5 +1,4 @@
-<script src="/Login/login.js"></script>
-<link href="/Styles/style.css" rel="stylesheet" />
+
 <div id="content" ng-controller="LoginController">
     <div class="left">
         <h2 style="margin-left:0px; margin-right:0px;">Utiliser votre compte pour se connecter</h2>
@@ -34,16 +33,4 @@
             <input type="submit" value="Inscription" ng-click="register()" />
         </form>
     </div>
-    
-    
-    
-    <form>
-        <label for="selectName">Email:</label>
-        <input type="text" id="selectName" ng-model="suUser">
-        <label for="selectPassword">Password:</label>
-        <input type="password" id="selectPassword" ng-model="suPass">
-        <label for="selectPassword">Check Password:</label>
-        <input type="password" id="selectCheckPassword" ng-model="suPassC">
-        <button class="btn btn-default" type="submit" ng-click="register()">REGISTER</button>
-    </form>
 </div>
