@@ -1,10 +1,13 @@
 <div ng-controller="TransportController">
     transport
 
+<!--
         <ui-gmap-google-map id='map' center='center' zoom='8' bounds='bounds'>
             <ui-gmap-marker ng-if="location" idKey='1' coords='location'>
             </ui-gmap-marker>
         </ui-gmap-google-map>
+-->
+    <div id="map" style="width:500px;height:400px"></div>
     
 <button ng-click="ajouterMarker()" class="btn btn-default" value="Salut">Choisir</button>
 
