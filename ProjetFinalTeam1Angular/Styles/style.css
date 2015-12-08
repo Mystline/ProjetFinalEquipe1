@@ -170,23 +170,7 @@ header {
         }
 
 
-/*header #c-user #user-connect button {
-                height: 32px;
-                color: white;
-                font-family: montserrat_b;
-                margin-left: 4px;
-                cursor: pointer;
-            }
 
-            header #c-user #user-connect .button1 {
-                border: 1px solid #16A085;
-                background-color: #16A085;
-            }
-
-            header #c-user #user-connect .button2 {
-                border: 1px solid #333;
-                background-color: #333;
-            }*/
 #addVoyages {
     background-color: #333;
     margin-left: -10px;
