@@ -11,10 +11,10 @@ namespace ProjetFinalTeam1.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime DateTimeDebut { get; set; }
+        public DateTime HeureDebut { get; set; }
 
         [Required]
-        public DateTime DateTimeFin { get; set; }
+        public DateTime HeureFin { get; set; }
 
         [Required]
         public double Cout { get; set; }

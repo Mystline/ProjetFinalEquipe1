@@ -17,6 +17,9 @@ namespace ProjetFinalTeam1.Models
         [Required]
         public DateTime DateTimeDebut { get; set; }
 
+        [Required]
+        public int NbDeJour { get; set; }
+
         public virtual List<ApplicationUser> ApplicationUsers { get; set; }
 
         public virtual List<Jour> Jours { get; set; }
