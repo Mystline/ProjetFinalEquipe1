@@ -30,10 +30,26 @@ function BarController($scope, $http, $rootScope, $location) {
     }
 
 
-
+ $scope.getUserInfo = function () {
+     var token = localStorage.getItem("token");
+        if (token)
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3216/api/Account/UserInfo',
+            headers:{ Authorization: 'Bearer ' + token},
+            success: function (data) {
+                    console.log(data);
+            },
+            error: function () {
+                
+            }
+        });
+    }
 
 
 
 
     $scope.getUser();
+    
+    $scope.getUserInfo();
 }]);
