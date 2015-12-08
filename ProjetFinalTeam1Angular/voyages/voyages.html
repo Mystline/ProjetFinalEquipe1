@@ -1,25 +1,56 @@
 <div ng-controller="VoyageController">
     <div class="container">
-        <form method="post">
+        <div class="row">
+            <form method="post">
 
-            <div class="form-group">
-                <h2>Ajouter un voyage</h2>
-            </div>
-            
-            <div class="form-group">
-                <label>Budget voyage</label>
-                <input type="text" name="budget" ng-model="budget">
-            </div>
+                <div class="form-group">
+                    <h2>Ajouter un voyage</h2>
+                </div>
 
-            <div class="form-group">
-                <label>Début voyage</label>
-                <input type="text" name="debut" ng-model="debut">
-            </div>
+                <div class="form-group">
+                    <label>Budget voyage</label>
+                    <input type="text" name="budget" ng-model="budgetVoyage">
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Ajouter" ng-click="ajouterVoyage()">
-            </div>
+                <div class="form-group">
+                    <label>Début voyage</label>
+                    <input type="text" name="debut" ng-model="dateDebut">
+                </div>
 
-        </form>
+                <div class="form-group">
+                    <label>Nombre de jours</label>
+                    <input type="text" name="jours" ng-model="nbJours">
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Ajouter" ng-click="ajouterVoyage()">
+                </div>
+
+            </form>
+        </div>
+        <div class="row">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Budget Voyage</th>
+                        <th>Debut Voyage</th>
+                        <th>Nombre de Jours</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="voyage in voyages">
+                    <td>{{voyage.Id}}</td>
+                    <td>{{voyage.BudgetVoyage}}</td>
+                    <td>{{voyage.DateTimeDebut}}</td>
+                    <td>{{voyage.NbDeJour}}</td>
+                    <td class="text-center">
+                        <a ng-click="modifierVoyage(voyage)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>
+                        <a ng-click="selectionnerVoyage(voyage)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>
+                        <a ng-click="supprimerVoyage(voyage)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
