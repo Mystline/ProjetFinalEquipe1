@@ -57,10 +57,11 @@ function TransportController($scope, $rootScope, $http, $route, $sce) {
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     $scope.ajouterMarker = function (){
         var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(45.501459, -73.567543),
-          map: map,
-          icon: '../Images/markerBlack.png'
+            position: new google.maps.LatLng(45.501459, -73.567543),
+            map: map,
+            icon: '../Images/markerBlack.png'
             //icon: iconBase + 'schools_maps.png'
+            //title: 'Voila un icon noir!'
         });
     }
     
