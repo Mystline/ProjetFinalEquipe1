@@ -1,7 +1,7 @@
 <div ng-controller="TransportController">
     transport
 
-        <ui-gmap-google-map center='center' zoom='8' bounds='bounds'>
+        <ui-gmap-google-map id='map' center='center' zoom='8' bounds='bounds'>
             <ui-gmap-marker ng-if="location" idKey='1' coords='location'>
             </ui-gmap-marker>
         </ui-gmap-google-map>
