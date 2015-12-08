@@ -36,12 +36,18 @@ function TransportController($scope, $rootScope, $http, $route, $sce) {
     $scope.center = { latitude: 45.501459, longitude: -73.567543 };
     
     var mapCanvas = document.getElementById('map');
-    var map = new google.maps.Map(mapCanvas,);
-//    $scope.ajouterMarker = function (){
-//        var marker = new google.maps.Marker({
-//            position: $scope.center,
-//            icon: 'Images/markerBlack.png',
-//            map: 
-//        });
-//    }
+    var mapOptions = {
+      center: $scope.center,
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(mapCanvas);
+    
+    $scope.ajouterMarker = function (){
+        var marker = new google.maps.Marker({
+            position: $scope.center,
+            icon: '../Images/markerBlack.png',
+            map: map
+        });
+    }
 }]);
