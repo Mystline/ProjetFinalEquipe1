@@ -12,6 +12,7 @@ using ProjetFinalTeam1.Models;
 
 namespace ProjetFinalTeam1.Controllers
 {
+    [Authorize]
     public class VoyagesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

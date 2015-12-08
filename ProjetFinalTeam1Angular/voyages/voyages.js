@@ -10,13 +10,13 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             $scope.nbJours = "";
             $scope.voyages = [];
 
-//            $http({
-//                method: 'GET',
-//                url: "http://localhost:59044/api/Voyages"
-//            }).success(function (data) {
-//                console.log(data)
-//                $scope.voyages = data;
-//            });
+            $http({
+                method: 'GET',
+                url: "http://localhost:59044/api/Voyages"
+            }).success(function (data) {
+                console.log(data)
+                $scope.voyages = data;
+            });
 
             $scope.ajouterVoyage = function () {
                 if ($scope.budgetVoyage == "" || $scope.dateDebut == "" || $scope.nbJours == "") {
