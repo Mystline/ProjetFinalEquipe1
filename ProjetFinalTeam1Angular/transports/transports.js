@@ -36,7 +36,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce) {
     $scope.center = { latitude: 45.501459, longitude: -73.567543 };
     
     var mapCanvas = document.getElementById('map');
-    var map = new google.maps.Map(mapCanvas);
+    var map = new google.maps.Map(mapCanvas,);
 //    $scope.ajouterMarker = function (){
 //        var marker = new google.maps.Marker({
 //            position: $scope.center,
