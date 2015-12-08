@@ -1,8 +1,25 @@
 <div ng-controller="VoyageController">
-    voyage
+    <div class="container">
+        <form method="post">
+
+            <div class="form-group">
+                <h2>Ajouter un voyage</h2>
+            </div>
+            
+            <div class="form-group">
+                <label>Budget voyage</label>
+                <input type="text" name="budget" ng-model="budget">
+            </div>
+
+            <div class="form-group">
+                <label>Début voyage</label>
+                <input type="text" name="debut" ng-model="debut">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Ajouter" ng-click="ajouterVoyage()">
+            </div>
+
+        </form>
+    </div>
 </div>
-
-
-
-
-
