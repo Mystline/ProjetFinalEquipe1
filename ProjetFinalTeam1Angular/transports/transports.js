@@ -3,9 +3,13 @@ angular
     .controller('TransportController',['$scope', '$rootScope', '$http', '$route', '$sce',
  
 function TransportController($scope, $rootScope, $http, $route, $sce) {
+    //Variables
+    var map;
+    var center = new google.maps.LatLng(45.501459, -73.567543);
     
+    //---------------------------------------------------------------------
     //Geolocalisation
-    if (navigator.geolocation)
+    /*if (navigator.geolocation)
     {   
         navigator.geolocation.watchPosition(function(position) {
 
@@ -31,23 +35,33 @@ function TransportController($scope, $rootScope, $http, $route, $sce) {
     else
     {
         alert("Geolocation is not supported by this browser.");
+    }*/
+    
+    //$scope.center = { latitude: 45.501459, longitude: -73.567543 };
+    
+    //---------------------------------------------------------------------
+    //Initialiser la map
+    function initialize() {
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+            center: center,
+            zoom: 8,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+        map = new google.maps.Map(mapCanvas, mapOptions);
     }
+    google.maps.event.addDomListener(window, 'load', initialize);
     
-    $scope.center = { latitude: 45.501459, longitude: -73.567543 };
-    
-    var mapCanvas = document.getElementById('map');
-    var mapOptions = {
-      center: $scope.center,
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(mapCanvas);
-    
+    //---------------------------------------------------------------------
+    //Methodes
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     $scope.ajouterMarker = function (){
         var marker = new google.maps.Marker({
-            position: $scope.center,
-            icon: '../Images/markerBlack.png',
-            map: map
+          position: new google.maps.LatLng(45.501459, -73.567543),
+          map: map,
+          icon: '../Images/markerBlack.png'
+            //icon: iconBase + 'schools_maps.png'
         });
     }
+    
 }]);
