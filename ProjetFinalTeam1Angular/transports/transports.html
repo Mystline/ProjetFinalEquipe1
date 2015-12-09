@@ -1,16 +1,64 @@
 <div ng-controller="TransportController">
-    transport
-
-<!--
+    <div class="container">
+        <h1>Transports</h1>
+        <h2>Google map</h2>
+        <!--
         <ui-gmap-google-map id='map' center='center' zoom='8' bounds='bounds'>
             <ui-gmap-marker ng-if="location" idKey='1' coords='location'>
             </ui-gmap-marker>
         </ui-gmap-google-map>
--->
-    <div id="map" style="width:500px;height:400px"></div>
-    
-<button ng-click="ajouterMarker()" class="btn btn-default" value="Salut">Choisir</button>
-
+        -->
+        <div id="map" style="width:500px;height:400px"></div>
+        <button ng-click="afficherLesActivites()" class="btn btn-default" value="Salut">Choisir</button>
+        <button ng-click="afficherItineraire()" class="btn btn-default">Afficher itineraire</button>
+        
+        
+        <h2>Create new</h2>
+        <form ng-submit="createNewTransport()" id="ajoutMemo">
+            <input type="text" class="form-control" placeholder="Type" ng-model="type" style="width:300px; margin-top:5px">
+            <input type="text" class="form-control" placeholder="Transporteur" ng-model="transporteur" style="width:300px; margin-top:5px">
+            <input type="number" min="0" class="form-control" placeholder="Cout" ng-model="cout" style="width:200px; margin-top:5px">
+            Jour: <select style="margin-top:5px">
+                      <option ng-repeat="jour in jours" value="{{jour}}">{{jour}}</option>
+                  </select>
+            <input type="text" class="form-control" placeholder="Endroit depart" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+            
+            <input class="btn btn-default" type="submit" value="Ajouter" style="margin-top:10px">
+        </form>
+        
+        
+        <h2>Index</h2>
+        <div class="row" style="margin-bottom:50px">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cout</th>
+                        <th>Type</th>
+                        <th>Transporteur</th>
+                        <th># Jour</th>
+                        <th>LongDepart</th>
+                        <th>LatDepart</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="transport in transports">
+                    <td>{{transport.Id}}</td>
+                    <td>{{transport.Cout}}</td>
+                    <td>{{transport.Type}}</td>
+                    <td>{{transport.Transporteur}}</td>
+                    <td>{{transport.Jour_Id}}</td>
+                    <td>{{transport.longitudeDepart}}</td>
+                    <td>{{transport.latitudeDepart}}</td>
+                    <td class="text-center">
+                        <a ng-click="modifierTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>
+                        <a ng-click="selectionnerTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>
+                        <a ng-click="supprimerTransport(transport)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 
