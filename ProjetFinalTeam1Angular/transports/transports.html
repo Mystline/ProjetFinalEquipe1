@@ -13,23 +13,9 @@
         <button ng-click="afficherItineraire()" class="btn btn-default">Afficher itineraire</button>
         
         
-        <h2>Create new</h2>
-        <form ng-submit="createNewTransport()" id="ajoutMemo">
-            <input type="text" class="form-control" placeholder="Type" ng-model="type" style="width:300px; margin-top:5px">
-            <input type="text" class="form-control" placeholder="Transporteur" ng-model="transporteur" style="width:300px; margin-top:5px">
-            <input type="number" min="0" class="form-control" placeholder="Cout" ng-model="cout" style="width:200px; margin-top:5px">
-            Jour: <select style="margin-top:5px">
-                      <option ng-repeat="jour in jours" value="{{jour}}">{{jour}}</option>
-                  </select>
-            <input type="text" class="form-control" placeholder="Endroit depart" ng-model="endroitDepart" style="width:300px; margin-top:5px">
-            
-            <input class="btn btn-default" type="submit" value="Ajouter" style="margin-top:10px">
-        </form>
-        
-        
         <h2>Index</h2>
-        <div class="row" style="margin-bottom:50px">
-            <table class="table table-striped custab">
+        <div class="row" style="margin-bottom:30px">
+            <table class="table table-striped custab" style="border-style:solid; border-width:2px">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -51,12 +37,61 @@
                     <td>{{transport.longitudeDepart}}</td>
                     <td>{{transport.latitudeDepart}}</td>
                     <td class="text-center">
+                        <a ng-click="afficherItineraire()" class='btn btn-primary btn-xs'><span class="glyphicon glyphicon-ok"></span> Afficher</a>
                         <a ng-click="modifierTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>
-                        <a ng-click="selectionnerTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>
+<!--                        <a ng-click="selectionnerTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>-->
                         <a ng-click="supprimerTransport(transport)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
                     </td>
                 </tr>
             </table>
+        </div>
+        
+        <div style="margin-bottom:30px">
+            <h2>Creer transport</h2>
+            <form ng-submit="createNewTransport()" id="ajoutTransport">
+                <input type="text" class="form-control" placeholder="Type" ng-model="type" style="width:300px; margin-top:5px">
+                <input type="text" class="form-control" placeholder="Transporteur" ng-model="transporteur" style="width:300px; margin-top:5px">
+                <input type="number" min="0" class="form-control" placeholder="Cout" ng-model="cout" style="width:200px; margin-top:5px">
+                <p style="margin-top:5px">
+                    Jour:
+                    <select>
+                        <option ng-repeat="jour in jours" value="{{jour}}">{{jour}}</option>
+                    </select>
+                </p>
+                <input type="text" class="form-control" placeholder="Endroit depart" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+
+                <input class="btn btn-default" type="submit" value="Ajouter" style="margin-top:10px">
+            </form>
+        </div>
+        
+        <div style="margin-bottom:30px">
+            <h2>Modifier transport</h2>
+            <form ng-submit="modifierTransport()" id="modifTransport">
+                <p>
+                    Type:
+                    <input type="text" class="form-control" ng-model="type" style="width:300px; margin-top:5px">
+                </p>
+                <p>
+                    Transporteur:
+                    <input type="text" class="form-control" ng-model="transporteur" style="width:300px; margin-top:5px">
+                </p>
+                <p>
+                    Cout:
+                    <input type="number" min="0" class="form-control" ng-model="cout" style="width:200px; margin-top:5px">
+                </p>
+                <p>
+                    Jour:
+                    <select>
+                        <option ng-repeat="jour in jours" value="{{jour}}">{{jour}}</option>
+                    </select>
+                </p>
+                <p style="margin-top:5px">
+                    Endroit de départ:
+                    <input type="text" class="form-control" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+                </p>
+
+                <input class="btn btn-default" type="submit" value="Modifier" style="margin-top:10px">
+            </form>
         </div>
     </div>
 </div>

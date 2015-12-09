@@ -16,6 +16,14 @@ function TransportController($scope, $rootScope, $http, $route, $sce) {
     $scope.jours.push(2);
     $scope.jours.push(3);
     
+    //TODO: Faire les vrais requets ajax au serveur.
+    $scope.transports = [];
+    $scope.transports.push(
+        {Id:0, Cout:10, Type:"Auto", Transporteur:"Moi", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 },
+        {Id:1, Cout:10, Type:"Autobus", Transporteur:"RTL", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 },
+        {Id:1, Cout:10, Type:"Autobus", Transporteur:"RTL", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 }
+    );
+    
     //---------------------------------------------------------------------
     //Geolocalisation
     /*if (navigator.geolocation)
