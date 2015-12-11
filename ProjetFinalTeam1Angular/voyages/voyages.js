@@ -25,18 +25,27 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                     alert("Un ou plusieurs champs ne sont pas valides");
 
                 } else {
-                    $http({
-                        methode: 'POST',
-                        url: "http://localhost:3216/api/Voyages",
+                    
+                    var dt = new Date();
+                    var dtstring = dt.getFullYear()
+                    + '-' + pad2(dt.getMonth()+1)
+                    + '-' + pad2(dt.getDate())
+                    + ' ' + pad2(dt.getHours())
+                    + ':' + pad2(dt.getMinutes())
+                    + ':' + pad2(dt.getSeconds());
+                    
+                    console.log($scope.dateDebut,$scope.budgetVoyage,$scope.nbJours);
+                    $.ajax({
+                        method: 'POST',
+                        url: "http://localhost:3216/api/Voyages/",
                         data: {
-                            Id: 1,
-                            BudgetVoyage: $scope.dateDebut,
-                            DateTimeDebut: $scope.budgetVoyage,
+                            BudgetVoyage: $scope.budgetVoyage,
+                            DateTimeDebut: dtstring,
                             NbDeJour: $scope.nbJours
                         }
 
-                    }).success(function (data) {
-                        $scope.voyages.push(data);
+                    }).success(function (data)  {
+                        $scope.voyages.push({BudgetVoyage: $scope.budgetVoyage, DateTimeDebut: dtstring, NbDeJour: $scope.nbJours});
                         console.log(data)
                     });
                 }
@@ -45,9 +54,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             
             $scope.selectionnerVoyage = function(voyage){
             $rootScope.voyageSelect = voyage;
-            $rootScope.changeView('/jours');
-            
-            
+            $rootScope.changeView('/jours'); 
             
             }
 
@@ -72,6 +79,11 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                 };
                 return -1;
             }
+            
+            
+            function pad2(number) {
+                return (number < 10 ? '0' : '') + number
+            }   
 
 
 }]);

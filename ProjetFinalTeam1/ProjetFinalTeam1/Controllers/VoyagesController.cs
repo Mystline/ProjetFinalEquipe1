@@ -12,7 +12,7 @@ using ProjetFinalTeam1.Models;
 
 namespace ProjetFinalTeam1.Controllers
 {
-    [Authorize]
+
     public class VoyagesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -75,11 +75,23 @@ namespace ProjetFinalTeam1.Controllers
         [ResponseType(typeof(Voyage))]
         public IHttpActionResult PostVoyage(Voyage voyage)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            int lenght = voyage.NbDeJour;
 
+            for(int i = 0; i < lenght; i++)
+            {
+                Jour temp = new Jour();
+                temp.Voyage = voyage;
+                temp.Date = voyage.DateTimeDebut.AddDays(i);
+                temp.BudgetJournee = 0;
+                db.Jours.Add(temp);
+                voyage.Jours.Add(temp);
+            }
+            
             db.Voyages.Add(voyage);
             db.SaveChanges();
 

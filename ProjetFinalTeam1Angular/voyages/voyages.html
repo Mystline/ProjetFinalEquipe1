@@ -1,7 +1,7 @@
 <div ng-controller="VoyageController">
     <div class="container">
         <div class="row">
-            <form method="post">
+            <form>
 
                 <div class="form-group">
                     <h2>Ajouter un voyage</h2>
@@ -9,17 +9,17 @@
 
                 <div class="form-group">
                     <label>Budget voyage</label>
-                    <input type="text" name="budget" ng-model="budgetVoyage">
+                    <input type="number" name="budget" ng-model="budgetVoyage">$
                 </div>
 
                 <div class="form-group">
                     <label>Début voyage</label>
-                    <input type="text" name="debut" ng-model="dateDebut">
+                    <input type="date" name="debut" ng-model="dateDebut">
                 </div>
 
                 <div class="form-group">
                     <label>Nombre de jours</label>
-                    <input type="text" name="jours" ng-model="nbJours">
+                    <input type="number" name="jours" ng-model="nbJours">
                 </div>
 
                 <div class="form-group">
