@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ProjetFinalTeam1.DAL
 {
-    public class Equipe1Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class Equipe1Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
 
         protected override void Seed(ApplicationDbContext context)

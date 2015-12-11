@@ -207,14 +207,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511261935463_debutProjet.cs" />
-    <Compile Include="Migrations\201511261935463_debutProjet.Designer.cs">
-      <DependentUpon>201511261935463_debutProjet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512081409008_avantHeure.cs" />
-    <Compile Include="Migrations\201512081409008_avantHeure.Designer.cs">
-      <DependentUpon>201512081409008_avantHeure.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -293,14 +285,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511261935463_debutProjet.resx">
-      <DependentUpon>201511261935463_debutProjet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512081409008_avantHeure.resx">
-      <DependentUpon>201512081409008_avantHeure.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

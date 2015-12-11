@@ -21,7 +21,7 @@ namespace ProjetFinalTeam1
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<ApplicationDbContext>(new Equipe1Initializer());
+            //Database.SetInitializer<ApplicationDbContext>(new Equipe1Initializer());
         }
     }
 }
