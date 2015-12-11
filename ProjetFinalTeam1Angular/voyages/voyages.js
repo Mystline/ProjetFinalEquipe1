@@ -84,6 +84,26 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             function pad2(number) {
                 return (number < 10 ? '0' : '') + number
             }   
+            
+            
+            function initVoyage()
+            {
+                $.ajax({
+                    method: 'GET',
+                    url: "http://localhost:3216/api/Voyages/",
+                    success: function (response) 
+                    {
+                        console.log(response);
+                        for(var i =0; i < response.length; i++)
+                        {
+                            $scope.voyages.push({BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[î].NbDeJour});
+                        }    
+                    }
+                });
+            }
+            
+            
+            initVoyage();
 
 
 }]);

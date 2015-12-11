@@ -95,7 +95,7 @@ namespace ProjetFinalTeam1.Controllers
             db.Voyages.Add(voyage);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = voyage.Id }, voyage);
+            return Ok(voyage);
         }
 
         // DELETE: api/Voyages/5

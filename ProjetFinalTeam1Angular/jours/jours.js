@@ -9,16 +9,16 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     
     //rootScope ??
     $scope.lstJours = [];
-    $scope.lstActivites = [];
+    $rootScope.lstActivites = [];
     
     
     $scope.getJours(function() {
     $.ajax({
         method: 'GET',
-        url: "http://localhost:3216/api/Jour/GetJours",
+        url: "http://localhost:3216/api/Jour/GetJoursVoyage",
         data:
         {
-            Jour: $rootScope.JourSelect,
+            Jour: $rootScope.VoyageSelect
         },
         error: function (data) {
             console.log("Aucun jour de selectionner ou autre erreur")
@@ -29,7 +29,8 @@ function JourController($scope, $rootScope, $http, $route, $sce)
       
         for(var i =0; i< response.length; i++)
         {
-
+            $scope.lstJours.push({Date:response[i].Date
+                , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].Voyage_Id})
         }
                                   
         console.log($scope.lstJours);
@@ -42,10 +43,10 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     $scope.getActivities(function() {
     $.ajax({
         method: 'GET',
-        url: "http://localhost:3216/api/Activite/GetActivites",
+        url: "http://localhost:3216/api/Activite/GetActivitesJour",
         data:
         {
-            Jour: $rootScope.VoyageSelect,
+            Jour: $rootScope.JourSelect
         },
         error: function (data) {
             console.log("Aucune activite de selectionner ou autre erreur")
@@ -55,9 +56,12 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         console.log(response);
         for(var i =0; i< response.length; i++)
         {
-
+            $rootScope.lstActivites.push({HeureDebut:response[i].HeureDebut,
+                         HeureFin:response[i].HeureFin, Cout:response[i].Cout,
+                         Latitude:response[i].latitude, Longitude:response[i].Longitude
+                                                                , Jour:response[i].Jour});
         }
-        console.log($scope.lstActivites);
+        console.log($rootScope.lstActivites);
     }
 
     });

@@ -22,6 +22,11 @@ namespace ProjetFinalTeam1.Controllers
             return db.Activites;
         }
 
+        public List<Activite> GetActivitesJour(Jour jour)
+        {
+            return db.Activites.Where(a => a.Jour = jour);
+        }
+
         // GET: api/Activites/5
         [ResponseType(typeof(Activite))]
         public IHttpActionResult GetActivite(int id)

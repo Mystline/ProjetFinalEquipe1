@@ -22,6 +22,13 @@ namespace ProjetFinalTeam1.Controllers
             return db.Jours;
         }
 
+        // GET: api/Jours
+        public List<Jour> GetJoursVoyage(Voyage voyage)
+        {
+
+            return db.Jours.Where(j => j.Voyage == voyage).ToList();
+        }
+
         // GET: api/Jours/5
         [ResponseType(typeof(Jour))]
         public IHttpActionResult GetJour(int id)
