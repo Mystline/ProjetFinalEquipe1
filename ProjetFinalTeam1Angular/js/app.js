@@ -15,22 +15,22 @@ angular.module('projetequipe1', ['ngRoute', 'uiGmapgoogle-maps'])
 }])
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/voyages', {
-        templateUrl: 'voyages/voyages.html',
+        templateUrl: 'voyages/voyages.html' 
     });
     $routeProvider.when('/jours', {
-        templateUrl: 'jours/jours.html',
+        templateUrl: 'jours/jours.html'
     });
 	$routeProvider.when('/activites', {
-        templateUrl: 'activites/activites.html',
+        templateUrl: 'activites/activites.html'
     });
 	$routeProvider.when('/transports', {
-        templateUrl: 'transports/transports.html',
+        templateUrl: 'transports/transports.html'
     });	
 	$routeProvider.when('/utilisateurs', {
-        templateUrl: 'utilisateurs/utilisateurs.html',
+        templateUrl: 'utilisateurs/utilisateurs.html'
     });
     $routeProvider.when('/Login', {
-        templateUrl: 'Login/Login.html',
+        templateUrl: 'Login/Login.html'
     });
     $routeProvider.otherwise({ redirectTo: '/voyages' });
 }]);

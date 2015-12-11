@@ -34,6 +34,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         }
                                   
         console.log($scope.lstJours);
+        $scope.$apply();
                                   
     }
 
@@ -65,5 +66,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     }
 
     });
+    
+    $scope.getJours();
                                   
 }]);

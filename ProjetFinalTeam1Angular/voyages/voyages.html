@@ -39,13 +39,15 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tr ng-repeat="voyage in voyages">
+                <tr ng-repeat="voyage in voyages" onclick="selectionnerVoyage()">
                     <td>{{voyage.BudgetVoyage}}</td>
                     <td>{{voyage.DateTimeDebut}}</td>
                     <td>{{voyage.NbDeJour}}</td>
                     <td class="text-center">
+                        
+                        <a ng-click="selectionnerVoyage(voyage)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Selectionner ce voyage</a>
+                        
                         <a ng-click="modifierVoyage(voyage)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>
-                        <a ng-click="selectionnerVoyage(voyage)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>
                         <a ng-click="supprimerVoyage(voyage)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
                     </td>
                 </tr>

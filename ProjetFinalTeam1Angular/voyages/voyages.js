@@ -87,7 +87,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             }   
             
             
-            function initVoyage()
+            $scope.initVoyage = function()
             {
                 $.ajax({
                     method: 'GET',
@@ -105,7 +105,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             }
             
             
-            initVoyage();
+            $scope.initVoyage();
 
 
 }]);
