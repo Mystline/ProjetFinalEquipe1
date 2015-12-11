@@ -23,6 +23,20 @@ namespace ProjetFinalTeam1.Controllers
             return db.Voyages;
         }
 
+        [Route("api/Voyages/GetVoyagesDTO")]
+        public List<VoyageDTO> GetVoyagesDTO()
+        {
+            List<VoyageDTO> lstDTO = new List<VoyageDTO>();
+            List<Voyage> lstJours = db.Voyages.ToList();
+
+            foreach(Voyage v in lstJours)
+            {
+                lstDTO.Add(new VoyageDTO(v));
+            }
+
+            return lstDTO;
+        }
+
         // GET: api/Voyages/5
         [ResponseType(typeof(Voyage))]
         public IHttpActionResult GetVoyage(int id)
@@ -72,7 +86,7 @@ namespace ProjetFinalTeam1.Controllers
         }
 
         // POST: api/Voyages
-        [ResponseType(typeof(Voyage))]
+        [ResponseType(typeof(VoyageDTO))]
         public IHttpActionResult PostVoyage(Voyage voyage)
         {
 
@@ -95,7 +109,9 @@ namespace ProjetFinalTeam1.Controllers
             db.Voyages.Add(voyage);
             db.SaveChanges();
 
-            return Ok(voyage);
+            VoyageDTO dto = new VoyageDTO(voyage);
+
+            return Ok(dto);
         }
 
         // DELETE: api/Voyages/5

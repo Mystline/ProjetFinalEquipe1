@@ -46,7 +46,8 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
 
                     }).success(function (data)  {
                         $scope.voyages.push({BudgetVoyage: $scope.budgetVoyage, DateTimeDebut: dtstring, NbDeJour: $scope.nbJours});
-                        console.log(data)
+                        console.log(data);
+                        $scope.$apply();
                     });
                 }
 
@@ -59,7 +60,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             }
 
             $scope.supprimerVoyage = function (voyage) {
-                $http({
+                $.ajax({
                     method: 'DELETE',
                     url: "http://localhost:3216/api/Voyages/" + voyage.Id
 
@@ -90,14 +91,15 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             {
                 $.ajax({
                     method: 'GET',
-                    url: "http://localhost:3216/api/Voyages/",
+                    url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
                     success: function (response) 
                     {
                         console.log(response);
                         for(var i =0; i < response.length; i++)
                         {
-                            $scope.voyages.push({BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[î].NbDeJour});
-                        }    
+                            $scope.voyages.push({BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[i].NbDeJour});
+                        }
+                        $scope.$apply();
                     }
                 });
             }

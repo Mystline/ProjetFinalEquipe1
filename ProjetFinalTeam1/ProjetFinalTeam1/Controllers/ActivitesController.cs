@@ -22,9 +22,18 @@ namespace ProjetFinalTeam1.Controllers
             return db.Activites;
         }
 
-        public List<Activite> GetActivitesJour(Jour jour)
+        [Route("api/Voyages/GetActivitesJour")]
+        public List<ActiviteDTO> GetActivitesJour(Jour jour)
         {
-            return db.Activites.Where(a => a.Jour = jour);
+            List<ActiviteDTO> lstDTO = new List<ActiviteDTO>();
+            List<Activite> lstActivite = db.Activites.Where(a => a.Jour == jour).ToList();
+
+            foreach(Activite a in lstActivite)
+            {
+                lstDTO.Add(new ActiviteDTO(a));
+            }
+
+            return lstDTO;
         }
 
         // GET: api/Activites/5

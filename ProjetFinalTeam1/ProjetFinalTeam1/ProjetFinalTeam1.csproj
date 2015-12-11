@@ -211,10 +211,13 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activite.cs" />
+    <Compile Include="Models\ActiviteDTO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Jour.cs" />
+    <Compile Include="Models\JourDTO.cs" />
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\Voyage.cs" />
+    <Compile Include="Models\VoyageDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
