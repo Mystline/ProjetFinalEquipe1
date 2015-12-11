@@ -14,9 +14,11 @@ function BarController($scope, $http, $rootScope, $location) {
              $rootScope.activeUser = localStorage.getItem("user");
          
           $('#connected').show();
+             $('#Notconnected').hide();
         }
         else{
             $rootScope.activeUser = "nouserconnected";
+        $('#Notconnected').show();
         }
     }
 

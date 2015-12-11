@@ -42,11 +42,10 @@ function LoginController($rootScope, $scope, $http, $location) {
             }).done(function (data) {
                 localStorage.setItem("token", data.access_token);
                 localStorage.setItem("user", data.userName);
-                
                 var s = localStorage.getItem("back");
                 if (s === null)
                     s = window.location.protocol + "//" + window.location.host;
-                window.location = s;
+                window.location = window.location.protocol + "//" + window.location.host;
             });
         });
     }
@@ -69,11 +68,10 @@ function LoginController($rootScope, $scope, $http, $location) {
             $('#imgLoadSi').hide();
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user", data.userName);
-
             var s = localStorage.getItem("back");
             if (s === null)
                 s = window.location.protocol + "//" + window.location.host;
-            window.location = s;
+            window.location = window.location.protocol + "//" + window.location.host;;
         });
     }
 
