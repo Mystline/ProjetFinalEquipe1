@@ -203,6 +203,7 @@
     <Compile Include="Controllers\TransportsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VoyagesController.cs" />
+    <Compile Include="DAL\Equipe1Initializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
