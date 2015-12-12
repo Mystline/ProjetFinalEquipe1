@@ -22,18 +22,23 @@ namespace ProjetFinalTeam1.Controllers
             return db.Jours;
         }
 
-        [Route("api/Voyages/GetJoursVoyage")]
+        [Route("api/Jours/GetJoursVoyage")]
         // GET: api/Jours
-        public List<JourDTO> GetJoursVoyage(Voyage voyage)
+        public List<JourDTO> GetJoursVoyage(int voyageId)
         {
+            Voyage voyage = db.Voyages.FirstOrDefault(v => v.Id == voyageId);
+
             List<JourDTO> lstDTO = new List<JourDTO>();
-            List<Jour> lstJours = db.Jours.Where(j => j.Voyage == voyage).ToList();
 
-            foreach (Jour j in lstJours)
+            if (voyage != null)
             {
-                lstDTO.Add(new JourDTO(j));
-            }
+                List<Jour> lstJours = db.Jours.Where(j => j.Voyage.Id == voyage.Id).ToList();
 
+                foreach (Jour j in lstJours)
+                {
+                    lstDTO.Add(new JourDTO(j));
+                }
+            }
             return lstDTO;
         }
 

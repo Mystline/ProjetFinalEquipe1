@@ -22,7 +22,7 @@ namespace ProjetFinalTeam1.Controllers
             return db.Activites;
         }
 
-        [Route("api/Voyages/GetActivitesJour")]
+        [Route("api/Activites/GetActivitesJour")]
         public List<ActiviteDTO> GetActivitesJour(Jour jour)
         {
             List<ActiviteDTO> lstDTO = new List<ActiviteDTO>();

@@ -45,7 +45,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                         }
 
                     }).success(function (data)  {
-                        $scope.voyages.push({BudgetVoyage: $scope.budgetVoyage, DateTimeDebut: dtstring, NbDeJour: $scope.nbJours});
+                        $scope.initVoyage();
                         console.log(data);
                         $scope.$apply();
                     });
@@ -54,8 +54,9 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             }
             
             $scope.selectionnerVoyage = function(voyage){
-            $rootScope.voyageSelect = voyage;
-            $rootScope.changeView('/jours'); 
+                console.log(voyage);
+                $rootScope.voyageSelect = voyage;
+                $rootScope.changeView('/jours'); 
             
             }
 
@@ -89,6 +90,8 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             
             $scope.initVoyage = function()
             {
+                $scope.voyages = [];
+                
                 $.ajax({
                     method: 'GET',
                     url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
@@ -97,7 +100,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                         console.log(response);
                         for(var i =0; i < response.length; i++)
                         {
-                            $scope.voyages.push({BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[i].NbDeJour});
+                            $scope.voyages.push({Id:response[i].Id, BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[i].NbDeJour});
                         }
                         $scope.$apply();
                     }
