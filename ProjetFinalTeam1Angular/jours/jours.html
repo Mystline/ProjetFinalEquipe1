@@ -26,10 +26,22 @@
         
         <div class="col-md-4">
             <h1>Infos journées</h1>
-            <div id="jourInfo" style="display: none;">
-                <h1>Buget Jour : {{budgetJour}}</h1><button ng-click="modifierBudgetJour()">Modifier</button>
+            <div id="jourInfo" style="display: none; background-color:lightgray;">
+                <h1>Buget Jour : {{budgetJour}} $</h1>
                 </br>
                 <h1>Nombre d'activite : {{nbEvent}}</h1>
+                </br>
+                <button ng-click="allowModif()" class="btn btn-primary">Modifier</button>
+                <button class="btn btn-primary">Consulter activitees</button>
+            </div>
+        
+            <div id="modifJour" style="display: none;background-color:lightgray;">
+                </br></br></br>
+                <h2>Nouveau budget</h2>
+                </br>
+                <input type="number" name="newbudget" ng-model="newbudget" /> $
+                </br></br></br>
+                <button ng-click="modifierBudgetJour()" class="btn btn-primary">Confirmer modification</button>
             </div>
         </div>
         

@@ -19,6 +19,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         
         console.log("voyage get jour");
         console.log($rootScope.voyageSelect);
+        $scope.lstJours = [];
         
     $.ajax({
         method: 'GET',
@@ -48,9 +49,17 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     {
     
         $('#jourInfo').show();
+        $('#modifJour').hide();
         $scope.budgetJour = jour.BudgetJournee;
         $scope.nbEvent = 6;
         $rootScope.JourSelect = jour;
+        
+    }
+    
+    $scope.allowModif = function()
+    {
+        $('#modifJour').show();
+        
         
     }
     
@@ -64,9 +73,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
             data:
             {
                 id: $rootScope.JourSelect.Id,
-                budget:50,
-
-                
+                budget:$scope.newbudget               
             },  
                 error: function (data) {
                 console.log("Probleme modif journee")
@@ -75,11 +82,13 @@ function JourController($scope, $rootScope, $http, $route, $sce)
             {
                 console.log(response);
 
+                $('#jourInfo').hide();
                 $scope.budgetJour = response;
-
+                $scope.getJours();
                 $scope.$apply();
             }
         });
+        $('#modifJour').hide();
     }
       
     
