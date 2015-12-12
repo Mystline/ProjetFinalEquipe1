@@ -32,14 +32,13 @@
             <table class="table table-striped custab">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Budget Voyage</th>
                         <th>Debut Voyage</th>
                         <th>Nombre de Jours</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tr ng-repeat="voyage in voyages" onclick="selectionnerVoyage()">
+                <tr ng-repeat="voyage in voyages">
                     <td>{{voyage.BudgetVoyage}}</td>
                     <td>{{voyage.DateTimeDebut}}</td>
                     <td>{{voyage.NbDeJour}}</td>
