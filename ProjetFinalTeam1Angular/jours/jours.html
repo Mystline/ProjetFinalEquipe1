@@ -17,7 +17,7 @@
                     <td>{{jour.BudgetJournee}}</td>
                     <td class="text-center">
                         
-                        <a class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Selectionner cette journee</a>
+                        <a ng-click="showJour(jour)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Selectionner cette journee</a>
 
                     </td>
                 </tr>
@@ -26,6 +26,11 @@
         
         <div class="col-md-4">
             <h1>Infos journées</h1>
+            <div id="jourInfo" style="display: none;">
+                <h1>Buget Jour : {{budgetJour}}</h1><button ng-click="modifierBudgetJour()">Modifier</button>
+                </br>
+                <h1>Nombre d'activite : {{nbEvent}}</h1>
+            </div>
         </div>
         
         <div class="col-md-4">

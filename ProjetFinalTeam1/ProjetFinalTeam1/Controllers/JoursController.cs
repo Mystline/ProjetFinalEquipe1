@@ -42,6 +42,16 @@ namespace ProjetFinalTeam1.Controllers
             return lstDTO;
         }
 
+        [Route("api/Jours/GetBudget")]
+        public int GetBudget(int id, double budget)
+        {
+            db.Jours.FirstOrDefault(j => j.Id == id).BudgetJournee = budget;
+
+            db.SaveChanges();
+
+            return 0;
+        }
+
         // GET: api/Jours/5
         [ResponseType(typeof(Jour))]
         public IHttpActionResult GetJour(int id)
@@ -57,7 +67,7 @@ namespace ProjetFinalTeam1.Controllers
 
         // PUT: api/Jours/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutJour(int id, Jour jour)
+        public IHttpActionResult PutJour(int id, JourDTO jour)
         {
             if (!ModelState.IsValid)
             {

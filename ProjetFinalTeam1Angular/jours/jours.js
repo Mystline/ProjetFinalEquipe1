@@ -5,6 +5,9 @@ angular
 function JourController($scope, $rootScope, $http, $route, $sce) 
 {
     
+    $scope.budgetJour = 0;
+    $scope.nbEvent = 0;
+    
     $rootScope.JourSelect = "";
     
     //rootScope ??
@@ -29,8 +32,8 @@ function JourController($scope, $rootScope, $http, $route, $sce)
 
             for(var i =0; i< response.length; i++)
             {
-                $scope.lstJours.push({Date:response[i].Date
-                    , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].Voyage_Id})
+                $scope.lstJours.push({Id:response[i].Id,Date:response[i].Date
+                    , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].VoyageId})
             }
 
             console.log($scope.lstJours);
@@ -39,6 +42,44 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         }
         });
 
+    }
+    
+    $scope.showJour = function(jour)
+    {
+    
+        $('#jourInfo').show();
+        $scope.budgetJour = jour.BudgetJournee;
+        $scope.nbEvent = 6;
+        $rootScope.JourSelect = jour;
+        
+    }
+    
+    $scope.modifierBudgetJour = function()
+    {
+        console.log("show jour");
+        console.log($rootScope.JourSelect);
+        $.ajax({
+            method: 'GET',
+            url: "http://localhost:3216/api/Jours/GetBudget/",
+            data:
+            {
+                id: $rootScope.JourSelect.Id,
+                budget:50,
+
+                
+            },  
+                error: function (data) {
+                console.log("Probleme modif journee")
+            },
+            success: function(response)
+            {
+                console.log(response);
+
+                $scope.budgetJour = response;
+
+                $scope.$apply();
+            }
+        });
     }
       
     
