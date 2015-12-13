@@ -130,17 +130,17 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                     errors = 0;
 
 
-                    if ($("#voyage-jour").val().length < 3) {
+                    if ($("#voyage-jour").val().length < 3 && $("#voyage-jour").val().length > 0) {
                         $('#voyage-jour').css("border", "1px solid #1abc9c");
                         mess += "<li class='green'>Le nombre de jour est valide</li>";
                     }
                     else {
                         $('#voyage-jour').css("border", "1px solid #e74c3c");
-                        mess += "<li class='red'>Il ne peut y avoir plus de 99 jours dans un voyage</li>";
+                        mess += "<li class='red'>Il doit avoir de 1 a 99 jours dans un voyage</li>";
                         errors++;
                     }
                 
-                    if($('#voyage-budget').val().length > 9)
+                    if($('#voyage-budget').val().length > 9 && $('#voyage-budget').val().length < 1)
                     {
                         $('#voyage-budget').css("border", "1px solid #e74c3c");
                         mess += "<li class='red'>Le budget est trop important</li>";
