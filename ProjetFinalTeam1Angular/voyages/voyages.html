@@ -9,17 +9,17 @@
 
                 <div class="form-group">
                     <label>Budget voyage</label>
-                    <input type="number" name="budget" ng-model="budgetVoyage">$
+                    <input type="number" name="budget" ng-model="budgetVoyage" id="voyage-budget">$
                 </div>
 
                 <div class="form-group">
                     <label>Début voyage</label>
-                    <input type="date" name="debut" ng-model="dateDebut">
+                    <input type="date" name="debut" ng-model="dateDebut" id="voyage-date">
                 </div>
 
                 <div class="form-group">
                     <label>Nombre de jours</label>
-                    <input type="number" name="jours" ng-model="nbJours">
+                    <input type="number" name="jours" ng-model="nbJours" id="voyage-jour">
                 </div>
 
                 <div class="form-group">
@@ -27,6 +27,7 @@
                 </div>
 
             </form>
+            <ul id="voyageerror"></ul>
         </div>
         <div class="row">
             <table class="table table-striped custab">

@@ -19,6 +19,13 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             });*/
 
             $scope.ajouterVoyage = function () {
+                
+                validVoyage.apply($('#login-pass'));
+                if (errors != 0) {
+                    alert("Information invalide");
+                    return;
+                }
+                
                 if ($scope.budgetVoyage == "" || $scope.dateDebut == "" || $scope.nbJours == "") {
 
 
@@ -48,6 +55,9 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                         $scope.initVoyage();
                         console.log(data);
                         $scope.$apply();
+                    }).error(function (data) {
+                        
+                        console.log("erreur ajout voyage");
                     });
                 }
 
@@ -105,7 +115,46 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                         $scope.$apply();
                     }
                 });
+                
+                $('#voyage-jour').on('change keypress paste focus textInput input', function () {
+                    validVoyage.apply(this);
+                });
+                
+                $('#voyage-budget').on('change keypress paste focus textInput input', function () {
+                    validVoyage.apply(this);
+                });
             }
+            
+            function validVoyage() {
+                    var mess = "";
+                    errors = 0;
+
+
+                    if ($("#voyage-jour").val().length < 3) {
+                        $('#voyage-jour').css("border", "1px solid #1abc9c");
+                        mess += "<li class='green'>Le nombre de jour est valide</li>";
+                    }
+                    else {
+                        $('#voyage-jour').css("border", "1px solid #e74c3c");
+                        mess += "<li class='red'>Il ne peut y avoir plus de 99 jours dans un voyage</li>";
+                        errors++;
+                    }
+                
+                    if($('#voyage-budget').val().length > 9)
+                    {
+                        $('#voyage-budget').css("border", "1px solid #e74c3c");
+                        mess += "<li class='red'>Le budget est trop important</li>";
+                        errors++; 
+                    }
+                    else
+                    {
+                        $('#voyage-budget').css("border", "1px solid #1abc9c");
+                        mess += "<li class='green'>Le budget est valide</li>";
+                    }
+                
+
+                    $('#voyageerror').html(mess);
+                }
             
             
             $scope.initVoyage();

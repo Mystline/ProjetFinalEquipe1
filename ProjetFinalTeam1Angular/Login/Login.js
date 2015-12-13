@@ -62,7 +62,7 @@ function LoginController($rootScope, $scope, $http, $location) {
                 password: $scope.siPass
             },
             error: function (data) {
-                $("#lefterror").text("L'identifiant et le mot de passe ne foctionnent pas.");
+                $("#lefterror").text("L'identifiant et le mot de passe ne fonctionnent pas.");
             }
         }).done(function (data) {
             $('#imgLoadSi').hide();
