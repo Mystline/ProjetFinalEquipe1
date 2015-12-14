@@ -1,5 +1,53 @@
 <div ng-controller="ActiviteController">
 activite
+    <div class="container">
+        <div class="row">
+            <form>
+
+                <div class="form-group">
+                    <h2>Ajouter une activitée</h2>
+                </div>
+
+                <div class="form-group">
+                    <label>HeureDebut</label>
+                    <input type="Time"  ng-model="HeureDebut" >$
+                </div>
+
+                <div class="form-group">
+                    <label>HeureFin</label>
+                    <input type="Time"  ng-model="HeureFin" >
+                </div>
+
+                <div class="form-group">
+                    <label>Cout</label>
+                    <input type="number"  ng-model="Cout" >
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Ajouter" ng-click="ajouterActivites()">
+                </div>
+
+            </form>
+            <ul id="voyageerror"></ul>
+        </div>
+        <div class="row">
+            <table class="table table-striped custab">
+                <thead>
+                    <tr>
+                        <th>HeureDebut</th>
+                        <th>HeureFin</th>
+                        <th>Cout</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="activite in activites">
+                    <td>{{activite.HeureDebut}}</td>
+                    <td>{{activite.HeureFin}}</td>
+                    <td>{{activite.Cout}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 
