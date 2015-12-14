@@ -56,6 +56,12 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         
     }
     
+     $scope.selectionnerActivitie = function(){
+                console.log($rootScope.JourSelect);
+                $rootScope.changeView('/activites'); 
+            
+            }
+    
     $scope.allowModif = function()
     {
         $('#modifJour').show();
