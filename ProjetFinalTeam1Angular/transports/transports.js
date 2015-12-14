@@ -2,7 +2,7 @@ angular
     .module('projetequipe1')
     .controller('TransportController',['$scope', '$rootScope', '$http', '$route', '$sce',
  
-function TransportController($scope, $rootScope, $http, $route, $sce) {
+function TransportController($scope, $rootScope, $http, $route, $sce, AjaxTransportsService) {
     //GESTION GOOGLE MAP
     //Variables
     var map;
@@ -200,41 +200,30 @@ function TransportController($scope, $rootScope, $http, $route, $sce) {
 
         flightPath.setMap(map);
     }
-
-
-
-//=====================================================================
-//GESTION TRANSPORT
-//Create new
-
-
-//---------------------------------------------------------------------
-//SERVICE
-
-//Create new
-$scope.createNewTransport = function() {
-
-}
-
-
-//Get all transport
-$scope.getAllTransports = function() {
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:3216/api/Transports',
-        /*data:
-        {
-
-        }*/
-    }).success(function(data) {
-        console.log(data);
-    });
-}
     
-    
-    
-    
-    
-    
+
+    //=====================================================================
+    //GESTION TRANSPORT
+    //SERVICE
+
+    //Create new
+    $scope.createNewTransport = function() {
+        //AjaxTransportsService.postTransport();
+    }
+
+
+    //Get all transport
+    $scope.getAllTransports = function() {
+        AjaxTransportsService.getTransports();
+    }
+
+
     
 }]);
+
+
+
+
+
+
+
