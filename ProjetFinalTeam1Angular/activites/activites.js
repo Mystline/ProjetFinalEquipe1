@@ -1,7 +1,7 @@
-angular
-    .module('projetequipe1', [])
-    .controller('ActiviteController',['$scope', '$rootScope', '$http', '$route', '$sce',
- 
+angular.module('projetequipe1.activites', [])
+
+.controller('ActiviteController',
+            
 function ActiviteController($scope, $rootScope, $http, $route, $sce) {
     $scope.HeureDebut = "";
     $scope.HeureFin = "";
@@ -40,4 +40,4 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce) {
         }
     }
     
-}]);
+});
