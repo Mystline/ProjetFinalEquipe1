@@ -1,5 +1,5 @@
 angular
-    .module('projetequipe1.transports')
+    .module('projetequipe1.transports', [])
     .controller('TransportController',['$scope', '$rootScope', '$http', '$route', '$sce',
  
 function TransportController($scope, $rootScope, $http, $route, $sce, TransportsService) {
