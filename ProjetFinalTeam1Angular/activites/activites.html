@@ -1,3 +1,5 @@
+
+
 <div ng-controller="ActiviteController">
 activite
     <div class="container">
@@ -22,7 +24,15 @@ activite
                     <label>Cout</label>
                     <input type="number"  ng-model="Cout" >
                 </div>
-
+               <div class="form-group">
+                         <div class="label">Latitutde:</div></td>
+                        <input type="text"  ng-model="Latitude" >
+                </div>
+             <div class="form-group">
+                         <div class="label">Longitude:</div></td>
+                        <input type="text"  ng-model="Longitude" >
+                </div>
+            
                 <div class="form-group">
                     <input type="submit" value="Ajouter" ng-click="ajouterActivites()">
                 </div>
@@ -37,6 +47,8 @@ activite
                         <th>HeureDebut</th>
                         <th>HeureFin</th>
                         <th>Cout</th>
+                        <th>LongDepart</th>
+                        <th>LatDepart</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -44,13 +56,14 @@ activite
                     <td>{{activite.HeureDebut}}</td>
                     <td>{{activite.HeureFin}}</td>
                     <td>{{activite.Cout}}</td>
+                    <td>{{activite.Longitude}}</td>
+                    <td>{{activite.Latitude}}</td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
-
-
+</div>
 
 
 
