@@ -1,4 +1,11 @@
-angular.module('projetequipe1', ['ngRoute', 'uiGmapgoogle-maps'])
+angular.module('projetequipe1', [
+    'ngRoute', 
+    'uiGmapgoogle-maps',
+    
+    'projetequipe1.activites',
+    'projetequipe1.transports'
+])
+
 .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM',
@@ -6,13 +13,14 @@ angular.module('projetequipe1', ['ngRoute', 'uiGmapgoogle-maps'])
         libraries: 'weather,geometry,visualization'
     });
 })
+
 .run(['$rootScope', '$location', function ($rootScope, $location) {
 
 	$rootScope.changeView = function(view){
         $location.path(view); // path not hash
     }
-        
 }])
+
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/voyages', {
         templateUrl: 'voyages/voyages.html' 

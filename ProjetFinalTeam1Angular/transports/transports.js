@@ -1,8 +1,8 @@
 angular
-    .module('projetequipe1')
+    .module('projetequipe1.transports')
     .controller('TransportController',['$scope', '$rootScope', '$http', '$route', '$sce',
  
-function TransportController($scope, $rootScope, $http, $route, $sce, AjaxTransportsService) {
+function TransportController($scope, $rootScope, $http, $route, $sce, TransportsService) {
     //GESTION GOOGLE MAP
     //Variables
     var map;
@@ -208,13 +208,13 @@ function TransportController($scope, $rootScope, $http, $route, $sce, AjaxTransp
 
     //Create new
     $scope.createNewTransport = function() {
-        //AjaxTransportsService.postTransport();
+        //TransportsService.postTransport();
     }
 
 
     //Get all transport
     $scope.getAllTransports = function() {
-        AjaxTransportsService.getTransports();
+        TransportsService.getTransports();
     }
 
 
