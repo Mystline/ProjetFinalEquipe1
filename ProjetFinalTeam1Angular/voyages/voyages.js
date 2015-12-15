@@ -140,7 +140,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                         errors++;
                     }
                 
-                    if($('#voyage-budget').val().length > 9 && $('#voyage-budget').val().length < 1)
+                    if($('#voyage-budget').val().length > 9 || $('#voyage-budget').val().length < 1)
                     {
                         $('#voyage-budget').css("border", "1px solid #e74c3c");
                         mess += "<li class='red'>Le budget est trop important</li>";
