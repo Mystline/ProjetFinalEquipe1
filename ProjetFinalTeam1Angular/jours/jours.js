@@ -134,7 +134,11 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     
     function pad2(number) {
         return (number < 10 ? '0' : '') + number
-    }   
+    }
+    
+    $scope.renderHtml = function (htmlCode) {
+        return $sce.trustAsHtml(htmlCode);
+    };
     
     $scope.getJours();
                                   
