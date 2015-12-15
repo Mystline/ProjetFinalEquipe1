@@ -29,11 +29,12 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         },
         success: function(response)
         {
-            console.log(response);                            
-
+            console.log(response);        
+            
             for(var i =0; i< response.length; i++)
             {
-                $scope.lstJours.push({Id:response[i].Id,Date:response[i].Date
+                
+                $scope.lstJours.push({Id:response[i].Id, Date:response[i].Date.split("T")[0]
                     , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].VoyageId})
             }
 
@@ -46,27 +47,30 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     }
     
     $scope.showJour = function(jour)
-    {
-    
+    {    
         $('#jourInfo').show();
+        $('#lstActivite').hide();
         $('#modifJour').hide();
         $scope.budgetJour = jour.BudgetJournee;
         $scope.nbEvent = 6;
-        $rootScope.JourSelect = jour;
-        
+        $rootScope.JourSelect = jour;       
     }
     
-     $scope.selectionnerActivitie = function(){
-                console.log($rootScope.JourSelect);
-                $rootScope.changeView('/activites'); 
-            
-            }
+    $scope.showLstActivites = function()
+    {
+        $('#lstActivite').show();            
+    }
+    
+    
+    $scope.selectionnerActivitie = function(){
+         
+        console.log($rootScope.JourSelect);
+        $rootScope.changeView('/activites');            
+    }
     
     $scope.allowModif = function()
     {
-        $('#modifJour').show();
-        
-        
+        $('#modifJour').show();    
     }
     
     $scope.modifierBudgetJour = function()
@@ -95,6 +99,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
             }
         });
         $('#modifJour').hide();
+        $('#lstActivite').hide();
     }
       
     
@@ -112,6 +117,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         success: function(response)
         {
             console.log(response);
+            
             for(var i =0; i< response.length; i++)
             {
                 $rootScope.lstActivites.push({HeureDebut:response[i].HeureDebut,
@@ -125,6 +131,10 @@ function JourController($scope, $rootScope, $http, $route, $sce)
 
         });
     }
+    
+    function pad2(number) {
+        return (number < 10 ? '0' : '') + number
+    }   
     
     $scope.getJours();
                                   
