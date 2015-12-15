@@ -94,7 +94,8 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
             mess += "<li class='red'>La longueur d'un mot de passe doit être d'au moins six caractéres.</li>";
             errors++;
         } else {
-
+         $scope.StylePass = { 'border': '1px solid #1abc9c' };
+            $scope.StylePassC = { 'border': '1px solid #1abc9c' };
         }
 
         if (!/[A-Z]/.test($scope.suPass)) {
@@ -104,6 +105,8 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
             errors++;
         } else {
 
+            $scope.StylePass = { 'border': '1px solid #1abc9c' };
+            $scope.StylePassC = { 'border': '1px solid #1abc9c' };
         }
 
         if (!/[0-9]/.test($scope.suPass)) {
@@ -121,16 +124,21 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
             mess += "<li class='red'>Le mot de passe doit contenir au moins un caractére spécial.</li>";
             errors++;
         } else {
-
+            $scope.StylePass = { 'border': '1px solid #1abc9c' };
+            $scope.StylePassC = { 'border': '1px solid #1abc9c' };
         }
 
 
         if ($scope.suPass === $scope.suPassC ) {
+            $scope.StylePass = { 'border': '1px solid #1abc9c' };
+            $scope.StylePassC = { 'border': '1px solid #1abc9c' };
+            
        }
         else {
 
             $scope.StylePass = { 'border': '1px solid #e74c3c' };
             $scope.StylePassC = { 'border': '1px solid #e74c3c' };
+            
             mess += "<li class='red'>Les mots de passe ne corespondent pas. </li>";
             errors++;
         }
