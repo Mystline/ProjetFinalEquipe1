@@ -14,7 +14,7 @@
             <input type="submit" value="Se connecter" ng-click="login()" style="vertical-align:top;" /> <img src="Images/loader.GIF" style="display: none; width:40px; height: 40px; margin-top: 22px; margin-left: 10px;" id="imgLoadSi" />
             <div style="clear:both;"></div>
         </form>
-        <div id="lefterror"></div>
+        <div id="lefterror" >{{lefterrorModel}}</div>
     </div>
     <div class="right" id="signup">
         <h2 style="margin-left:0px; margin-right:0px;">Inscrivez-vous sur le site</h2>
@@ -25,11 +25,11 @@
             <div style="clear:both;"></div>
             <label>Mot de passe</label>
             <div style="clear:both;"></div>
-            <input type="password" name="pass" ng-model="suPass" id="login-pass" />
+            <input type="password" name="pass" ng-model="suPass" ng-style="StylePass" id="login-pass" ng-keypress="myFunct($event)"  />
             <div style="clear:both;"></div>
             <label>Réécrivez le mot de passe</label>
             <div style="clear:both;"></div>
-            <input type="password" name="pass" ng-model="suPassC" id="login-pass-r" />
+            <input type="password" name="pass" ng-model="suPassC" ng-style="StylePassC" id="login-pass-r" ng-keypress="myFunct($event)"  />
             <div style="clear:both;"></div>
             <input type="submit" value="Inscription" ng-click="register()" />
         </form>
