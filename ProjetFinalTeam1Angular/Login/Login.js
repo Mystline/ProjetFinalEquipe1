@@ -1,8 +1,8 @@
 angular
     .module('projetequipe1')
-    .controller('LoginController',['$rootScope', '$scope', '$http', '$location','$sce', 
+    .controller('LoginController',['$rootScope', '$scope', '$http', '$location','$sce', '$timeout', 
 
-function LoginController($rootScope, $scope, $http, $location,$sce) {
+function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
     $scope.siUser = "";
     $scope.siPass = "";
     $scope.suUser = "";
