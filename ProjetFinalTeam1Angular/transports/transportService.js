@@ -1,12 +1,12 @@
 
 //****Decider en equipe si on met tous dans le meme module ou on creer des modules differents.
-angular.module('projetequipe1', [])
+angular.module('projetequipe1.transports', [])
 
 .service('DataService', function() {
     this.lstTransports = [];
 })
 
-.service('AjaxTransportsService', function(DataService) {
+.service('TransportsService', function(DataService) {
     //GET ALL TRANSPORTS
     this.getTransports = function() {
         $.ajax({
