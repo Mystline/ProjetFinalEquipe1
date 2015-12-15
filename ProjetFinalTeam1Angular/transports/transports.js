@@ -1,6 +1,6 @@
-angular
-    .module('projetequipe1.transports', [])
-    .controller('TransportController',['$scope', '$rootScope', '$http', '$route', '$sce',
+angular.module('projetequipe1.transports', [])
+
+.controller('TransportController', TransportController)
  
 function TransportController($scope, $rootScope, $http, $route, $sce, TransportsService) {
     //GESTION GOOGLE MAP
@@ -219,7 +219,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
 
 
     
-}]);
+}
 
 
 

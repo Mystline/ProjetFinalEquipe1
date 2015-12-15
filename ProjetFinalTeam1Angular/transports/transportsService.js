@@ -1,6 +1,6 @@
 
 //****Decider en equipe si on met tous dans le meme module ou on creer des modules differents.
-angular.module('projetequipe1.transports', [])
+angular.module('projetequipe1.transportsService', [])
 
 .service('DataService', function() {
     this.lstTransports = [];

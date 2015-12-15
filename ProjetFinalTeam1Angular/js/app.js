@@ -3,6 +3,7 @@ angular.module('projetequipe1', [
     'uiGmapgoogle-maps',
     
     'projetequipe1.activites',
+    'projetequipe1.transportsService',
     'projetequipe1.transports'
 ])
 

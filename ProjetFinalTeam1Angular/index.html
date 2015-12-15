@@ -37,7 +37,6 @@
 	</head>
 
 	<body ng-app="projetequipe1" style="background-color:#F1F1F6;">
-	
         
         <div class="btn-group"  ng-controller="BarController">
             <button ng-click="changeView('/voyages')" class="btn btn-primary">Voyages</button>
@@ -47,9 +46,9 @@
             <button ng-click="changeView('/utilisateurs')" class="btn btn-primary">Utilisateurs</button>
             <button id="Notconnected"  ng-click="changeView('/Login')" class="btn btn-primary">Login</button>
             <button id="connected" ng-click="logout()"  class="btn btn-primary">Logout:{{activeUser}}</button>
-		</div>	
-	
-            <ng-view></ng-view>
+		</div>
+        
+        <ng-view></ng-view>
          
         </div>
     </body>
