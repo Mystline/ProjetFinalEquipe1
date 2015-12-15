@@ -12,6 +12,7 @@
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
+                <h2>Budget Total : {{voyageSelect.BudgetVoyage}} $</h2>
                 <tr ng-repeat="jour in lstJours">
                     <td>{{jour.Date}}</td>
                     <td>{{jour.BudgetJournee}} $</td>
@@ -32,7 +33,7 @@
                 <h1>Nombre d'activite : {{nbEvent}}</h1>
                 </br>
                 <button ng-click="allowModif()" class="btn btn-primary">Modifier budget</button>
-                <button ng-click="selectionnerActivitie()" class="btn btn-primary"  >Consulter activitees</button>
+                <button ng-click="showLstActivites()" class="btn btn-primary"  >Consulter activitees</button>
             </div>
         
             <div id="modifJour" style="display: none;background-color:lightgray;">
@@ -45,8 +46,10 @@
             </div>
         </div>
         
-        <div class="col-md-4">
-            <h1>Budget, activités?</h1>
+        <div class="col-md-4" style="display: none;" id="lstActivite">
+            <h1>Liste des activités</h1>
+            
+            <button ng-click="selectionnerActivitie()" class="btn btn-primary"  >Consulter cette activite</button>
         </div>
     
     </div>
