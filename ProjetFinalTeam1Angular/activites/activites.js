@@ -164,7 +164,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
                     
                    index++;                
                 }*/
-                var e = 0;
+                /*var e = 0;
                 for(i=0; i < results.length; i++) 
                 {
                         if(results[i].types[0] == "lodging" || 
@@ -197,7 +197,29 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
                                 })( marker , $scope, content , results[i] )
                             );                            
                         } 
-                }
+                }*/
+                for(i=0; i<5; i++) {
+                bounds.extend(results[i].geometry.location);
+                $scope.places.push(results[i]);
+                var marker = new google.maps.Marker({
+                    position: $scope.places[i].geometry.location,
+                    map: map,
+                    icon: results[i].icon
+                })
+                $scope.markers.push(marker);
+                var content = '<div><div id="infowindow_content" ng-include src="\'info.html\'"></div><div>';
+                google.maps.event.addListener(marker, 'click', 
+                    (function( marker , scope, content , place ){
+                        return function(){
+                            $rootScope.place = place;
+                            var compiled = $compile(content)(scope);
+                            scope.$apply();
+                            scope.infoWindow.setContent( compiled[0] );
+                            scope.infoWindow.open( map , marker );                                        
+                        };
+                    })( marker , $scope, content , results[i] )
+                );
+            }
                 
                 map.fitBounds(bounds);
                 
