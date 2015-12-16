@@ -56,8 +56,6 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
     //Pour nettoyer le visuel et remettre les valeurs par défaut
     function resetValue()
     {
-        
-
         $scope.rechercheState = false;
         $scope.ajoutEffectue = false;
 

@@ -20,14 +20,20 @@ namespace ProjetFinalTeam1.Models
         public string Transporteur { get; set; }
 
         [Required]
-        public string longitudeDepart { get; set; }
+        public string LongDepart { get; set; }
 
         [Required]
-        public string latitudeDepart { get; set; }
+        public string LatDepart { get; set; }
 
+        public string LongArrive { get; set; }
+
+        public string LatArrive { get; set; }
+
+        //----------------------------------------------
+        //Propriete de navigation
         public virtual Jour Jour { get; set; }
 
-        public virtual Activite ActiviteDestination { get; set; }
+        //public virtual Activite ActiviteDestination { get; set; }
 
     }
 }

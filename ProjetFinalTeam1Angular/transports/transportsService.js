@@ -18,17 +18,39 @@ angular.module('projetequipe1.transportsService', [])
         });
     };
     
+    //GET TRANSPORTS DU VOYAGES
+    this.getTransportsVoyage = function(voyageId) {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3216/api/TransportsVoyage',
+            data:
+            {
+                VoyageId: voyageId
+            }
+        }).success(function (data) {
+            console.log(data);
+            //DataService.lstTransports = data;
+        });
+    };
+    
     //POST NEW TRANPORT
-    /*this.postTransport = function() {
+    this.postTransport = function(transport) {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:3216/api/Transports',
             data:
             {
-                
+                Cout: transport.cout,
+                Type: transport.type,
+                Transporteur: transport.lransporteur,
+                LatDepart: transport.latDepart,
+                LongDepart: transport.longDepart,
+                LatArrive: transport.latArrive,
+                LongArrive: transport.longArrive,
+                Jour_Id: transport.jour_Id
             }
         }).success(function(data) {
             console.log(data);
         })
-    }*/
+    }
 })

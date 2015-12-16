@@ -9,7 +9,7 @@
         </ui-gmap-google-map>
         -->
         <div id="map" style="width:500px;height:400px"></div>
-        <button ng-click="afficherLesActivites()" class="btn btn-default" value="Salut">Choisir</button>
+<!--        <button ng-click="afficherLesActivites()" class="btn btn-default" value="Salut">Choisir</button>-->
         <button ng-click="afficherItineraire()" class="btn btn-default">Afficher itineraire</button>
         
         
@@ -23,8 +23,10 @@
                         <th>Type</th>
                         <th>Transporteur</th>
                         <th># Jour</th>
-                        <th>LongDepart</th>
                         <th>LatDepart</th>
+                        <th>LongDepart</th>
+                        <th>LatArrive</th>
+                        <th>LongArrive</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -34,10 +36,12 @@
                     <td>{{transport.Type}}</td>
                     <td>{{transport.Transporteur}}</td>
                     <td>{{transport.Jour_Id}}</td>
-                    <td>{{transport.longitudeDepart}}</td>
-                    <td>{{transport.latitudeDepart}}</td>
+                    <td>{{transport.LatDepart}}</td>
+                    <td>{{transport.LongDepart}}</td>
+                    <td>{{transport.LatArrive}}</td>
+                    <td>{{transport.LongArrive}}</td>
                     <td class="text-center">
-                        <a ng-click="afficherItineraire()" class='btn btn-primary btn-xs'><span class="glyphicon glyphicon-ok"></span> Afficher</a>
+                        <a ng-click="afficherItineraire(transport.LatDepart, transport.LongDepart, transport.LatArrive, transport.LongArrive)" class='btn btn-primary btn-xs'><span class="glyphicon glyphicon-ok"></span> Afficher</a>
                         <a ng-click="modifierTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>
 <!--                        <a ng-click="selectionnerTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>-->
                         <a ng-click="supprimerTransport(transport)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
@@ -59,6 +63,7 @@
                     </select>
                 </p>
                 <input type="text" class="form-control" placeholder="Endroit depart" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+                <input type="text" class="form-control" placeholder="Endroit arrive" ng-model="endroitArrive" style="width:300px; margin-top:5px">
 
                 <input class="btn btn-default" type="submit" value="Ajouter" style="margin-top:10px">
             </form>
@@ -88,6 +93,10 @@
                 <p style="margin-top:5px">
                     Endroit de départ:
                     <input type="text" class="form-control" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+                </p>
+                <p style="margin-top:5px">
+                    Endroit d'arrivé:
+                    <input type="text" class="form-control" ng-model="endroitArrive" style="width:300px; margin-top:5px">
                 </p>
 
                 <input class="btn btn-default" type="submit" value="Modifier" style="margin-top:10px">

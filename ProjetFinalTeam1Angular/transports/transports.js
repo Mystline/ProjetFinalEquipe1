@@ -20,7 +20,6 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     $scope.transports = [];
     $scope.transports.push(
         {Id:0, Cout:10, Type:"Auto", Transporteur:"Moi", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 },
-        {Id:1, Cout:10, Type:"Autobus", Transporteur:"RTL", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 },
         {Id:1, Cout:10, Type:"Autobus", Transporteur:"RTL", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 }
     );
     
@@ -76,9 +75,9 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //******************************METHODES*******************************
     
     //???????????????
-    $scope.afficherLesActivites = function () {
+    /*$scope.afficherLesActivites = function () {
         $scope.ajouterMarker(45.501459, -73.567543);
-    }
+    }*/
     
     //---------------------------------------------------------------------
     //Markers
@@ -102,6 +101,26 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
         var request = {
             origin:'Cégep Édouard Montpetit',
             destination:'170 Boulevard Taschereau, La Prairie, QC J5R 1S8',
+            avoidHighways: true,
+            travelMode: google.maps.TravelMode['DRIVING']
+        };
+        directionsDisplay.setMap(map);
+
+        directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+    
+    $scope.afficherItineraireAvecCoordonnees = function(latDebut, longDebut, latArrive, longArrive) {
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+
+        var request = {
+            //origin:'Cégep Édouard Montpetit',
+            origin: new google.maps.LatLng(latDebut, longDebut),
+            destination: new google.maps.LatLng(latArrive, longArrive),
             avoidHighways: true,
             travelMode: google.maps.TravelMode['DRIVING']
         };
@@ -208,13 +227,28 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
 
     //Create new
     $scope.createNewTransport = function() {
-        //TransportsService.postTransport();
+        var newTransport = {
+            cout: $scope.cout,
+            type: $scope.type,
+            transporteur: $scope.transporteur,
+            latitudeDepart: -73.567543,
+            longitudeDepart: 45.501459,
+            latitudeArrive: -70,
+            longitudeArrive: 45,
+            jour_Id: $scope.jour
+        }
+        TransportsService.postTransport(newTransport);
     }
 
 
     //Get all transport
     $scope.getAllTransports = function() {
         TransportsService.getTransports();
+    }
+    
+    //Get les transports du voyage selectionne
+    $scope.getTransportsVoyage = function() {
+        
     }
 
 

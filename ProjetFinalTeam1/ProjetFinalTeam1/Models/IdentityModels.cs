@@ -40,8 +40,6 @@ namespace ProjetFinalTeam1.Models
 
             modelBuilder.Entity<Activite>().HasRequired(j => j.Jour).WithMany(a => a.Activites);
 
-            modelBuilder.Entity<Transport>().HasRequired(a => a.ActiviteDestination).WithOptional(t => t.TransportUtilise);
-
         } 
         
         public static ApplicationDbContext Create()
