@@ -3,7 +3,7 @@ angular.module('projetequipe1.activites', [])
 .controller('ActiviteController', ActiviteController)
 
             
-function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
+function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $timeout) {
     
     var API_KEY = "AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM";
     
@@ -16,18 +16,38 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
     
     
     $scope.ajouterActivites = function () {
-        if($scope.HeureDebut == "" || $scope.HeureFin == "" || $scope.Cout == ""||$scope.Latitude == ""||$scope.Longitude == "")
+        if($scope.HeureDebut == "" || $scope.HeureFin == "" || $scope.Cout == ""||$scope.latitudeRecherche == ""||$scope.longitudeRecherche == "")
         {
             alert("Un ou plusieurs champs ne sont pas valides");
         }
         else
         {
+            console.log($rootScope.JourSelect);
+            
+            var dt = $scope.HeureDebut;
+                    var dtstring = dt.getFullYear()
+                    + '-' + pad2(dt.getMonth()+1)
+                    + '-' + pad2(dt.getDate())
+                    + ' ' + pad2(dt.getHours())
+                    + ':' + pad2(dt.getMinutes())
+                    + ':' + pad2(dt.getSeconds());
+            
+            
+            var dt2 = $scope.HeureFin;
+                    var dtstring2 = dt2.getFullYear()
+                    + '-' + pad2(dt2.getMonth()+1)
+                    + '-' + pad2(dt2.getDate())
+                    + ' ' + pad2(dt2.getHours())
+                    + ':' + pad2(dt2.getMinutes())
+                    + ':' + pad2(dt2.getSeconds());
+            
+            
             $.ajax({
                 method: 'POST',
                 url: "http://localhost:3216/api/Activites/",
                 data: {
-                    HeureDebut: $scope.HeureDebut,
-                    HeureFin: $scope.HeureFin,
+                    HeureDebut: dtstring,
+                    HeureFin: dtstring2,
                     Cout: $scope.Cout,
                     Latitude:$scope.latitudeRecherche,
                     Longitude:$scope.longitudeRecherche,
@@ -46,16 +66,34 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
     //État recherche ou ajout d'une activité dans la vue
     $scope.selectChangeState = function(place) {
      
-        resetValue();
+        console.log(place);
+        
+        
+        $scope.resetValue();
         $scope.selectState = !$scope.selectState;
         
-        $rootScope.$apply();
-     
+        
+        if(place != null)
+        {
+            // anything you want can go here and will safely be run on the next digest.
+
+            console.log("selection suggestion");
+            $scope.Latitude = place.geometry.location.lat();
+            $scope.Longitude = place.geometry.location.lng();
+            
+            console.log($scope.Longitude );
+            console.log($scope.Latitude );
+        }
+    
     }
     
     //Pour nettoyer le visuel et remettre les valeurs par défaut
-    function resetValue()
+    $scope.resetValue = function()
     {
+        $scope.Latitude= "";
+        $scope.Longitude = "";
+        
+        
         $scope.rechercheState = false;
         $scope.ajoutEffectue = false;
 
@@ -63,9 +101,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
         
         $scope.HeureDebut = "";
         $scope.HeureFin = "";
-        $scope.Cout = "";
-        $scope.Latitude = "";
-        $scope.Longitude = "";   
+        $scope.Cout = ""; 
     }
     
 
@@ -252,5 +288,11 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
             $scope.doGeo();
         });
     };
+    
+    
+    //Pour former une date
+    function pad2(number) {
+        return (number < 10 ? '0' : '') + number
+    }   
     
 }

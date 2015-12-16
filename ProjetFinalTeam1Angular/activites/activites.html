@@ -54,7 +54,7 @@
                                     <li class="list-group-item" ng-repeat="place in places">
                                         <div class="review-comment">                                                                      
                                             <h3><img ng-src="{{place.icon}}" alt=""> {{place.name}}</h3>
-                                            <button class="btn btn-primary" onclick=selectChangeState(place)>Choisir cette activité</button>
+                                            <button class="btn btn-primary" ng-click="selectChangeState(place)">Choisir cette activité</button>
                                         </div>
                                     </li>
                                 </ul>

@@ -88,10 +88,17 @@ namespace ProjetFinalTeam1.Controllers
         [ResponseType(typeof(Activite))]
         public IHttpActionResult PostActivite(Activite activite)
         {
+            //activite.HeureDebut = DateTime.Now;
+            //activite.HeureFin = DateTime.Now;
+            activite.Jour = db.Jours.FirstOrDefault(j => j.Id == activite.Jour.Id);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            db.Jours.FirstOrDefault(j => j.Id == activite.Jour.Id).Activites.Add(activite);
+            db.Entry(db.Jours.FirstOrDefault(j => j.Id == activite.Jour.Id)).State = EntityState.Modified;
 
             db.Activites.Add(activite);
             db.SaveChanges();
