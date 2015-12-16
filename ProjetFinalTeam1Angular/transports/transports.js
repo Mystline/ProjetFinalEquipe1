@@ -12,11 +12,12 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     $scope.jours.push(3);
     
     //TODO: Faire les vrais requets ajax au serveur.
-    $scope.transports = [];
-    $scope.transports.push(
-        {Id:0, Cout:10, Type:"Auto", Transporteur:"Moi", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 },
-        {Id:1, Cout:10, Type:"Autobus", Transporteur:"RTL", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 }
-    );
+    $scope.lstTransports = TransportsService.dataService.lstTransports;
+    
+    //TODO: Trouver le moyen de mettre à jour la liste index.
+    $scope.$watch('DataService.lstTransports', function(newVal, oldVal, scope) {
+        scope.lstTransports = TransportsService.dataService.lstTransports;
+    });
     
     
     //=====================================================================
@@ -243,28 +244,51 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //=====================================================================
     //************************GESTION DES SECTIONS*************************
     //=====================================================================
+    $scope.resetCreationSection = function(){
+        $scope.cout = "";
+        $scope.type = "";
+        $scope.transporteur = "";
+        
+        //***A completer
+    }
+    
     $scope.afficherPage = function(page) {
         switch(page) {
             case "Index":
                 $scope.pageIndex = true;
                 $scope.pageCreate = false;
                 $scope.pageModif = false;
+                $scope.pageSupprimer = false;
+                
+                //****Modifier allTransports par TransportsVoyage
+                //$scope.getAllTransports();
                 break;
                 
             case "Create":
                 $scope.pageIndex = false;
                 $scope.pageCreate = true;
                 $scope.pageModif = false;
+                $scope.pageSupprimer = false;
                 break;
                 
             case "Modif":
                 $scope.pageIndex = false;
                 $scope.pageCreate = false;
                 $scope.pageModif = true;
+                $scope.pageSupprimer = false;
+                break;
+            case "Supp":
+                $scope.pageIndex = false;
+                $scope.pageCreate = false;
+                $scope.pageModif = false;
+                $scope.pageSupprimer = true;
                 break;
         }
     }
     
+    /*$scope.appliquerChangement = function(){
+        //$scope.$apply();
+    }*/
     
     //=====================================================================
     //**************************GESTION TRANSPORT**************************
@@ -274,9 +298,12 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //***INDEX
     //--------------------------------------------
     //**Tous les transports
-    $scope.getAllTransports = function() {
+    function getAllTransports() {
         TransportsService.getTransports();
     }
+    
+    //Exécute la methode
+    getAllTransports();
     
     //**Les transports du voyage selectionne
     $scope.getTransportsVoyage = function(voyageID) {
@@ -318,10 +345,11 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //--------------------------------------------
     //***SUPPRIMER
     //--------------------------------------------
-    $scope.supprimerTransport = function(transport) {
+    $scope.supprimerTransport = function(transportID) {
         
-        TransportsService.deleteTransport(transport);
+        TransportsService.deleteTransport(transportID);
     }
+    
 }
 
 
