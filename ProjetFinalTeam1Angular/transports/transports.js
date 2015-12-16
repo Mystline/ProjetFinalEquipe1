@@ -3,11 +3,6 @@ angular.module('projetequipe1.transports', [])
 .controller('TransportController', TransportController)
  
 function TransportController($scope, $rootScope, $http, $route, $sce, TransportsService) {
-    //GESTION GOOGLE MAP
-    //Variables
-    var map;
-    var center = new google.maps.LatLng(45.501459, -73.567543);
-    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     
     //TODO: Get le nombre de jours du voyage.
     $scope.jours = [];
@@ -23,8 +18,19 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
         {Id:1, Cout:10, Type:"Autobus", Transporteur:"RTL", Jour_Id:1, longitudeDepart:0, latitudeDepart:0 }
     );
     
-    //---------------------------------------------------------------------
-    //Geolocalisation
+    
+    //=====================================================================
+    //*************************GESTION GOOGLE MAP**************************
+    //=====================================================================
+    
+    //Variables
+    var map;
+    var center = new google.maps.LatLng(45.501459, -73.567543);
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    
+    //--------------------------------------------
+    //GEOLOCALISATION
+    //--------------------------------------------
     /*if (navigator.geolocation)
     {   
         navigator.geolocation.watchPosition(function(position) {
@@ -55,8 +61,10 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     
     //$scope.center = { latitude: 45.501459, longitude: -73.567543 };
     
-    //---------------------------------------------------------------------
-    //Initialiser la map
+    
+    //--------------------------------------------
+    //INITIALISER LA MAP
+    //--------------------------------------------
     function initialize() {
         var mapCanvas = document.getElementById('map');
         var mapOptions = {
@@ -71,16 +79,15 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //??????????????
     google.maps.event.addDomListener(window, 'load', initialize);
     
-    //---------------------------------------------------------------------
-    //******************************METHODES*******************************
     
-    //???????????????
-    /*$scope.afficherLesActivites = function () {
-        $scope.ajouterMarker(45.501459, -73.567543);
-    }*/
+    //=====================================================================
+    //***********************GOOGLE MAP (METHODES)*************************
+    //=====================================================================
+
+    //=====================================================================
+    //***********************GOOGLE MAP (MARKERS)**************************
+    //=====================================================================
     
-    //---------------------------------------------------------------------
-    //Markers
     $scope.ajouterMarker = function (lat, long){
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, long),
@@ -90,9 +97,14 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             //title: 'Voila un icon noir!'
         });
     }
+    //???????????????
+    /*$scope.afficherLesActivites = function () {
+        $scope.ajouterMarker(45.501459, -73.567543);
+    }*/
     
-    //---------------------------------------------------------------------
-    //Itineraire
+    //=====================================================================
+    //**********************GOOGLE MAP (ITINERAIRES)***********************
+    //=====================================================================
     
     $scope.afficherItineraire = function() {
         var directionsService = new google.maps.DirectionsService();
@@ -134,6 +146,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     }
     
     
+    //--------------------------------------------------------------------------------------------
     /*The maximum allowed waypoints is 8, plus the origin, and destination.*/
     //Pour initialiser la map
     /*$scope.initMap = function(id,mode) {
@@ -160,9 +173,13 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             }
         });
     }*/
+    //--------------------------------------------------------------------------------------------
+    
+    
     
     //--------------------------------------------
     //Pour itineraire avec waypoints
+    //--------------------------------------------
     $scope.initWayp = function() {
         var mapOptions = {
             center: { lat: 45.501459, lng: -73.567543 },
@@ -193,8 +210,10 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             }
         });
     }
+    
     //--------------------------------------------
     //Pour itineraire en avion
+    //--------------------------------------------
     $scope.initPlane = function() {
         var myLatLng = new google.maps.LatLng(0, -180);
         var myOptions = {
@@ -222,11 +241,43 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     
 
     //=====================================================================
-    //GESTION TRANSPORT
-    //SERVICE
-
-    //Create new
+    //************************GESTION DES SECTIONS*************************
+    //=====================================================================
+    $scope.afficherPage = function(page) {
+        switch(page) {
+            case "Index":
+                $scope.pageIndex = true;
+                $scope.pageCreate = false;
+                $scope.pageModif = false;
+                break;
+                
+            case "Create":
+                $scope.pageIndex = false;
+                $scope.pageCreate = true;
+                $scope.pageModif = false;
+                break;
+                
+            case "Modif":
+                $scope.pageIndex = false;
+                $scope.pageCreate = false;
+                $scope.pageModif = true;
+                break;
+        }
+    }
+    
+    
+    //=====================================================================
+    //**************************GESTION TRANSPORT**************************
+    //=====================================================================
+    
+    //--------------------------------------------
+    //**CREATE
+    //--------------------------------------------
     $scope.createNewTransport = function() {
+        
+        //****Obtenir les coordonnées de l'activitéDepart.
+        //****Obtenir les coordonnées de l'activitéArrivé.
+        
         var newTransport = {
             cout: $scope.cout,
             type: $scope.type,
@@ -237,22 +288,38 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             longitudeArrive: 45,
             jour_Id: $scope.jour
         }
+        
         TransportsService.postTransport(newTransport);
     }
 
-
-    //Get all transport
+    //--------------------------------------------
+    //***INDEX
+    //--------------------------------------------
+    //**Tous les transports
     $scope.getAllTransports = function() {
         TransportsService.getTransports();
     }
     
-    //Get les transports du voyage selectionne
-    $scope.getTransportsVoyage = function() {
+    //**Les transports du voyage selectionne
+    $scope.getTransportsVoyage = function(voyageID) {
+        //***bonne ligne de code, mais pour le développement je hardcode.
+        //TransportsService.getTransportsVoyage(voyageID);
+        TransportsService.getTransportsVoyage(0);
+    }
+    
+    //--------------------------------------------
+    //***MODIFIER
+    //--------------------------------------------
+    $scope.modifierTransport = function(transport) {
         
     }
-
-
     
+    //--------------------------------------------
+    //***SUPPRIMER
+    //--------------------------------------------
+    $scope.supprimerTransport = function(transport) {
+        
+    }
 }
 
 
