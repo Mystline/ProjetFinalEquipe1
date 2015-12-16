@@ -110,6 +110,63 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
                 $scope.markers = [];
                 $scope.infoWindow = new google.maps.InfoWindow();
                 var bounds = new google.maps.LatLngBounds();
+                
+                var count = 0;
+                var index = 0;
+                
+                console.log(results[index].types[0]);
+                console.log(results[index].types.length);
+                
+                /*
+                while(count != 5)
+                {                                  
+                    
+                    for(var e = 0; e<results[index].types.length; e++)
+                    {
+                        if(results[index].types[e] == "lodging" || 
+                          results[index].types[e] == "restaurant" || 
+                          results[index].types[e] == "food" || 
+                          results[index].types[e] == "point of interest" || 
+                          results[index].types[e] == "point_of_interest" )
+                        {
+                            console.log(results);
+                            console.log(results[index]);
+                            console.log(results[index].geometry);
+                            var test = results[index].geometry.location;
+                            console.log(bounds);
+                            
+                            bounds.extend(results[index].geometry.location);
+                            
+                            $scope.places.push(results[index]);
+                            var marker = new google.maps.Marker({
+                                position: $scope.places[index].geometry.location,
+                                map: map,
+                                icon: results[index].icon,
+                                name: results[index].name
+                            })
+                            $scope.markers.push(marker);
+                            var content = '<div><div id="infowindow_content" ng-include src="\'info.html\'"></div><div>';
+                            google.maps.event.addListener(marker, 'click', 
+                                (function( marker , scope, content , place ){
+                                    return function(){
+                                        $rootScope.place = place;
+                                        var compiled = $compile(content)(scope);
+                                        scope.$apply();
+                                        scope.$apply();
+                                        scope.infoWindow.setContent( compiled[0] );
+                                        scope.infoWindow.open( map , marker );                                        
+                                    };
+                            })( marker , $scope, content , results[i] )
+                        );
+                                                       
+                            e=results[index].types.length;
+                            count++;
+                        }
+                    }
+                    
+                   index++;                
+                }*/
+                
                 for(i=0; i<5; i++) {
                     bounds.extend(results[i].geometry.location);
                     $scope.places.push(results[i]);
