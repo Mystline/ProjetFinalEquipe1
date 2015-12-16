@@ -1,5 +1,47 @@
 
 <div ng-controller="ActiviteController">
+    <section id="geocode">
+            <div class="container">
+                
+                <div class="section-heading scrollpoint sp-effect3">
+                    <h1>Géocoder</h1>
+                    <div class="divider"></div>
+                    <p>Trouver un point latitude / longitude à partir d'une adresse</p>
+                </div>
+                <div class="row">                    
+                    <div class="title scrollpoint sp-effect3">
+                        <p>Exemple</p>
+                    </div>           
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <div class="about-item scrollpoint sp-effect2">
+                            <h3>Adresse</h3>
+                            <input class="form-control" ng-model="adresse" placeholder="Adresse"/>
+                            <br />
+                            <button class="btn btn-default btn-lg" ng-click="geocode()">Géocoder</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6" >
+                        <div class="about-item scrollpoint sp-effect5">
+                            <h3>Résultat</h3>
+                            <p>Adresse formaté : {{belleAdresse}}</p>
+                            <p>Latitude : {{latitude}}</p>
+                            <p>Longitude : {{longitude}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6" >
+                        <div class="about-item scrollpoint sp-effect1">
+                            <ui-gmap-google-map center='center' zoom='8' bounds='bounds'>
+                                <ui-gmap-marker ng-if="location" idKey='0' coords='location'>
+                                </ui-gmap-marker>
+                            </ui-gmap-google-map>
+                        </div>
+                    </div>
+                </div>
+                                    
+            </div>                        
+        </section>
+    
+    
     
     <section id="suggestion">
             <div class="container">

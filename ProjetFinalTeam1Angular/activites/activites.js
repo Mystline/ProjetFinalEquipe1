@@ -4,6 +4,9 @@ angular.module('projetequipe1.activites', [])
 
             
 function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
+    
+    var API_KEY = "AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM";
+    
     $scope.HeureDebut = "";
     $scope.HeureFin = "";
     $scope.Cout = "";
@@ -90,5 +93,22 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
             $scope.$apply();
         }
     });
+    
+    
+    $scope.center = { latitude: 45.501459, longitude: -73.567543 };
+    $scope.geocode = function() {
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+$scope.adresse+'&key='+API_KEY)
+        .success(function(data){
+            $scope.belleAdresse = data.results[0].formatted_address;
+            loc = data.results[0].geometry.location;
+            neb = data.results[0].geometry.viewport.northeast;
+            swb = data.results[0].geometry.viewport.southwest;
+            $scope.latitude = loc.lat;
+            $scope.longitude = loc.lng;                        
+            $scope.location = { latitude: loc.lat, longitude: loc.lng }
+            $scope.center = $scope.location;
+            $scope.bounds = { northeast : { latitude: neb.lat, longitude: neb.lng }, southwest : { latitude: swb.lat, longitude: swb.lng } };
+        });
+    };
     
 }
