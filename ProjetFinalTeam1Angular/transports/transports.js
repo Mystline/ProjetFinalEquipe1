@@ -269,6 +269,21 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //=====================================================================
     //**************************GESTION TRANSPORT**************************
     //=====================================================================
+
+    //--------------------------------------------
+    //***INDEX
+    //--------------------------------------------
+    //**Tous les transports
+    $scope.getAllTransports = function() {
+        TransportsService.getTransports();
+    }
+    
+    //**Les transports du voyage selectionne
+    $scope.getTransportsVoyage = function(voyageID) {
+        //***bonne ligne de code, mais pour le développement je hardcode.
+        //TransportsService.getTransportsVoyage(voyageID);
+        TransportsService.getTransportsVoyage(0);
+    }
     
     //--------------------------------------------
     //**CREATE
@@ -289,22 +304,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             jour_Id: $scope.jour
         }
         
-        TransportsService.postTransport(newTransport);
-    }
-
-    //--------------------------------------------
-    //***INDEX
-    //--------------------------------------------
-    //**Tous les transports
-    $scope.getAllTransports = function() {
-        TransportsService.getTransports();
-    }
-    
-    //**Les transports du voyage selectionne
-    $scope.getTransportsVoyage = function(voyageID) {
-        //***bonne ligne de code, mais pour le développement je hardcode.
-        //TransportsService.getTransportsVoyage(voyageID);
-        TransportsService.getTransportsVoyage(0);
+        TransportsService.createTransport(newTransport);
     }
     
     //--------------------------------------------
@@ -312,6 +312,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //--------------------------------------------
     $scope.modifierTransport = function(transport) {
         
+        TransportsService.updateTransport(transport);
     }
     
     //--------------------------------------------
@@ -319,6 +320,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //--------------------------------------------
     $scope.supprimerTransport = function(transport) {
         
+        TransportsService.deleteTransport(transport);
     }
 }
 

@@ -1,5 +1,4 @@
 
-//****Decider en equipe si on met tous dans le meme module ou on creer des modules differents.
 angular.module('projetequipe1.transportsService', [])
 
 .service('DataService', function() {
@@ -18,7 +17,7 @@ angular.module('projetequipe1.transportsService', [])
         });
     };
     
-    //GET TRANSPORTS DU VOYAGES
+    //**GET TRANSPORTS DU VOYAGES
     this.getTransportsVoyage = function(voyageId) {
         $.ajax({
             type: 'GET',
@@ -33,8 +32,8 @@ angular.module('projetequipe1.transportsService', [])
         });
     };
     
-    //POST NEW TRANPORT
-    this.postTransport = function(transport) {
+    //**CREATE NEW TRANPORT
+    this.createTransport = function(transport) {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:3216/api/Transports',
@@ -52,5 +51,24 @@ angular.module('projetequipe1.transportsService', [])
         }).success(function(data) {
             console.log(data);
         })
-    }
+    };
+    
+    //X UPDATE TRANSPORT
+    this.updateTransport = function(transport) {
+        
+    };
+    
+    //X DELETE TRANSPORT
+    this.deleteTransport = function(transport) {
+        /*$.ajax({
+            type: 'POST',
+            url: 'http://localhost:3216/api/Transports',
+            data:
+            {
+                
+            }
+        }).success(function(data) {
+            console.log(data);
+        })*/
+    };
 })
