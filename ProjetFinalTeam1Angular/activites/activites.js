@@ -29,8 +29,8 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile) {
                     HeureDebut: $scope.HeureDebut,
                     HeureFin: $scope.HeureFin,
                     Cout: $scope.Cout,
-                    Latitude:$scope.Latitude,
-                    Longitude:$scope.Longitude,
+                    Latitude:$scope.latitudeRecherche,
+                    Longitude:$scope.longitudeRecherche,
                     Jour:$rootScope.JourSelect
                 }
             }).success(function (data)  {
