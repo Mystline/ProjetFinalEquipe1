@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ActivitesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JoursController.cs" />
+    <Compile Include="Controllers\TransportsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VoyagesController.cs" />
     <Compile Include="DAL\Equipe1Initializer.cs" />
