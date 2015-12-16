@@ -10,6 +10,7 @@ namespace ProjetFinalTeam1.Models
         public VoyageDTO(Voyage v)
         {
             Id = v.Id;
+            Name = v.Name;
             BudgetVoyage = v.BudgetVoyage;
             DateTimeDebut = v.DateTimeDebut;
             NbDeJour = v.NbDeJour;
@@ -26,6 +27,8 @@ namespace ProjetFinalTeam1.Models
         }
 
         public int Id { get; set; }
+
+        public String Name { get; set; }
 
         public double BudgetVoyage { get; set; }
 

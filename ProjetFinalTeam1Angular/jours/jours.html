@@ -7,13 +7,14 @@
             <table class="table table-striped custab">
                 <thead>
                     <tr>
+                        <th>Journee</th>
                         <th>Date</th>
-                        <th>Budget</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">Budget</th>
                     </tr>
                 </thead>
                 <h2>Budget Total : {{voyageSelect.BudgetVoyage}} $</h2>
                 <tr ng-repeat="jour in lstJours">
+                    <td>Jour {{jour.Num}}</td>
                     <td>{{jour.Date}}</td>
                     <td>{{jour.BudgetJournee}} $</td>
                     <td class="text-center">
@@ -23,6 +24,9 @@
                     </td>
                 </tr>
             </table>
+            
+            <button ng-click="changeView('/voyages')" class="btn btn-primary">Retour aux voyages</button>
+            
         </div>
         
         <div class="col-md-4">

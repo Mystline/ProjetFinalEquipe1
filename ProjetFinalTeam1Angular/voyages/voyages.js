@@ -5,6 +5,7 @@ angular
 function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout)
         {
 
+            $scope.nomVoyage = "";
             $scope.budgetVoyage = "";
             $scope.dateDebut = "";
             $scope.nbJours = "";
@@ -35,11 +36,12 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout)
                     + ':' + pad2(dt.getMinutes())
                     + ':' + pad2(dt.getSeconds());
                     
-                    console.log($scope.dateDebut,$scope.budgetVoyage,$scope.nbJours);
+                    console.log($scope.nomVoyage, $scope.dateDebut,$scope.budgetVoyage,$scope.nbJours);
                     $.ajax({
                         method: 'POST',
                         url: "http://localhost:3216/api/Voyages/",
                         data: {
+                            Name: $scope.nomVoyage,
                             BudgetVoyage: $scope.budgetVoyage,
                             DateTimeDebut: dtstring,
                             NbDeJour: $scope.nbJours
@@ -74,10 +76,12 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout)
                     url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
                     success: function (response) 
                     {
+                        
+                        
                         console.log(response);
                         for(var i =0; i < response.length; i++)
                         {
-                            $scope.voyages.push({Id:response[i].Id, BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[i].NbDeJour});
+                            $scope.voyages.push({Id:response[i].Id, Nom:response[i].Name, BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut.split('T')[0], NbDeJour: response[i].NbDeJour});
                         }
                         $scope.$apply();
                     }
@@ -97,6 +101,19 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout)
                 var mess = "";
                 errors = 0;
 
+                //
+                //Validation du nom
+                //
+                if((""+$scope.nomVoyage).length < 3 || (""+$scope.nomVoyage).length > 30) {
+                    $scope.styleVoyageNom = { 'border': '1px solid #e74c3c' };
+                    mess += "<li class='red'>Le nom du voyage doit etre de 3 a 30 caracteres</li>";
+                    errors++; 
+                }
+                else {
+                   $scope.styleVoyageNom = { 'border': '1px solid #1abc9c' };
+                    mess += "<li class='green'>Le nom du voyage est valide</li>";
+                }
+                
                 //
                 //Validation du nombre de jours
                 //
@@ -126,7 +143,6 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout)
                 $scope.voyageerror = mess;
                 $scope.renderHtml($scope.voyageerror); 
                 console.log($scope.voyageerror);
-                $scope.$apply();
             }
             
             //Pour afficher les <li> dans la liste du message d'erreur 

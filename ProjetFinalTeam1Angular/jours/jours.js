@@ -21,27 +21,27 @@ function JourController($scope, $rootScope, $http, $route, $sce)
         console.log($rootScope.voyageSelect);
         $scope.lstJours = [];
         
-    $.ajax({
-        method: 'GET',
-        url: "http://localhost:3216/api/Jours/GetJoursVoyage?voyageId="+$rootScope.voyageSelect.Id,
-        error: function (data) {
-            console.log("Aucun jour de selectionner ou autre erreur")
-        },
-        success: function(response)
-        {
-            console.log(response);        
-            
-            for(var i =0; i< response.length; i++)
+        $.ajax({
+            method: 'GET',
+            url: "http://localhost:3216/api/Jours/GetJoursVoyage?voyageId="+$rootScope.voyageSelect.Id,
+            error: function (data) {
+                console.log("Aucun jour de selectionner ou autre erreur")
+            },
+            success: function(response)
             {
-                
-                $scope.lstJours.push({Id:response[i].Id, Date:response[i].Date.split("T")[0]
-                    , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].VoyageId})
+                //console.log(response);        
+
+                for(var i =0; i< response.length; i++)
+                {
+                    var num = i+1;
+                    $scope.lstJours.push({Num:num, Id:response[i].Id, Date:response[i].Date.split("T")[0]
+                        , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].VoyageId})
+                }
+
+                console.log($scope.lstJours);
+                $scope.$apply();
+
             }
-
-            console.log($scope.lstJours);
-            $scope.$apply();
-
-        }
         });
 
     }

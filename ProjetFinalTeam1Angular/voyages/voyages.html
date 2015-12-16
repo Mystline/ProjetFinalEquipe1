@@ -7,18 +7,23 @@
                     <h2>Ajouter un voyage</h2>
                 </div>
 
+                 <div class="form-group">
+                    <label>Nom du voyage : </label>
+                    <input type="text" name="nomV" ng-model="nomVoyage" ng-style="styleVoyageNom" ng-keypress="applyValidation($event)">
+                </div>
+                
                 <div class="form-group">
-                    <label>Budget voyage</label>
-                    <input type="number" name="budget" ng-model="budgetVoyage" id="login-pass" ng-style="styleVoyageBudget" ng-keypress="applyValidation($event)">$
+                    <label>Budget voyage : </label>
+                    <input type="number" name="budget" ng-model="budgetVoyage" ng-style="styleVoyageBudget" ng-keypress="applyValidation($event)">$
                 </div>
 
                 <div class="form-group">
-                    <label>Début voyage</label>
+                    <label>Début voyage : </label>
                     <input type="date" name="debut" ng-model="dateDebut" ng-keypress="myFunct($event)">
                 </div>
 
                 <div class="form-group">
-                    <label>Nombre de jours</label>
+                    <label>Nombre de jours : </label>
                     <input type="number" name="jours" ng-model="nbJours" ng-style="styleVoyageNbJour" ng-keypress="applyValidation($event)">
                 </div>
 
@@ -33,6 +38,7 @@
             <table class="table table-striped custab">
                 <thead>
                     <tr>
+                        <th>Nom</th>
                         <th>Budget Voyage</th>
                         <th>Debut Voyage</th>
                         <th>Nombre de Jours</th>
@@ -40,6 +46,7 @@
                     </tr>
                 </thead>
                 <tr ng-repeat="voyage in voyages">
+                    <td>{{voyage.Nom}}</td>
                     <td>{{voyage.BudgetVoyage}}</td>
                     <td>{{voyage.DateTimeDebut}}</td>
                     <td>{{voyage.NbDeJour}}</td>
