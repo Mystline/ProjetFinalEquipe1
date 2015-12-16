@@ -9,17 +9,17 @@
 
                 <div class="form-group">
                     <label>Budget voyage</label>
-                    <input type="number" name="budget" ng-model="budgetVoyage" id="voyage-budget">$
+                    <input type="number" name="budget" ng-model="budgetVoyage" id="login-pass" ng-style="styleVoyageBudget" ng-keypress="applyValidation($event)">$
                 </div>
 
                 <div class="form-group">
                     <label>Début voyage</label>
-                    <input type="date" name="debut" ng-model="dateDebut" id="voyage-date">
+                    <input type="date" name="debut" ng-model="dateDebut" ng-keypress="myFunct($event)">
                 </div>
 
                 <div class="form-group">
                     <label>Nombre de jours</label>
-                    <input type="number" name="jours" ng-model="nbJours" id="voyage-jour">
+                    <input type="number" name="jours" ng-model="nbJours" ng-style="styleVoyageNbJour" ng-keypress="applyValidation($event)">
                 </div>
 
                 <div class="form-group">
@@ -27,7 +27,7 @@
                 </div>
 
             </form>
-            <ul ng-model="voyageerror"  ng-bind-html="renderHtml(righterrorhtml)"></ul>
+            <ul ng-model="voyageerror"  ng-bind-html="renderHtml(voyageerror)"></ul>
         </div>
         <div class="row">
             <table class="table table-striped custab">

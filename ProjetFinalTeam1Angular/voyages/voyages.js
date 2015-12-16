@@ -1,8 +1,8 @@
 angular
     .module('projetequipe1')
-    .controller('VoyageController', ['$scope', '$rootScope', '$http', '$route', '$sce',
+    .controller('VoyageController', ['$scope', '$rootScope', '$http', '$route', '$sce', '$timeout',
 
-function VoyageController($scope, $rootScope, $http, $route, $sce)
+function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout)
         {
 
             $scope.budgetVoyage = "";
@@ -10,29 +10,22 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             $scope.nbJours = "";
             $scope.voyages = [];
             $scope.voyageerror= "";
-/*
-            $http({
-                method: 'GET',
-                url: "http://localhost:59044/api/Voyages"
-            }).success(function (data) {
-                console.log(data)
-                $scope.voyages = data;
-            });*/
+
 
             $scope.ajouterVoyage = function () {
                 
-                validVoyage.apply($('#login-pass'));
+                //validVoyage.apply($('#login-pass'));
+                validVoyage();
                 if (errors != 0) {
                     alert("Information invalide");
                     return;
                 }
                 
-                if ($scope.budgetVoyage == "" || $scope.dateDebut == "" || $scope.nbJours == "") {
-
-
+                if ($scope.budgetVoyage == "" || $scope.dateDebut == "" || $scope.nbJours == "") 
+                {
                     alert("Un ou plusieurs champs ne sont pas valides");
-
-                } else {
+                } 
+                else {
                     
                     var dt = new Date();
                     var dtstring = dt.getFullYear()
@@ -61,8 +54,8 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                         console.log("erreur ajout voyage");
                     });
                 }
-
             }
+            
             
             $scope.selectionnerVoyage = function(voyage){
                 console.log(voyage);
@@ -71,7 +64,87 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
             
             }
 
-            $scope.supprimerVoyage = function (voyage) {
+            //Ajoute tout les voyages dans la liste $scope.voyages
+            $scope.initVoyage = function()
+            {
+                $scope.voyages = [];
+                
+                $.ajax({
+                    method: 'GET',
+                    url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
+                    success: function (response) 
+                    {
+                        console.log(response);
+                        for(var i =0; i < response.length; i++)
+                        {
+                            $scope.voyages.push({Id:response[i].Id, BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[i].NbDeJour});
+                        }
+                        $scope.$apply();
+                    }
+                });
+                
+            }
+            
+            $scope.applyValidation = function (keyEvent) {
+                $timeout(function () {
+                    validVoyage();
+                });
+
+            }
+            
+            //Fonction de validation pour création d'un voyage
+            function validVoyage() {             
+                var mess = "";
+                errors = 0;
+
+                //
+                //Validation du nombre de jours
+                //
+                if ((""+$scope.nbJours).length < 3 && (""+$scope.nbJours).length > 0) {
+                    $scope.styleVoyageNbJour = { 'border': '1px solid #1abc9c' };
+                    mess += "<li class='green'>Le nombre de jour est valide</li>";
+                }
+                else {
+                    $scope.styleVoyageNbJour = { 'border': '1px solid #e74c3c' };
+                    mess += "<li class='red'>Il doit avoir de 1 a 99 jours dans un voyage</li>";
+                    errors++;
+                }
+
+                //
+                //Validation du budget
+                //
+                if((""+$scope.budgetVoyage).length > 9 || (""+$scope.budgetVoyage).length < 1) {
+                    $scope.styleVoyageBudget = { 'border': '1px solid #e74c3c' };
+                    mess += "<li class='red'>Le budget est trop important</li>";
+                    errors++; 
+                }
+                else {
+                   $scope.styleVoyageBudget = { 'border': '1px solid #1abc9c' };
+                    mess += "<li class='green'>Le budget est valide</li>";
+                }
+
+                $scope.voyageerror = mess;
+                $scope.renderHtml($scope.voyageerror); 
+                console.log($scope.voyageerror);
+                $scope.$apply();
+            }
+            
+            //Pour afficher les <li> dans la liste du message d'erreur 
+            $scope.renderHtml = function (htmlCode) {
+                return $sce.trustAsHtml(htmlCode);
+            };
+            
+            //Pour former une date
+            function pad2(number) {
+                return (number < 10 ? '0' : '') + number
+            }   
+            
+            
+            $scope.initVoyage();
+
+            
+            
+            /*$scope.supprimerVoyage = function (voyage) {
                 $.ajax({
                     method: 'DELETE',
                     url: "http://localhost:3216/api/Voyages/" + voyage.Id
@@ -91,35 +164,12 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                     }
                 };
                 return -1;
-            }
+            }*/
             
             
-            function pad2(number) {
-                return (number < 10 ? '0' : '') + number
-            }   
-            
-            
-            $scope.initVoyage = function()
-            {
-                $scope.voyages = [];
-                
-                $.ajax({
-                    method: 'GET',
-                    url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
-                    success: function (response) 
-                    {
-                        console.log(response);
-                        for(var i =0; i < response.length; i++)
-                        {
-                            $scope.voyages.push({Id:response[i].Id, BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut, NbDeJour: response[i].NbDeJour});
-                        }
-                        $scope.$apply();
-                    }
-                });
-                
-                //$scope.dateDebut
+            //$scope.dateDebut
                 //$scope.budgetVoyage
-                $('#voyage-jour').on('change keypress paste focus textInput input', function () {
+                /*$('#voyage-jour').on('change keypress paste focus textInput input', function () {
                     $scope.validVoyage();
                     $scope.$apply();
                 });
@@ -127,49 +177,15 @@ function VoyageController($scope, $rootScope, $http, $route, $sce)
                 $('#voyage-budget').on('change keypress paste focus textInput input', function () {
                      $scope.validVoyage();
                      $scope.$apply();
-                });
-            }
+                });*/
             
-            $scope.validVoyage = function()  {
-                    var mess = "";
-                    errors = 0;
 
-
-                    if ($scope.dateDebut.length < 3 && $scope.dateDebut.length > 0) {
-                        //$scope.dateDebut.css("border", "1px solid #1abc9c");
-                        mess += "<li class='green'>Le nombre de jour est valide</li>";
-                    }
-                    else {
-                        //$('#voyage-jour').css("border", "1px solid #e74c3c");
-                        mess += "<li class='red'>Il doit avoir de 1 a 99 jours dans un voyage</li>";
-                        errors++;
-                    }
-                
-                    if($scope.budgetVoyage.length > 9 || $scope.budgetVoyage.length < 1)
-                    {
-                        //$scope.budgetVoyage.css("border", "1px solid #e74c3c");
-                        mess += "<li class='red'>Le budget est trop important</li>";
-                        errors++; 
-                    }
-                    else
-                    {
-                        //$scope.budgetVoyage.css("border", "1px solid #1abc9c");
-                        mess += "<li class='green'>Le budget est valide</li>";
-                    }
-                
-                    $scope.voyageerror = mess;
-                
-                    $scope.renderHtml($scope.voyageerror);
-                    
-                    $scope.$apply();
-                }
-            
-            $scope.renderHtml = function (htmlCode) {
-                return $sce.trustAsHtml(htmlCode);
-            };
-            
-            
-            $scope.initVoyage();
-
-
+            /*
+            $http({
+                method: 'GET',
+                url: "http://localhost:59044/api/Voyages"
+            }).success(function (data) {
+                console.log(data)
+                $scope.voyages = data;
+            });*/
 }]);
