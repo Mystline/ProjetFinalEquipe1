@@ -1,5 +1,34 @@
 
 <div ng-controller="ActiviteController">
+    
+    <section id="suggestion">
+            <div class="container">
+                <div class="section-heading inverse scrollpoint sp-effect3">
+                    <h1>Suggestion</h1>
+                    <div class="divider"></div>
+                    <p>Google Places API, les suggestion comme on trouve dans Google Maps</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-md-push-1 scrollpoint sp-effect3">
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="place in places">
+                                    <div class="review-comment">                                                                      
+                                        <h3><img ng-src="{{place.icon}}" alt=""> {{place.name}}</h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="map-places" style="width:100%;height:400px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    
+    
     <div class="container">
         <div class="row">
             <form>
