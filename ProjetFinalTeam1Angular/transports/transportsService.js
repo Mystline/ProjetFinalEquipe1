@@ -27,7 +27,7 @@ angular.module('projetequipe1.transportsService', [])
     this.getTransportsVoyage = function(voyageId) {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:3216/api/TransportsVoyage',
+            url: 'http://localhost:3216/api/TransportsVoyage/' + voyageId,
             data:
             {
                 VoyageId: voyageId
@@ -41,6 +41,20 @@ angular.module('projetequipe1.transportsService', [])
             }
         });
     };
+    
+    //GET TRANSPORT BY ID
+    this.getTransportDetail = function(transportID) {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3216/api/Transport/' + transportID,
+            data:
+            {
+                id: transportID
+            }
+        }).success(function (data) {
+            console.log(data);
+        })
+    }
     
     //**CREATE
     this.createTransport = function(transport) {
@@ -56,9 +70,7 @@ angular.module('projetequipe1.transportsService', [])
                 LongDepart: transport.longDepart,
                 LatArrive: transport.latArrive,
                 LongArrive: transport.longArrive,
-                
-                //???????????
-                Jour_Id: transport.jour_Id
+                Jour: transport.jour
             }
         }).success(function(data) {
             console.log(data);
@@ -81,16 +93,14 @@ angular.module('projetequipe1.transportsService', [])
                 LongDepart: transport.LongDepart,
                 LatArrive: transport.LatArrive,
                 LongArrive: transport.LongArrive,
-                
-                //???????????
-                Jour_Id: transport.Jour_Id
+                Jour: transport.Jour
             }
         }).success(function(data) {
             console.log(data);
         })
     };
     
-    //X DELETE
+    //**DELETE
     this.deleteTransport = function(transportID) {
         $.ajax({
             type: 'DELETE',

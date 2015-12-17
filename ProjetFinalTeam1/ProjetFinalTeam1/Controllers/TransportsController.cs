@@ -16,14 +16,14 @@ namespace ProjetFinalTeam1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //GET api/Transports/Voyage
-        //[Route("api/Transports/Voyage")]
-        //public List<Transport> GetTransportsVoyage(int voyageId)
-        //{
-        //    List<Transport> lstTransports = new List<Transport>();
-        //    lstTransports = db.Transports.Where(t => t.Jour.Voyage.Id == voyageId).ToList();
-        //    return lstTransports;
-        //}
+        //GET api/Transports/Voyage/5
+        [Route("api/Transports/Voyage")]
+        public List<Transport> GetTransportsVoyage(int voyageId)
+        {
+            List<Transport> lstTransports = new List<Transport>();
+            lstTransports = db.Transports.Where(t => t.Jour.Voyage.Id == voyageId).ToList();
+            return lstTransports;
+        }
 
         // GET api/Transports
         public IQueryable<Transport> GetTransports()

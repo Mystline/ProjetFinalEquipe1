@@ -11,7 +11,13 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     $scope.jours.push(2);
     $scope.jours.push(3);
     
-    //TODO: Faire les vrais requets ajax au serveur.
+    /*$scope. = $.ajax({
+        type: 'GET',
+        
+    })*/
+    
+    
+    
     $scope.lstTransports = TransportsService.dataService.lstTransports;
     
     //TODO: Trouver le moyen de mettre à jour la liste index.
@@ -286,9 +292,10 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
         }
     }
     
-    /*$scope.appliquerChangement = function(){
-        //$scope.$apply();
-    }*/
+    $scope.afficherPageSupprimer = function(transportID) {
+        
+    }
+    
     
     //=====================================================================
     //**************************GESTION TRANSPORT**************************
@@ -302,11 +309,8 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
         TransportsService.getTransports();
     }
     
-    //Exécute la methode
-    getAllTransports();
-    
     //**Les transports du voyage selectionne
-    $scope.getTransportsVoyage = function() {
+    function getTransportsVoyage() {
         
         //***bonne ligne de code, mais pour le développement je hardcode.
         
@@ -319,6 +323,10 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             TransportsService.getTransportsVoyage($rootScope.voyageSelect);
         }
     }
+    
+    //Exécute la methode quand on arrive sur la page Transport.
+    getTransportsVoyage();
+    
     
     //--------------------------------------------
     //**CREATE
@@ -336,7 +344,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
             longitudeDepart: 45.501459,
             latitudeArrive: -70,
             longitudeArrive: 45,
-            jour_Id: $scope.jour
+            jour: $rootScope.JourSelect
         }
         
         TransportsService.createTransport(newTransport);
