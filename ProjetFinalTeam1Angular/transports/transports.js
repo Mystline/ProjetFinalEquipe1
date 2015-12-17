@@ -244,7 +244,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //=====================================================================
     //************************GESTION DES SECTIONS*************************
     //=====================================================================
-    $scope.resetCreationSection = function(){
+    $scope.resetValueDansCreation = function(){
         $scope.cout = "";
         $scope.type = "";
         $scope.transporteur = "";
@@ -306,10 +306,18 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     getAllTransports();
     
     //**Les transports du voyage selectionne
-    $scope.getTransportsVoyage = function(voyageID) {
+    $scope.getTransportsVoyage = function() {
+        
         //***bonne ligne de code, mais pour le développement je hardcode.
-        //TransportsService.getTransportsVoyage(voyageID);
-        TransportsService.getTransportsVoyage(0);
+        
+        if($rootScope.voyageSelect == null)
+        {
+            getAllTransports();
+        }
+        else
+        {
+            TransportsService.getTransportsVoyage($rootScope.voyageSelect);
+        }
     }
     
     //--------------------------------------------
