@@ -13,19 +13,19 @@ function BarController($scope, $http, $rootScope, $location) {
        
              $rootScope.activeUser = localStorage.getItem("user");
          
-          $('#connected').show();
-             $('#Notconnected').hide();
+            $scope.NGconnected = true;
+            $scope.NGNotconnected = false;
         }
         else{
             $rootScope.activeUser = "nouserconnected";
-        $('#Notconnected').show();
+        $scope.NGNotconnected = true;
         }
     }
 
     $scope.logout = function () {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        $('#connected').hide();
+        $scope.NGconnected = false;
         localStorage.setItem("back", window.location.href);
        s = window.location.protocol + "//" + window.location.host;
     window.location = s;

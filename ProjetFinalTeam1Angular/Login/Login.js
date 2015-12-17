@@ -28,7 +28,8 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
                 ConfirmPassword: $scope.suPassC
             },
             error: function (data) {
-                $("#righterror").text("Les informations soumises ne repondent pas aux critéres.");
+                $scope.righterrorModel = "Les informations soumises ne repondent pas aux critéres.";
+                $scope.$apply();
             }
         }).success(function (data) {
             $.ajax({
@@ -62,7 +63,8 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
                 password: $scope.siPass
             },
             error: function (data) {
-                $("#lefterror").text("L'identifiant et le mot de passe ne fonctionnent pas.");
+                 $scope.lefterrorModel = "Les informations soumises ne repondent pas aux critéres.";
+                $scope.$apply();
             }
         }).done(function (data) {
             $('#imgLoadSi').hide();
