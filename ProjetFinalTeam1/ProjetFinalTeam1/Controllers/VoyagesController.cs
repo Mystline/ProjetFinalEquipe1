@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ProjetFinalTeam1.Models;
+using System.Globalization;
 
 namespace ProjetFinalTeam1.Controllers
 {

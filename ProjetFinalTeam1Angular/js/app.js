@@ -8,6 +8,7 @@ angular.module('projetequipe1', [
     'projetequipe1.activitesService',
     'projetequipe1.joursService',
     'projetequipe1.voyagesService',
+    'projetequipe1.globalService'
 ])
 
 .config(function(uiGmapGoogleMapApiProvider) {
