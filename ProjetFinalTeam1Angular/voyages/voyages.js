@@ -11,23 +11,13 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
             $scope.nbJours = "";
             $scope.voyageerror= "";
             
-            $scope.voyages = [];
+            $scope.voyages = VoyagesService.dataService.lstVoyages;
             
-            //scope.voyages = VoyagesService.dataService.lstVoyages;
+            $scope.VoyagesService = VoyagesService;            
             
             $scope.$watch('VoyagesService.dataService.lstVoyages', function(newVal, oldVal, scope) {
                 console.log("valeur ajouter");
-                $scope.$evalAsync(function() {   
-                $scope.voyages = VoyagesService.dataService.lstVoyages;
-                });
-                if (!$scope.$$phase) { // check if digest already in progress
-                $scope.$apply(); // launch digest;
-                }
-            });
-            
-            $scope.$watch('voyages', function(newVal, oldVal, scope) {
-                console.log("valeur ajouter");
-                $scope.voyages = VoyagesService.dataService.lstVoyages;
+                scope.voyages = VoyagesService.dataService.lstVoyages;
             });
 
             //Remplissage de la liste de voyages (Database)
@@ -75,6 +65,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
 
             function formatDate(dt)
             {
+                
                 var dtstring = dt.getFullYear()
                 + '-' + pad2(dt.getMonth()+1)
                 + '-' + pad2(dt.getDate())
@@ -137,148 +128,8 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
             $scope.renderHtml = function (htmlCode) {
                 return $sce.trustAsHtml(htmlCode);
             };
-            
-            $scope.init = function()
-            {
-                $scope.$evalAsync(function() {  
-                VoyagesService.initVoyage();
-                });
-                if (!$scope.$$phase) { // check if digest already in progress
-                $scope.$apply(); // launch digest;
-                }
-            }
-            
-            if (!$scope.$$phase) { // check if digest already in progress
-                $scope.$apply(); // launch digest;
-                }
-            $scope.init();
-            
-           /* $scope.ajouterVoyage = function () {
-                
-                //validVoyage.apply($('#login-pass'));
-                validVoyage();
-                if (errors != 0) {
-                    alert("Information invalide");
-                    return;
-                }
-                
-                if ($scope.budgetVoyage == "" || $scope.dateDebut == "" || $scope.nbJours == "") 
-                {
-                    alert("Un ou plusieurs champs ne sont pas valides");
-                } 
-                else {
-                    
-                    var dt = new Date();
-                    var dtstring = dt.getFullYear()
-                    + '-' + pad2(dt.getMonth()+1)
-                    + '-' + pad2(dt.getDate())
-                    + ' ' + pad2(dt.getHours())
-                    + ':' + pad2(dt.getMinutes())
-                    + ':' + pad2(dt.getSeconds());
-                    
-                    console.log($scope.nomVoyage, $scope.dateDebut,$scope.budgetVoyage,$scope.nbJours);
-                    $.ajax({
-                        method: 'POST',
-                        url: "http://localhost:3216/api/Voyages/",
-                        data: {
-                            Name: $scope.nomVoyage,
-                            BudgetVoyage: $scope.budgetVoyage,
-                            DateTimeDebut: dtstring,
-                            NbDeJour: $scope.nbJours
-                        }
-
-                    }).success(function (data)  {
-                        $scope.initVoyage();
-                        console.log(data);
-                        $scope.$apply();
-                    }).error(function (data) {
-                        
-                        console.log("erreur ajout voyage");
-                    });
-                }
-            }*/
-            
-            
-            /*
-            //Ajoute tout les voyages dans la liste $scope.voyages
-            $scope.initVoyage = function()
-            {
-                $scope.voyages = [];
-                
-                $.ajax({
-                    method: 'GET',
-                    url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
-                    success: function (response) 
-                    {
-                        
-                        
-                        console.log(response);
-                        for(var i =0; i < response.length; i++)
-                        {
-                            $scope.voyages.push({Id:response[i].Id, Nom:response[i].Name, BudgetVoyage: response[i].BudgetVoyage, DateTimeDebut: response[i].DateTimeDebut.split('T')[0], NbDeJour: response[i].NbDeJour});
-                        }
-                        $scope.$apply();
-                    }
-                });
-                
-            }*/
-            
-            
-            
-            
-            /*
-            //Pour former une date
-            function pad2(number) {
-                return (number < 10 ? '0' : '') + number
-            }   
-            
-            
-            $scope.initVoyage();*/
 
             
-            
-            /*$scope.supprimerVoyage = function (voyage) {
-                $.ajax({
-                    method: 'DELETE',
-                    url: "http://localhost:3216/api/Voyages/" + voyage.Id
+            VoyagesService.initVoyage();
 
-                }).success(function (data) {
-                    console.log(data);
-                    $scope.voyageIndexASupprimer = $scope.voyageIndex($scope.voyages, voyage);
-                    $rootScope.data.memos.splice($scope.voyageIndexASupprimer, 1);
-                });
-
-            }
-
-            $scope.voyageIndex = function arrayObjectIndexOf(arr, obj) {
-                for (var i = 0; i < arr.length; i++) {
-                    if (angular.equals(arr[i], obj)) {
-                        return i;
-                    }
-                };
-                return -1;
-            }*/
-            
-            
-            //$scope.dateDebut
-                //$scope.budgetVoyage
-                /*$('#voyage-jour').on('change keypress paste focus textInput input', function () {
-                    $scope.validVoyage();
-                    $scope.$apply();
-                });
-                
-                $('#voyage-budget').on('change keypress paste focus textInput input', function () {
-                     $scope.validVoyage();
-                     $scope.$apply();
-                });*/
-            
-
-            /*
-            $http({
-                method: 'GET',
-                url: "http://localhost:59044/api/Voyages"
-            }).success(function (data) {
-                console.log(data)
-                $scope.voyages = data;
-            });*/
 }]);
