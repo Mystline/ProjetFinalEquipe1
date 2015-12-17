@@ -42,16 +42,18 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                     + ':' + pad2(dt2.getSeconds());
             
             
+            $rootScope.JourSelect.VoyageId = null;
+            
             $.ajax({
                 method: 'POST',
                 url: "http://localhost:3216/api/Activites/",
                 data: {
+                    Jour:$rootScope.JourSelect,
                     HeureDebut: dtstring,
                     HeureFin: dtstring2,
                     Cout: $scope.Cout,
                     Latitude:$scope.latitudeRecherche,
                     Longitude:$scope.longitudeRecherche,
-                    Jour:$rootScope.JourSelect
                 }
             }).success(function (data)  {
                 console.log(data);

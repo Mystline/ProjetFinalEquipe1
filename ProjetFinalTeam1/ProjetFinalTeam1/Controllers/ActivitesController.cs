@@ -84,6 +84,21 @@ namespace ProjetFinalTeam1.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Route("api/Jours/PostActiviteCustom")]
+        public int PostActiviteCustom(int id, Activite activite)
+        {
+            activite.Jour = db.Jours.FirstOrDefault(j => j.Id == activite.Jour.Id);
+
+
+            db.Jours.FirstOrDefault(j => j.Id == activite.Jour.Id).Activites.Add(activite);
+            db.Entry(db.Jours.FirstOrDefault(j => j.Id == activite.Jour.Id)).State = EntityState.Modified;
+
+            db.Activites.Add(activite);
+            db.SaveChanges();
+
+            return 0;
+        }
+
         // POST: api/Activites
         [ResponseType(typeof(Activite))]
         public IHttpActionResult PostActivite(Activite activite)
@@ -103,7 +118,7 @@ namespace ProjetFinalTeam1.Controllers
             db.Activites.Add(activite);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = activite.Id }, activite);
+            return CreatedAtRoute("DefaultApi", new { id = activite.Id }, activite.Id);
         }
 
         // DELETE: api/Activites/5
