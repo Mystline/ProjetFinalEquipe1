@@ -4,7 +4,10 @@ angular.module('projetequipe1', [
     
     'projetequipe1.activites',
     'projetequipe1.transportsService',
-    'projetequipe1.transports'
+    'projetequipe1.transports',
+    'projetequipe1.activitesService',
+    'projetequipe1.joursService',
+    'projetequipe1.voyagesService',
 ])
 
 .config(function(uiGmapGoogleMapApiProvider) {
