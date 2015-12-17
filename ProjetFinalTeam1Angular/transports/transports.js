@@ -5,10 +5,10 @@ angular.module('projetequipe1.transports', [])
 function TransportController($scope, $rootScope, $http, $route, $sce, DataService, TransportsService) {
     
     //TODO: Get le nombre de jours du voyage.
-    $scope.lstJours = [];
-    $scope.lstNumJours = [];
+    //$scope.lstJours = [];
+    //$scope.lstNumJours = [];
     
-    function getJoursVoyage() {
+    /*function getJoursVoyage() {
         $.ajax({
             type: 'GET',
             url: 'http://localhost:3216/api/Jours/GetJoursVoyage',
@@ -29,9 +29,9 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
                 $scope.lstNumJours.push(num);
             }
         })
-    }
+    }*/
     //Exécute la methode.
-    getJoursVoyage();
+    //getJoursVoyage();
     
     
     
@@ -48,9 +48,12 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //=====================================================================
     
     //Variables
-    var map;
+    var mapIndex;
+    var mapAjout;
+    var markerMapAjout;
     var center = new google.maps.LatLng(45.501459, -73.567543);
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    
     
     //--------------------------------------------
     //GEOLOCALISATION
@@ -89,19 +92,28 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //--------------------------------------------
     //INITIALISER LA MAP
     //--------------------------------------------
-    function initialize() {
-        var mapCanvas = document.getElementById('map');
+    function initialize(map) {
+        var mapCanvas = document.getElementById(map);
         var mapOptions = {
             center: center,
             zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-        map = new google.maps.Map(mapCanvas, mapOptions);
+        if(map == 'mapIndex')
+        {
+            mapIndex = new google.maps.Map(mapCanvas, mapOptions);
+        }
+        else
+        {
+            mapAjout = new google.maps.Map(mapCanvas, mapOptions);
+        }
     }
-    initialize();
+    initialize('mapIndex');
+    //initialize('mapAjout');
+    
     
     //??????????????
-    google.maps.event.addDomListener(window, 'load', initialize);
+    //google.maps.event.addDomListener(window, 'load', initialize);
     
     
     //=====================================================================
@@ -111,10 +123,31 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     
     //GEOCODE
     var API_KEY = "AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM";
-    $scope.geocode = function(adresse) {
-        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+adresse+'&key='+API_KEY)
+    
+    $scope.geocode = function(adresse, btn) {
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='+ adresse + '&key='+API_KEY)
         .success(function(data){
-            $scope.belleAdresse = data.results[0].formatted_address;
+            console.log(data);
+            
+            /*$scope.mapAjout = {
+                center: { latitude: data.results[0].geometry.location.lat, longitude: data.results[0].geometry.location.long },
+                marker: { latitude: data.results[0].geometry.location.lat, longitude: data.results[0].geometry.location.long },
+                zoom: 12
+            };*/
+            
+            if(btn == 'depart')
+            {
+                $scope.latDepart = data.results[0].geometry.location.lat;
+                $scope.longDepart = data.results[0].geometry.location.lng;
+            }
+            else
+            {
+                $scope.latArrive = data.results[0].geometry.location.lat;
+                $scope.longArrive = data.results[0].geometry.location.lng;
+            }
+            
+            
+            /*$scope.belleAdresse = data.results[0].formatted_address;
             loc = data.results[0].geometry.location;
             //neb = data.results[0].geometry.viewport.northeast;
             //swb = data.results[0].geometry.viewport.southwest;
@@ -122,46 +155,51 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
             $scope.longitudeRecherche = loc.lng;                        
             $scope.location = { latitude: loc.lat, longitude: loc.lng }
             //$scope.center = $scope.location;
-            //$scope.bounds = { northeast : { latitude: neb.lat, longitude: neb.lng }, southwest : { latitude: swb.lat, longitude: swb.lng } };
+            //$scope.bounds = { northeast : { latitude: neb.lat, longitude: neb.lng }, southwest : { latitude: swb.lat, longitude: swb.lng } };*/
 
             //$scope.doGeo();
         });
-    };
+    }
     
     
     //=====================================================================
     //***********************GOOGLE MAP (MARKERS)**************************
     //=====================================================================
+    $scope.afficherEndroit = function (lat, long){
+        $scope.mapAjout = {
+            center: { latitude: lat, longitude: long }, 
+            marker: { latitude: lat, longitude: long }, 
+            zoom: 12
+        };
+    }
+    
     
     $scope.ajouterMarker = function (lat, long){
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, long),
-            map: map,
+            map: mapAjout,
             icon: '../Images/markerBlack.png'
             //icon: iconBase + 'schools_maps.png'
             //title: 'Voila un icon noir!'
         });
     }
-    //???????????????
-    /*$scope.afficherLesActivites = function () {
-        $scope.ajouterMarker(45.501459, -73.567543);
-    }*/
+    
     
     //=====================================================================
     //**********************GOOGLE MAP (ITINERAIRES)***********************
     //=====================================================================
     
-    $scope.afficherItineraire = function() {
+    $scope.afficherItineraireSansCoord = function(debut, arrive) {
         var directionsService = new google.maps.DirectionsService();
         var directionsDisplay = new google.maps.DirectionsRenderer();
 
         var request = {
-            origin:'Cégep Édouard Montpetit',
-            destination:'170 Boulevard Taschereau, La Prairie, QC J5R 1S8',
+            origin: debut,
+            destination: arrive,
             avoidHighways: true,
             travelMode: google.maps.TravelMode['DRIVING']
         };
-        directionsDisplay.setMap(map);
+        directionsDisplay.setMap(mapIndex);
 
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
@@ -170,24 +208,32 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
         });
     }
     
-    $scope.afficherItineraireAvecCoordonnees = function(latDebut, longDebut, latArrive, longArrive) {
-        var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer();
+    $scope.afficherItineraireAvecCoordonnees = function(type, latDebut, longDebut, latArrive, longArrive) {
+        if(type == 'Avion' || type == 'avion')
+        {
+            $scope.initPlane(latDebut, longDebut, latArrive, longArrive);
+        }
+        else
+        {
+            initialize('mapIndex');
+            
+            var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
 
-        var request = {
-            //origin:'Cégep Édouard Montpetit',
-            origin: new google.maps.LatLng(latDebut, longDebut),
-            destination: new google.maps.LatLng(latArrive, longArrive),
-            avoidHighways: true,
-            travelMode: google.maps.TravelMode['DRIVING']
-        };
-        directionsDisplay.setMap(map);
+            var request = {
+                origin: new google.maps.LatLng(latDebut, longDebut),
+                destination: new google.maps.LatLng(latArrive, longArrive),
+                avoidHighways: true,
+                travelMode: google.maps.TravelMode['DRIVING']
+            };
+            directionsDisplay.setMap(mapIndex);
 
-        directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-            }
-        });
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
     }
     
     
@@ -259,7 +305,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //--------------------------------------------
     //Pour itineraire en avion
     //--------------------------------------------
-    $scope.initPlane = function() {
+    $scope.initPlane = function(latDebut, longDebut, latArrive, longArrive) {
         var myLatLng = new google.maps.LatLng(0, -180);
         var myOptions = {
             zoom: 3,
@@ -267,12 +313,15 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
 
-        var map = new google.maps.Map(document.getElementById("map-plane"),myOptions);
+        mapIndex = new google.maps.Map(document.getElementById("mapIndex"),myOptions);
         var flightPlanCoordinates = [
-            new google.maps.LatLng(37.772323, -122.214897),
-            new google.maps.LatLng(21.291982, -157.821856),
+            new google.maps.LatLng(latDebut, longDebut),
+            new google.maps.LatLng(latArrive, longArrive)
+            /*new google.maps.LatLng(37.772323, -122.214897),
+            new google.maps.LatLng(-27.46758, 153.027892)*/
+/*            new google.maps.LatLng(21.291982, -157.821856),
             new google.maps.LatLng(-18.142599, 178.431),
-            new google.maps.LatLng(-27.46758, 153.027892)
+            new google.maps.LatLng(-27.46758, 153.027892)*/
         ];
         var flightPath = new google.maps.Polyline({
             path: flightPlanCoordinates,
@@ -281,7 +330,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
             strokeWeight: 2
         });
 
-        flightPath.setMap(map);
+        flightPath.setMap(mapIndex);
     }
     
 
@@ -292,11 +341,14 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
         $scope.cout = "";
         $scope.type = "";
         $scope.transporteur = "";
+        
         $scope.endroitDepart = "";
         $scope.endroitArrive = "";
         
-        //***A completer
-        
+        $scope.latDepart = "";
+        $scope.longDepart = "";
+        $scope.latArrive = "";
+        $scope.longArrive = "";
     }
     
     $scope.afficherPage = function(page) {
@@ -369,12 +421,25 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //--------------------------------------------
     $scope.createNewTransport = function() {
         
-        //****Obtenir les coordonnées de l'activitéDepart.
-        //****Obtenir les coordonnées de l'activitéArrivé.
-        
-        
-        
         var newTransport = {
+            cout: $scope.cout,
+            type: $scope.type,
+            transporteur: $scope.transporteur,
+            latitudeDepart: $scope.latDepart,
+            longitudeDepart: $scope.longDepart,
+            latitudeArrive: $scope.latArrive,
+            longitudeArrive: $scope.longArrive,
+            jour: $rootScope.JourSelect
+        }
+        
+        TransportsService.createTransport(newTransport);
+    }
+    
+    //--------------------------------------------
+    //***MODIFIER
+    //--------------------------------------------
+    $scope.modifierTransport = function() {
+        var transportModif = {
             cout: $scope.cout,
             type: $scope.type,
             transporteur: $scope.transporteur,
@@ -385,23 +450,15 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
             jour: $rootScope.JourSelect
         }
         
-        TransportsService.createTransport(newTransport);
-    }
-    
-    //--------------------------------------------
-    //***MODIFIER
-    //--------------------------------------------
-    $scope.modifierTransport = function(transport) {
-        
-        TransportsService.updateTransport(transport);
+        TransportsService.updateTransport(transportModif, $scope.transportID);
     }
     
     //--------------------------------------------
     //***SUPPRIMER
     //--------------------------------------------
-    $scope.supprimerTransport = function(transportID) {
+    $scope.supprimerTransport = function() {
         
-        TransportsService.deleteTransport(transportID);
+        TransportsService.deleteTransport($scope.transportID);
     }
     
 }
