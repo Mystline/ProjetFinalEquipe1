@@ -11,7 +11,6 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
 
     var errors = 0;
 
-
     $scope.register = function () {
         changePassword.apply($('#login-pass'));
         if (errors != 0) {
@@ -52,8 +51,7 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
     }
 
     $scope.login = function () {
-        $("#lefterror").text("");
-        $('#imgLoadSi').show();
+       $scope.NGimgLoadSi = true;
         $.ajax({
             type: 'POST',
             url: 'http://localhost:3216/Token',
@@ -64,10 +62,11 @@ function LoginController($rootScope, $scope, $http, $location,$sce,$timeout) {
             },
             error: function (data) {
                  $scope.lefterrorModel = "Les informations soumises ne repondent pas aux critéres.";
+                $scope.NGimgLoadSi = false;
                 $scope.$apply();
             }
         }).done(function (data) {
-            $('#imgLoadSi').hide();
+             $scope.NGimgLoadSi = false;
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("user", data.userName);
             var s = localStorage.getItem("back");

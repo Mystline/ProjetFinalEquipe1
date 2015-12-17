@@ -11,7 +11,7 @@
             <div style="clear:both;"></div>
             <input type="password" name="pass" ng-model="siPass" />
             <div style="clear:both;"></div>
-            <input type="submit" value="Se connecter" ng-click="login()" style="vertical-align:top;" /> <img src="Images/loader.GIF" style="display: none; width:40px; height: 40px; margin-top: 22px; margin-left: 10px;" id="imgLoadSi" />
+            <input type="submit" value="Se connecter" ng-click="login()" style="vertical-align:top;" /> <img src="Images/loader.GIF" style="display: none; width:40px; height: 40px; margin-top: 22px; margin-left: 10px;"  ng-show="NGimgLoadSi" />
             <div style="clear:both;"></div>
         </form>
         <div id="lefterror" >{{lefterrorModel}}</div>
