@@ -2,19 +2,36 @@ angular.module('projetequipe1.transports', [])
 
 .controller('TransportController', TransportController)
  
-function TransportController($scope, $rootScope, $http, $route, $sce, TransportsService) {
+function TransportController($scope, $rootScope, $http, $route, $sce, DataService, TransportsService) {
     
     //TODO: Get le nombre de jours du voyage.
-    $scope.jours = [];
-    $scope.jours.push(0);
-    $scope.jours.push(1);
-    $scope.jours.push(2);
-    $scope.jours.push(3);
+    $scope.lstJours = [];
+    $scope.lstNumJours = [];
     
-    /*$scope. = $.ajax({
-        type: 'GET',
-        
-    })*/
+    function getJoursVoyage() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3216/api/Jours/GetJoursVoyage',
+            data:
+            {
+                voyageId: $rootScope.voyageSelect.Id
+            }
+        }).success(function(data) {
+            console.log(data);
+            for(var i=0; i<data.length; i++)
+            {
+                $scope.lstJours.push(data[i]);
+            }
+            
+            for(var i =0; i< $scope.lstJours.length; i++)
+            {
+                var num = i+1;
+                $scope.lstNumJours.push(num);
+            }
+        })
+    }
+    //Exécute la methode.
+    getJoursVoyage();
     
     
     
@@ -91,6 +108,27 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //***********************GOOGLE MAP (METHODES)*************************
     //=====================================================================
 
+    
+    //GEOCODE
+    var API_KEY = "AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM";
+    $scope.geocode = function(adresse) {
+        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+adresse+'&key='+API_KEY)
+        .success(function(data){
+            $scope.belleAdresse = data.results[0].formatted_address;
+            loc = data.results[0].geometry.location;
+            //neb = data.results[0].geometry.viewport.northeast;
+            //swb = data.results[0].geometry.viewport.southwest;
+            $scope.latitudeRecherche = loc.lat;
+            $scope.longitudeRecherche = loc.lng;                        
+            $scope.location = { latitude: loc.lat, longitude: loc.lng }
+            //$scope.center = $scope.location;
+            //$scope.bounds = { northeast : { latitude: neb.lat, longitude: neb.lng }, southwest : { latitude: swb.lat, longitude: swb.lng } };
+
+            //$scope.doGeo();
+        });
+    };
+    
+    
     //=====================================================================
     //***********************GOOGLE MAP (MARKERS)**************************
     //=====================================================================
@@ -254,8 +292,11 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
         $scope.cout = "";
         $scope.type = "";
         $scope.transporteur = "";
+        $scope.endroitDepart = "";
+        $scope.endroitArrive = "";
         
         //***A completer
+        
     }
     
     $scope.afficherPage = function(page) {
@@ -265,9 +306,6 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
                 $scope.pageCreate = false;
                 $scope.pageModif = false;
                 $scope.pageSupprimer = false;
-                
-                //****Modifier allTransports par TransportsVoyage
-                //$scope.getAllTransports();
                 break;
                 
             case "Create":
@@ -312,15 +350,13 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
     //**Les transports du voyage selectionne
     function getTransportsVoyage() {
         
-        //***bonne ligne de code, mais pour le développement je hardcode.
-        
         if($rootScope.voyageSelect == null)
         {
             getAllTransports();
         }
         else
         {
-            TransportsService.getTransportsVoyage($rootScope.voyageSelect);
+            TransportsService.getTransportsVoyage($rootScope.voyageSelect.Id);
         }
     }
     
@@ -335,6 +371,8 @@ function TransportController($scope, $rootScope, $http, $route, $sce, Transports
         
         //****Obtenir les coordonnées de l'activitéDepart.
         //****Obtenir les coordonnées de l'activitéArrivé.
+        
+        
         
         var newTransport = {
             cout: $scope.cout,

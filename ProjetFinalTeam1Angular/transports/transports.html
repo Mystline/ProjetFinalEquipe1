@@ -72,12 +72,32 @@
                     <p style="margin-top:5px">
                         Jour:
                         <select>
-                            <option ng-repeat="jour in jours" value="{{jour}}">{{jour}}</option>
+                            <option ng-repeat="numJour in lstNumJours" value="{{numJour}}">{{numJour}}</option>
                         </select>
                     </p>
+                    
+                    <!--<p style="margin-top:5px">
+                        Endroit de départ:
+                        <div ng-show="endroidDepartActivite()">
+                            
+                        </div>
+                        <div ng-show="endroidDepartActivite()">
+                            <input type="text" class="form-control" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+                        </div>
+                    </p>
+                    <p style="margin-top:5px">
+                        Endroit d'arrivé:
+                        <input type="text" class="form-control" ng-model="endroitArrive" style="width:300px; margin-top:5px">
+                    </p>-->
+                    
                     <input type="text" class="form-control" placeholder="Endroit depart" ng-model="endroitDepart" style="width:300px; margin-top:5px">
+                    <button ng-click="geocode(endroitDepart)" class="btn btn-default">Rechercher endroit</button>
+                    
                     <input type="text" class="form-control" placeholder="Endroit arrive" ng-model="endroitArrive" style="width:300px; margin-top:5px">
+                    <button ng-click="geocode(endroitArrive)" class="btn btn-default">Rechercher endroit</button>
 
+<!--                    <div id="map" style="width:500px;height:400px"></div>-->
+                    
                     <input class="btn btn-default" type="submit" value="Ajouter" style="margin-top:10px">
                 </form>
             </div>
@@ -100,12 +120,12 @@
                         Cout:
                         <input type="number" min="0" class="form-control" ng-model="cout" style="width:200px; margin-top:5px">
                     </p>
-                    <p>
+                    <!--<p>
                         Jour:
                         <select>
                             <option ng-repeat="jour in jours" value="{{jour}}">{{jour}}</option>
                         </select>
-                    </p>
+                    </p>-->
                     <p style="margin-top:5px">
                         Endroit de départ:
                         <input type="text" class="form-control" ng-model="endroitDepart" style="width:300px; margin-top:5px">

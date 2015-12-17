@@ -16,8 +16,8 @@ namespace ProjetFinalTeam1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //GET api/Transports/Voyage/5
-        [Route("api/Transports/Voyage")]
+        //GET api/Transports/GetTransportsVoyage
+        [Route("api/Transports/GetTransportsVoyage")]
         public List<Transport> GetTransportsVoyage(int voyageId)
         {
             List<Transport> lstTransports = new List<Transport>();

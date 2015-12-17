@@ -27,10 +27,10 @@ angular.module('projetequipe1.transportsService', [])
     this.getTransportsVoyage = function(voyageId) {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:3216/api/TransportsVoyage/' + voyageId,
+            url: 'http://localhost:3216/api/Transports/GetTransportsVoyage',
             data:
             {
-                VoyageId: voyageId
+                voyageId: voyageId
             }
         }).success(function (data) {
             console.log(data);
