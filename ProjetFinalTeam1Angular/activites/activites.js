@@ -153,7 +153,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                 console.log(results[index].types[0]);
                 console.log(results[index].types.length);
                 
-                /*
+                
                 while(count != 5)
                 {                                  
                     
@@ -175,7 +175,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                             
                             $scope.places.push(results[index]);
                             var marker = new google.maps.Marker({
-                                position: $scope.places[index].geometry.location,
+                                position: results[index].geometry.location,
                                 map: map,
                                 icon: results[index].icon,
                                 name: results[index].name
@@ -192,7 +192,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                                         scope.infoWindow.setContent( compiled[0] );
                                         scope.infoWindow.open( map , marker );                                        
                                     };
-                            })( marker , $scope, content , results[i] )
+                            })( marker , $scope, content , results[index] )
                         );
                                                        
                             e=results[index].types.length;
@@ -201,7 +201,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                     }
                     
                    index++;                
-                }*/
+                }
                 /*var e = 0;
                 for(i=0; i < results.length; i++) 
                 {
@@ -235,7 +235,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                                 })( marker , $scope, content , results[i] )
                             );                            
                         } 
-                }*/
+                }*//*
                 for(i=0; i<5; i++) {
                 bounds.extend(results[i].geometry.location);
                 $scope.places.push(results[i]);
@@ -257,7 +257,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                         };
                     })( marker , $scope, content , results[i] )
                 );
-            }
+            }*/
                 
                 map.fitBounds(bounds);
                 
