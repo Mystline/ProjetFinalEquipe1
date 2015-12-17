@@ -31,7 +31,7 @@
         
         <div class="col-md-4">
             <h1>Infos journées</h1>
-            <div id="jourInfo" style="display: none; background-color:lightgray;">
+            <div ng-show="jourInfo" style="background-color:lightgray;">
                 <h1>Bugdet Jour : {{budgetJour}} $</h1>
                 </br>
                 <h1>Nombre d'activite : {{nbEvent}}</h1>
@@ -40,7 +40,7 @@
                 <button ng-click="showLstActivites()" class="btn btn-primary"  >Consulter activitees</button>
             </div>
         
-            <div id="modifJour" style="display: none;background-color:lightgray;">
+            <div ng-show="modifJour" style="background-color:lightgray;">
                 </br></br></br>
                 <h2>Nouveau budget</h2>
                 </br>
@@ -50,7 +50,7 @@
             </div>
         </div>
         
-        <div class="col-md-4" style="display: none;" id="lstActivite">
+        <div class="col-md-4" ng-show="lstActivite">
             <h1>Liste des activités</h1>
             
             <button ng-click="selectionnerActivitie()" class="btn btn-primary"  >Consulter cette activite</button>

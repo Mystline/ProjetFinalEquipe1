@@ -2,7 +2,7 @@ angular
     .module('projetequipe1')
     .controller('JourController',['$scope', '$rootScope', '$http', '$route', '$sce',
  
-function JourController($scope, $rootScope, $http, $route, $sce) 
+function JourController($scope, $rootScope, $http, $route, $sce, $compile, $timeout) 
 {
     
     $scope.budgetJour = 0;
@@ -13,6 +13,10 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     //rootScope ??
     $scope.lstJours = [];
     $rootScope.lstActivites = [];
+    
+    $scope.jourInfo = false;
+    $scope.lstActivite = false;
+    $scope.modifJour = false;
     
     
     $scope.getJours = function() {
@@ -40,7 +44,6 @@ function JourController($scope, $rootScope, $http, $route, $sce)
 
                 console.log($scope.lstJours);
                 $scope.$apply();
-
             }
         });
 
@@ -48,9 +51,9 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     
     $scope.showJour = function(jour)
     {    
-        $('#jourInfo').show();
-        $('#lstActivite').hide();
-        $('#modifJour').hide();
+        $scope.jourInfo = true;
+        $scope.lstActivite = false;
+        $scope.modifJour = false;
         $scope.budgetJour = jour.BudgetJournee;
         $scope.nbEvent = 6;
         $rootScope.JourSelect = jour;       
@@ -58,7 +61,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     
     $scope.showLstActivites = function()
     {
-        $('#lstActivite').show();            
+        $scope.lstActivite = true;          
     }
     
     
@@ -70,7 +73,7 @@ function JourController($scope, $rootScope, $http, $route, $sce)
     
     $scope.allowModif = function()
     {
-        $('#modifJour').show();    
+        $scope.modifJour= true;
     }
     
     $scope.modifierBudgetJour = function()
@@ -92,14 +95,14 @@ function JourController($scope, $rootScope, $http, $route, $sce)
             {
                 console.log(response);
 
-                $('#jourInfo').hide();
+                $scope.jourInfo = false;
                 $scope.budgetJour = response;
                 $scope.getJours();
                 $scope.$apply();
             }
         });
-        $('#modifJour').hide();
-        $('#lstActivite').hide();
+        $scope.modifJour = false;
+        $scope.lstActivite = false;
     }
       
     
