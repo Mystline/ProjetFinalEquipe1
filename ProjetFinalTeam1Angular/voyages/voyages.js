@@ -24,6 +24,11 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
                 $scope.$apply(); // launch digest;
                 }
             });
+            
+            $scope.$watch('voyages', function(newVal, oldVal, scope) {
+                console.log("valeur ajouter");
+                $scope.voyages = VoyagesService.dataService.lstVoyages;
+            });
 
             //Remplissage de la liste de voyages (Database)
             //$scope.voyages = [];
@@ -44,7 +49,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
                 console.log(dtstring);
                 
                 VoyagesService.ajouterVoyage($scope.nomVoyage,$scope.budgetVoyage, dtstring, $scope.nbJours);
-                $scope.$apply();               
+                //$scope.$apply();               
             }
             
             //Selection du voyage
