@@ -68,6 +68,14 @@ function JourController($scope, $rootScope, $http, $route, $sce, $compile, $time
     $scope.selectionnerActivitie = function(){
          
         console.log($rootScope.JourSelect);
+        
+        $rootScope.NGconnected = true;
+        $rootScope.NGvoyage = false;
+        $rootScope.NGjours = false;
+        $rootScope.NGtransport = true;
+        $rootScope.NGutilisateur = false;
+        $rootScope.NGactivite = true;
+        
         $rootScope.changeView('/activites');            
     }
     

@@ -13,19 +13,40 @@ function BarController($scope, $http, $rootScope, $location) {
        
              $rootScope.activeUser = localStorage.getItem("user");
          
-            $scope.NGconnected = true;
-            $scope.NGNotconnected = false;
+            $rootScope.NGconnected = true;
+            $rootScope.NGNotconnected = false;
+            
+           $rootScope.NGjours = false;
+           $rootScope.NGvoyage = true;
+           $rootScope.NGtransport =  false;
+           $rootScope.NGutilisateur = true;
+           $rootScope.NGactivite = false;
+           
         }
         else{
-            $rootScope.activeUser = "nouserconnected";
-        $scope.NGNotconnected = true;
+           $rootScope.activeUser = "nouserconnected";
+           $scope.NGNotconnected = true;
+            
+            $rootScope.NGjours = false;
+           $rootScope.NGvoyage = false;
+           $rootScope.NGtransport = false;
+           $rootScope.NGutilisateur = false;
+           $rootScope.NGactivite = false;
+            
+           $rootScope.changeView('/Login'); 
         }
     }
 
     $scope.logout = function () {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        $scope.NGconnected = false;
+        $rootScope.NGconnected = false;
+        $rootScope.NGvoyage = false;
+        $rootScope.NGjours = false;
+        $rootScope.NGtransport = false;
+        $rootScope.NGutilisateur = false;
+        $rootScope.NGactivite = false;
+        
         localStorage.setItem("back", window.location.href);
        s = window.location.protocol + "//" + window.location.host;
     window.location = s;
