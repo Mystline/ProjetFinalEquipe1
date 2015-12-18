@@ -48,12 +48,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
                 GlobalService.selectVoyage = voyage;
                 $rootScope.voyageSelect = voyage;
                 
-        $rootScope.NGconnected = true;
-        $rootScope.NGvoyage = true;
-        $rootScope.NGjours = true;
-        $rootScope.NGtransport = false;
-        $rootScope.NGutilisateur = true;
-        $rootScope.NGactivite = false;
+
                 
                 $rootScope.changeView('/jours'); 
             
