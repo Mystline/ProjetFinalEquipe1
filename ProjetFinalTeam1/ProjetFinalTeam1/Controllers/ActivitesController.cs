@@ -23,10 +23,11 @@ namespace ProjetFinalTeam1.Controllers
         }
 
         [Route("api/Activites/GetActivitesJour")]
-        public List<ActiviteDTO> GetActivitesJour(Jour jour)
+        public List<ActiviteDTO> GetActivitesJour(int jourId)
         {
+            Jour jour = db.Jours.Find(jourId);
             List<ActiviteDTO> lstDTO = new List<ActiviteDTO>();
-            List<Activite> lstActivite = db.Activites.Where(a => a.Jour == jour).ToList();
+            List<Activite> lstActivite = db.Activites.Where(a => a.Jour.Id == jour.Id).ToList();
 
             foreach(Activite a in lstActivite)
             {

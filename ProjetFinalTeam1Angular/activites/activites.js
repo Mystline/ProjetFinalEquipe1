@@ -65,6 +65,33 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
         }
     }
     
+    $scope.getActivites = function() {
+        
+var jour = $rootScope.JourSelect;
+        
+        $.ajax({
+            method: 'GET',
+            url: "http://localhost:3216/api/Activites/GetActivitesJour?jourId="+$rootScope.JourSelect.Id,
+            error: function (data) {
+                console.log("Aucun jour de selectionner ou autre erreur")
+            },
+            success: function(response)
+            {
+                //console.log(response);        
+
+                for(var i =0; i< response.length; i++)
+                {
+                    var num = i+1;
+                    $scope.activites.push({HeureDebut:response[i].HeureDebut, HeureFin:response[i].HeureFin, Cout: response[i].Cout, Longitude: response[i].Longitude, Latitude: response[i].Latitude});
+                }
+                $scope.$apply();
+            }
+        });
+
+    }
+
+    $scope.getActivites();
+    
     //État recherche ou ajout d'une activité dans la vue
     $scope.selectChangeState = function(place) {
      
