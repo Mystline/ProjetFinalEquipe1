@@ -49,10 +49,10 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
                 $rootScope.voyageSelect = voyage;
                 
         $rootScope.NGconnected = true;
-        $rootScope.NGvoyage = false;
+        $rootScope.NGvoyage = true;
         $rootScope.NGjours = true;
         $rootScope.NGtransport = false;
-        $rootScope.NGutilisateur = false;
+        $rootScope.NGutilisateur = true;
         $rootScope.NGactivite = false;
                 
                 $rootScope.changeView('/jours'); 
