@@ -82,6 +82,7 @@ function UtilisateurController($scope, $rootScope, $http, $route, $sce, VoyagesS
             console.log(response);
             for(var i =0; i < response.length; i++)
                 {
+                   if($rootScope.activeUser != response[i].Email)
             $scope.users.push({Id:response[i].Id, Email:response[i].Email});
                 }
         });       
