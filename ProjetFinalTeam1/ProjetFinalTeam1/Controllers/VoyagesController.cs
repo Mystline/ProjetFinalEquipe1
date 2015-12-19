@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ProjetFinalTeam1.Models;
 using System.Globalization;
+using Microsoft.AspNet.Identity;
 
 namespace ProjetFinalTeam1.Controllers
 {
@@ -28,12 +29,22 @@ namespace ProjetFinalTeam1.Controllers
         public List<VoyageDTO> GetVoyagesDTO()
         {
             List<VoyageDTO> lstDTO = new List<VoyageDTO>();
-            List<Voyage> lstJours = db.Voyages.ToList();
 
-            foreach(Voyage v in lstJours)
+            string id = User.Identity.GetUserId();
+
+            List<Voyage> listVoyage = db.Voyages.ToList();
+
+            foreach (Voyage v in listVoyage)
             {
-                lstDTO.Add(new VoyageDTO(v));
+                foreach (ApplicationUser user in v.ApplicationUsers)
+                {
+                    if (user.Id == id)
+                    {
+                        lstDTO.Add(new VoyageDTO(v));
+                    }
+                }
             }
+
 
             return lstDTO;
         }
