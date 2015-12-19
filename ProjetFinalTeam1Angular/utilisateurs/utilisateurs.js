@@ -57,10 +57,12 @@ function UtilisateurController($scope, $rootScope, $http, $route, $sce, VoyagesS
     $scope.initVoyage = function()
     {
        
-        
+        var token = localStorage.getItem("token");
+   
         $http({
             method: 'GET',
-            url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/"
+            url: "http://localhost:3216/api/Voyages/GetVoyagesDTO/",
+            headers:{ Authorization: 'Bearer ' + token},
         }).success(function (response) {
             console.log(response);
             for(var i =0; i < response.length; i++)
@@ -73,11 +75,12 @@ function UtilisateurController($scope, $rootScope, $http, $route, $sce, VoyagesS
     
     $scope.initUser = function()
     {
-       
+       var token = localStorage.getItem("token");
         
         $http({
             method: 'GET',
-            url: "http://localhost:3216/api/Voyages/GetListUser"
+            url: "http://localhost:3216/api/Voyages/GetListUser",
+             headers:{ Authorization: 'Bearer ' + token},
         }).success(function (response) {
             console.log(response);
             for(var i =0; i < response.length; i++)

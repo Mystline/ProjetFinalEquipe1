@@ -382,10 +382,6 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
         }
     }
     
-    $scope.afficherPageSupprimer = function(transportID) {
-        
-    }
-    
     
     //=====================================================================
     //**************************GESTION TRANSPORT**************************
@@ -394,9 +390,22 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //--------------------------------------------
     //***INDEX
     //--------------------------------------------
-    //**Tous les transports
+    //Tous les transports
     function getAllTransports() {
         TransportsService.getTransports();
+    }
+    
+    //Les transports de la journee selectionne
+    function getTransportsVoyage() {
+        
+        if($rootScope.voyageSelect == null)
+        {
+            getAllTransports();
+        }
+        else
+        {
+            TransportsService.getTransportsVoyage($rootScope.voyageSelect.Id);
+        }
     }
     
     //**Les transports du voyage selectionne
@@ -413,7 +422,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     }
     
     //Exécute la methode quand on arrive sur la page Transport.
-    getTransportsVoyage();
+    getTransportsJour($rootScope.JourSelect)
     
     
     //--------------------------------------------
@@ -425,10 +434,10 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
             cout: $scope.cout,
             type: $scope.type,
             transporteur: $scope.transporteur,
-            latitudeDepart: $scope.latDepart,
-            longitudeDepart: $scope.longDepart,
-            latitudeArrive: $scope.latArrive,
-            longitudeArrive: $scope.longArrive,
+            latDepart: $scope.latDepart,
+            longDepart: $scope.longDepart,
+            latArrive: $scope.latArrive,
+            longArrive: $scope.longArrive,
             jour: $rootScope.JourSelect
         }
         
@@ -443,10 +452,10 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
             cout: $scope.cout,
             type: $scope.type,
             transporteur: $scope.transporteur,
-            latitudeDepart: -73.567543,
-            longitudeDepart: 45.501459,
-            latitudeArrive: -70,
-            longitudeArrive: 45,
+            latDepart: -73.567543,
+            longDepart: 45.501459,
+            latArrive: -70,
+            longArrive: 45,
             jour: $rootScope.JourSelect
         }
         

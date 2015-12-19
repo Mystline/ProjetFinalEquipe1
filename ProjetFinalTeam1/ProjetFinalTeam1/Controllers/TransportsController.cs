@@ -16,6 +16,15 @@ namespace ProjetFinalTeam1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //GET api/Transports/GetTransportsJour
+        [Route("api/Transports/GetTransportsJour")]
+        public List<Transport> GetTransportsJour(int jourId)
+        {
+            List<Transport> lstTransports = new List<Transport>();
+            lstTransports = db.Transports.Where(t => t.Jour.Id == jourId).ToList();
+            return lstTransports;
+        }
+
         //GET api/Transports/GetTransportsVoyage
         [Route("api/Transports/GetTransportsVoyage")]
         public List<Transport> GetTransportsVoyage(int voyageId)
