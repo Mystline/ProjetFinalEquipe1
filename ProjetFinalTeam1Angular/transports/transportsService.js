@@ -6,7 +6,7 @@ angular.module('projetequipe1.transportsService', [])
 })
 
 .service('TransportsService', function(DataService) {
-    this.dataService = DataService;
+    //this.dataService = DataService;
     
     //GET ALL TRANSPORTS
     this.getTransports = function() {
@@ -40,21 +40,6 @@ angular.module('projetequipe1.transportsService', [])
                 DataService.lstTransports.push(data[i]);
             }
         });
-//        $.ajax({
-//            type: 'GET',
-//            url: 'http://localhost:3216/api/Transports/GetTransportsJour',
-//            data:
-//            {
-//                jourId: jourId
-//            }
-//        }).success(function (data) {
-//            console.log(data);
-//            
-//            for(var i=0; i<data.length; i++)
-//            {
-//                DataService.lstTransports.push(data[i]);
-//            }
-//        });
     };
     
     //**GET TRANSPORTS DU VOYAGES
@@ -108,10 +93,12 @@ angular.module('projetequipe1.transportsService', [])
             }
         }).success(function(data) {
             console.log(data);
+            //this.getTransportsJour(transport.jour.Id);
+            //DataService.lstTransports.push(transport);
         })
     };
     
-    //**UPDATE
+    //X UPDATE
     this.updateTransport = function(transport) {
         $.ajax({
             type: 'PUT',

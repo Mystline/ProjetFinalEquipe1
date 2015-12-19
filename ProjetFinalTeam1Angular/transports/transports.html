@@ -1,7 +1,7 @@
 <div ng-controller="TransportController">
     <div class="container">
         <h1>Transports</h1>
-        <button ng-click="afficherPage('Index')" class="btn btn-default">Afficher tous les transports</button>
+        <button ng-click="afficherPage('Index')" class="btn btn-default">Liste des transports de la journée</button>
         <button ng-click="resetValueDansCreation(); afficherPage('Create')" class="btn btn-default">Créer un nouveu transport</button>
 <!--        <button ng-click="afficherPage('Modif')" class="btn btn-default">Modifier un transport</button>-->
         
@@ -37,7 +37,7 @@
                         <td class="text-center">
                             <a ng-click="afficherItineraireAvecCoordonnees(transport.Type, transport.LatDepart, transport.LongDepart, transport.LatArrive, transport.LongArrive)" class='btn btn-primary btn-xs'><span class="glyphicon glyphicon-ok"></span> Afficher</a>
 <!--                            <a ng-click="afficherPage('Modif')" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>-->
-                            <a ng-click="afficherPage('Supp')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
+                            <a ng-click="supprimerTransport(transport.Id)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
                         </td>
                     </tr>
                 </table>
@@ -46,8 +46,8 @@
             
             <h2>Google map</h2>
             <div id="mapIndex" style="width:500px;height:400px"></div>
-            <button ng-click="afficherItineraireSansCoord('Cégep Édouard Montpetit', '170 Boulevard Taschereau, La Prairie, QC J5R 1S8')" class="btn btn-default">Afficher un itineraire (Hardcode)</button>
-            <button ng-click="initPlane(37.772323, -122.214897, -27.46758, 153.027892)" class="btn btn-default">Afficher un itineraire (Avion)(Hardcode)</button>
+            <button ng-click="afficherItineraireSansCoord('Cégep Édouard Montpetit', '170 Boulevard Taschereau, La Prairie, QC J5R 1S8')" class="btn btn-default">(Exemple 1) Afficher un itineraire (Sur route)</button>
+            <button ng-click="afficherItineraireAvecCoordonnees('Avion', 37.772323, -122.214897, -27.46758, 153.027892)" class="btn btn-default">(Exemple 2) Afficher un itineraire (Avion)</button>
             
         </div>
         
@@ -104,6 +104,8 @@
         </div>
         
         
+        
+<!--        =================================================================================================================-->
         <div ng-show="pageModif">
             <div style="margin-bottom:30px">
                 <h2>Modifier transport</h2>
@@ -147,6 +149,7 @@
                 <input class="btn btn-default" type="submit" value="Confirmer" style="margin-top:10px">
             </form>
         </div>
+<!--        =================================================================================================================-->
     </div>
 </div>
 

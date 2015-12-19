@@ -91,10 +91,14 @@ namespace ProjetFinalTeam1.Controllers
         [ResponseType(typeof(Transport))]
         public IHttpActionResult PostTransport(Transport transport)
         {
+            transport.Jour = db.Jours.FirstOrDefault(j => j.Id == transport.Jour.Id);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            db.Jours.FirstOrDefault(j => j.Id == transport.Jour.Id).Transports.Add(transport);
+            db.Entry(db.Jours.FirstOrDefault(j => j.Id == transport.Jour.Id)).State = EntityState.Modified;
 
             db.Transports.Add(transport);
             db.SaveChanges();

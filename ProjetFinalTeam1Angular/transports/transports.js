@@ -3,7 +3,7 @@ angular.module('projetequipe1.transports', [])
 .controller('TransportController', TransportController)
  
 function TransportController($scope, $rootScope, $http, $route, $sce, DataService, TransportsService) {
-    
+    //================================================================================
     //TODO: Get le nombre de jours du voyage.
     //$scope.lstJours = [];
     //$scope.lstNumJours = [];
@@ -32,14 +32,14 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     }*/
     //Exécute la methode.
     //getJoursVoyage();
+    //================================================================================
     
     
-    
-    $scope.lstTransports = TransportsService.dataService.lstTransports;
+    $scope.lstTransports = DataService.lstTransports;
     
     //TODO: Trouver le moyen de mettre à jour la liste index.
     $scope.$watch('DataService.lstTransports', function(newVal, oldVal, scope) {
-        scope.lstTransports = TransportsService.dataService.lstTransports;
+        scope.lstTransports = DataService.lstTransports;
     });
     
     
@@ -308,7 +308,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     $scope.initPlane = function(latDebut, longDebut, latArrive, longArrive) {
         var myLatLng = new google.maps.LatLng(0, -180);
         var myOptions = {
-            zoom: 3,
+            zoom: 2,
             center: myLatLng,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
@@ -423,7 +423,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     
     //Exécute la methode quand on arrive sur la page Transport.
     getTransportsJour($rootScope.JourSelect);
-    
+    $scope.afficherPage('Index');
     
     //--------------------------------------------
     //**CREATE
@@ -447,7 +447,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //--------------------------------------------
     //***MODIFIER
     //--------------------------------------------
-    $scope.modifierTransport = function() {
+    /*$scope.modifierTransport = function() {
         var transportModif = {
             cout: $scope.cout,
             type: $scope.type,
@@ -460,14 +460,14 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
         }
         
         TransportsService.updateTransport(transportModif, $scope.transportID);
-    }
+    }*/
     
     //--------------------------------------------
     //***SUPPRIMER
     //--------------------------------------------
-    $scope.supprimerTransport = function() {
+    $scope.supprimerTransport = function(transportID) {
         
-        TransportsService.deleteTransport($scope.transportID);
+        TransportsService.deleteTransport(transportID);
     }
     
 }

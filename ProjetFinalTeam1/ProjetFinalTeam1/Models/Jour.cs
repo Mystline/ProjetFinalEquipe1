@@ -19,5 +19,7 @@ namespace ProjetFinalTeam1.Models
         public virtual Voyage Voyage { get; set; }
 
         public virtual List<Activite> Activites { get; set; }
+
+        public virtual List<Transport> Transports { get; set; }
     }
 }
