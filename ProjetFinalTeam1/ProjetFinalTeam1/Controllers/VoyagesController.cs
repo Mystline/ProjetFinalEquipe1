@@ -30,7 +30,16 @@ namespace ProjetFinalTeam1.Controllers
         {
             List<VoyageDTO> lstDTO = new List<VoyageDTO>();
 
-            string id = User.Identity.GetUserId();
+
+            List<Voyage> listVoyage = db.Voyages.ToList();
+
+            foreach(Voyage v in listVoyage)
+            {
+                lstDTO.Add(new VoyageDTO(v));
+
+            }
+
+            /*string id = User.Identity.GetUserId();
 
             List<Voyage> listVoyage = db.Voyages.ToList();
 
@@ -43,7 +52,7 @@ namespace ProjetFinalTeam1.Controllers
                         lstDTO.Add(new VoyageDTO(v));
                     }
                 }
-            }
+            }*/
 
 
             return lstDTO;
@@ -133,6 +142,8 @@ namespace ProjetFinalTeam1.Controllers
         public IHttpActionResult PostVoyage(Voyage voyage)
         {
 
+            string id = User.Identity.GetUserId();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -148,7 +159,11 @@ namespace ProjetFinalTeam1.Controllers
                 db.Jours.Add(temp);
                 voyage.Jours.Add(temp);
             }
-            
+
+            /*ApplicationUser user = db.Users.FirstOrDefault(u => u.Id == id);
+
+            voyage.ApplicationUsers.Add(db.Users.FirstOrDefault(u => u.Id == id));*/
+
             db.Voyages.Add(voyage);
             db.SaveChanges();
 
