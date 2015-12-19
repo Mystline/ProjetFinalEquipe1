@@ -23,21 +23,21 @@
 
                     </td>
                 </tr>
+                
             </table>
-            
+            <h4 style="color:red;" ng-show="showDepassement">Vous avez dépasser le budget pour votre voyage !!!</h4>
             <button ng-click="changeView('/voyages')" class="btn btn-primary">Retour aux voyages</button>
             
         </div>
         
         <div class="col-md-4">
             <h1>Infos journées</h1>
-            <div ng-show="jourInfo" style="background-color:lightgray;">
-                <h1>Bugdet Jour : {{budgetJour}} $</h1>
+            <div ng-show="jourInfo">
+                <h1>Bugdet de le journée : {{budgetJour}} $</h1>
                 </br>
-                <h1>Nombre d'activite : {{nbEvent}}</h1>
-                </br>
-                <button ng-click="allowModif()" class="btn btn-primary">Modifier budget</button>
-                <button ng-click="showLstActivites()" class="btn btn-primary"  >Consulter activitees</button>
+                <button ng-click="allowModif()" class="btn btn-primary">Modifier ce budget</button>
+                <button ng-click="changeView('/activites')" class="btn btn-primary"  >Consulter activitees</button>
+                <button ng-click="changeView('/transports')" class="btn btn-primary"  >Consulter transports</button>
             </div>
         
             <div ng-show="modifJour" style="background-color:lightgray;">
@@ -50,11 +50,6 @@
             </div>
         </div>
         
-        <div class="col-md-4" ng-show="lstActivite">
-            <h1>Liste des activités</h1>
-            
-            <button ng-click="selectionnerActivitie()" class="btn btn-primary"  >Consulter cette activite</button>
-        </div>
     
     </div>
 </div>

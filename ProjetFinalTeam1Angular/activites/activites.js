@@ -7,7 +7,11 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
     
     var API_KEY = "AIzaSyDY1hVrLnYHWLhr4X-RzJs5c2Y6r-43hwM";
     
-    $scope.selectState = false;
+    $scope.showList = true;
+    $scope.showRecherche = false;
+    $scope.showAjout = false;
+    
+    $scope.test = "";
     
     $scope.latitudeRecherche = 45.501459;
     $scope.longitudeRecherche = -73.567543;
@@ -19,6 +23,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
         if($scope.HeureDebut == "" || $scope.HeureFin == "" || $scope.Cout == ""||$scope.latitudeRecherche == ""||$scope.longitudeRecherche == "")
         {
             alert("Un ou plusieurs champs ne sont pas valides");
+            return;
         }
         else
         {
@@ -63,11 +68,13 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                 console.log("erreur ajout activites");
             });
         }
+        
+        $scope.getList();
     }
     
     $scope.getActivites = function() {
         
-var jour = $rootScope.JourSelect;
+        var jour = $rootScope.JourSelect;
         
         $.ajax({
             method: 'GET',
@@ -84,22 +91,24 @@ var jour = $rootScope.JourSelect;
                     var num = i+1;
                     $scope.activites.push({HeureDebut:response[i].HeureDebut, HeureFin:response[i].HeureFin, Cout: response[i].Cout, Longitude: response[i].Longitude, Latitude: response[i].Latitude});
                 }
+                
+                console.log($scope.activites);
                 $scope.$apply();
             }
         });
 
     }
-
-    $scope.getActivites();
     
     //État recherche ou ajout d'une activité dans la vue
-    $scope.selectChangeState = function(place) {
+    $scope.getAjout = function(place) {
      
         console.log(place);
         
+        $scope.showAjout = true;
+        $scope.showList = false;
+        $scope.showRecherche = false;    
         
         $scope.resetValue();
-        $scope.selectState = !$scope.selectState;
         
         
         if(place != null)
@@ -116,16 +125,28 @@ var jour = $rootScope.JourSelect;
     
     }
     
+    $scope.getList = function()
+    {
+        $scope.showList = true;
+        $scope.showAjout = false;
+        $scope.showRecherche = false;    
+        
+        $scope.getActivites();
+    }
+    
+    $scope.getRecherche = function()
+    {
+        $scope.showList = false;
+        $scope.showAjout = false;
+        $scope.showRecherche = true;      
+    }
+    
     //Pour nettoyer le visuel et remettre les valeurs par défaut
     $scope.resetValue = function()
     {
         $scope.Latitude= "";
         $scope.Longitude = "";
         
-        
-        $scope.rechercheState = false;
-        $scope.ajoutEffectue = false;
-
         $scope.belleAdresse = "";
         
         $scope.HeureDebut = "";
@@ -229,62 +250,6 @@ var jour = $rootScope.JourSelect;
                     
                    index++;                
                 }
-                /*var e = 0;
-                for(i=0; i < results.length; i++) 
-                {
-                        if(results[i].types[0] == "lodging" || 
-                              results[i].types[0] == "restaurant" || 
-                              results[i].types[0] == "food" || 
-                              results[i].types[0] == "point of interest" || 
-                              results[i].types[0] == "point_of_interest" )
-                        {
-                            bounds.extend(results[i].geometry.location);
-                            $scope.places.push(results[i]);
-                            var marker = new google.maps.Marker({
-                                position: $scope.places[i].geometry.location,
-                                map: map,
-                                icon: results[i].icon,
-                                name: results[i].name
-
-                            });
-                            
-                            $scope.markers.push(marker);
-                            var content = '<div><div id="infowindow_content" ng-include src="\'info.html\'"></div><div>';
-                            google.maps.event.addListener(marker, 'click', 
-                                (function( marker , scope, content , place ){
-                                    return function(){
-                                        $rootScope.place = place;
-                                        var compiled = $compile(content)(scope);
-                                        scope.$apply();
-                                        scope.infoWindow.setContent( compiled[0] );
-                                        scope.infoWindow.open( map , marker );                                        
-                                    };
-                                })( marker , $scope, content , results[i] )
-                            );                            
-                        } 
-                }*//*
-                for(i=0; i<5; i++) {
-                bounds.extend(results[i].geometry.location);
-                $scope.places.push(results[i]);
-                var marker = new google.maps.Marker({
-                    position: $scope.places[i].geometry.location,
-                    map: map,
-                    icon: results[i].icon
-                })
-                $scope.markers.push(marker);
-                var content = '<div><div id="infowindow_content" ng-include src="\'info.html\'"></div><div>';
-                google.maps.event.addListener(marker, 'click', 
-                    (function( marker , scope, content , place ){
-                        return function(){
-                            $rootScope.place = place;
-                            var compiled = $compile(content)(scope);
-                            scope.$apply();
-                            scope.infoWindow.setContent( compiled[0] );
-                            scope.infoWindow.open( map , marker );                                        
-                        };
-                    })( marker , $scope, content , results[i] )
-                );
-            }*/
                 
                 map.fitBounds(bounds);
                 
@@ -323,5 +288,8 @@ var jour = $rootScope.JourSelect;
     function pad2(number) {
         return (number < 10 ? '0' : '') + number
     }   
+    
+    
+    $scope.getActivites();
     
 }

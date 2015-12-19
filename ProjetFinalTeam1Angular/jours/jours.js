@@ -1,8 +1,8 @@
 angular
     .module('projetequipe1')
-    .controller('JourController',['$scope', '$rootScope', '$http', '$route', '$sce',
+    .controller('JourController',['$scope', '$rootScope', '$http', '$route', '$sce',  'GlobalService',
  
-function JourController($scope, $rootScope, $http, $route, $sce, $compile, $timeout) 
+function JourController($scope, $rootScope, $http, $route, $sce, $compile, $timeout,  GlobalService) 
 {
     
     $scope.budgetJour = 0;
@@ -10,20 +10,25 @@ function JourController($scope, $rootScope, $http, $route, $sce, $compile, $time
     
     $rootScope.JourSelect = "";
     
-    //rootScope ??
+    $scope.GlobalService = GlobalService;
+    
     $scope.lstJours = [];
     $rootScope.lstActivites = [];
     
     $scope.jourInfo = false;
     $scope.lstActivite = false;
     $scope.modifJour = false;
+    $scope.modifJour = false;
+    $scope.showDepassement = false;
     
+    $scope.budgetTotal = 0;
     
     $scope.getJours = function() {
         
         console.log("voyage get jour");
         console.log($rootScope.voyageSelect);
         $scope.lstJours = [];
+        $scope.budgetTotal = 0;
         
         $.ajax({
             method: 'GET',
@@ -37,16 +42,33 @@ function JourController($scope, $rootScope, $http, $route, $sce, $compile, $time
 
                 for(var i =0; i< response.length; i++)
                 {
+                    $scope.budgetTotal = $scope.budgetTotal + response[i].BudgetJournee;
                     var num = i+1;
                     $scope.lstJours.push({Num:num, Id:response[i].Id, Date:response[i].Date.split("T")[0]
                         , BudgetJournee:response[i].BudgetJournee, VoyageId:response[i].VoyageId})
+                    
+                    
                 }
-
+                $scope.calculerTotalBudget();
                 console.log($scope.lstJours);
                 $scope.$apply();
             }
         });
 
+    }
+    
+    $scope.calculerTotalBudget = function()
+    {
+        $scope.showDepassement = false;
+        var total = 0;
+        for(var i = 0; i<$scope.lstJours.length;i++)
+        {
+            total = (total + $scope.lstJours[i].BudgetJournee);
+            if(total > $rootScope.voyageSelect.BudgetVoyage)
+            {
+                $scope.showDepassement = true;
+            }
+        }
     }
     
     $scope.showJour = function(jour)
@@ -67,11 +89,6 @@ function JourController($scope, $rootScope, $http, $route, $sce, $compile, $time
     
     $scope.selectionnerActivitie = function(){
          
-        console.log($rootScope.JourSelect);
-        
-
-
-        
         $rootScope.changeView('/activites');            
     }
     
@@ -107,6 +124,7 @@ function JourController($scope, $rootScope, $http, $route, $sce, $compile, $time
         });
         $scope.modifJour = false;
         $scope.lstActivite = false;
+        $scope.calculerTotalBudget;
     }
       
     
