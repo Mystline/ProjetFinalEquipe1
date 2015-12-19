@@ -11,6 +11,8 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
     $scope.showRecherche = false;
     $scope.showAjout = false;
     
+    $scope.test = "";
+    
     $scope.latitudeRecherche = 45.501459;
     $scope.longitudeRecherche = -73.567543;
     
@@ -21,6 +23,7 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
         if($scope.HeureDebut == "" || $scope.HeureFin == "" || $scope.Cout == ""||$scope.latitudeRecherche == ""||$scope.longitudeRecherche == "")
         {
             alert("Un ou plusieurs champs ne sont pas valides");
+            return;
         }
         else
         {
@@ -88,6 +91,8 @@ function ActiviteController($scope, $rootScope, $http, $route, $sce, $compile, $
                     var num = i+1;
                     $scope.activites.push({HeureDebut:response[i].HeureDebut, HeureFin:response[i].HeureFin, Cout: response[i].Cout, Longitude: response[i].Longitude, Latitude: response[i].Latitude});
                 }
+                
+                console.log($scope.activites);
                 $scope.$apply();
             }
         });

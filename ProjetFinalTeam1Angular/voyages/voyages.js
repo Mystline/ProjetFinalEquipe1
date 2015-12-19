@@ -46,7 +46,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
             //Selection du voyage
             $scope.selectionnerVoyage = function(voyage){
                 console.log(voyage);
-                $scope.GlobalService.selectVoyage = voyage;
+                GlobalService.selectVoyage = voyage;
                 $rootScope.voyageSelect = voyage;
                 
 

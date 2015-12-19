@@ -18,6 +18,7 @@ function JourController($scope, $rootScope, $http, $route, $sce, $compile, $time
     $scope.jourInfo = false;
     $scope.lstActivite = false;
     $scope.modifJour = false;
+    $scope.modifJour = false;
     $scope.showDepassement = false;
     
     $scope.budgetTotal = 0;
