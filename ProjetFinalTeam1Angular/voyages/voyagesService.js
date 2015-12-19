@@ -45,5 +45,30 @@ angular.module('projetequipe1.voyagesService', [])
                 }
         });       
     }    
+    
+    //DELETE A VOYAGE FROM DATABASE
+    this.deleteVoyage = function(id)
+    {
+        var count = 0;
+        for(var i = 0; i < VoyageDataService.lstVoyages.length; i++)
+        {
+            if(id == VoyageDataService.lstVoyages[i].Id)
+            {
+                VoyageDataService.lstVoyages.slice(count);
+            }
+                
+            count++   
+        }
+        
+        
+        $http({
+            method: 'DELETE',
+            url: "http://localhost:3216/api/Voyages/?id="+id
+        }).success(function (response) {
+            console.log(response);
+
+        });       
+    }    
+    
 });
 

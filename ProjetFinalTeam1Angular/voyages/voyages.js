@@ -55,6 +55,12 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
             
             }
             
+            //Supprimer un voyage
+            $scope.supprimerVoyage = function(voyage)
+            {
+                VoyagesService.deleteVoyage(voyage.Id);  
+            }
+            
             //Performe la validation pour l'ajout de voyage
             $scope.applyValidation = function (keyEvent) {
                 $timeout(function () {
