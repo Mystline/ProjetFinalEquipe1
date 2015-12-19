@@ -1,7 +1,7 @@
 
 <div ng-controller="ActiviteController">
     
-    <div ng-show="showList"></div>
+    <div ng-show="showList">
     
         <div class="row">
             <div class="col-md-2"></div>
@@ -36,16 +36,24 @@
             </div>
             <div class="col-md-2"></div>      
         </div>
-  
+    
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <button class="btn btn-primary" ng-click="getRecherche()">Créer une activité</button>
+                <button class="btn btn-primary" ng-click="getRecherche()">Ajouter une activité</button>
             </div>
             <div class="col-md-2"></div>      
         </div>
-        
+    
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <button class="btn btn-primary" ng-click="changeView('/jours')">Retour aux journées</button>
+            </div>
+            <div class="col-md-2"></div>      
+        </div>
     </div>
+
     
     <div ng-show="showRecherche">
         <section id="geocode">
@@ -154,9 +162,10 @@
             <ul id="voyageerror"></ul>           
 <!--            <ul>{{voyageError}}</ul>-->
         </div>
+        
 
     </div>
-</div>
+    
 </div>
 
 
