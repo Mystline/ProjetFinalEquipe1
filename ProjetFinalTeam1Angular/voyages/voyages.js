@@ -13,7 +13,8 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
             
             $scope.voyages = VoyagesService.dataService.lstVoyages;
             
-            $scope.VoyagesService = VoyagesService;            
+            $scope.VoyagesService = VoyagesService;       
+            $scope.GlobalService = GlobalService;  
             
             $scope.$watch('VoyagesService.dataService.lstVoyages', function(newVal, oldVal, scope) {
                 console.log("valeur ajouter");
@@ -45,7 +46,7 @@ function VoyageController($scope, $rootScope, $http, $route, $sce, $timeout, Voy
             //Selection du voyage
             $scope.selectionnerVoyage = function(voyage){
                 console.log(voyage);
-                GlobalService.selectVoyage = voyage;
+                $scope.GlobalService.selectVoyage = voyage;
                 $rootScope.voyageSelect = voyage;
                 
 

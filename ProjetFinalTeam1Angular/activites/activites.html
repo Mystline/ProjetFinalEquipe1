@@ -1,6 +1,53 @@
 
 <div ng-controller="ActiviteController">
-    <div ng-show="!selectState">
+    
+    <div ng-show="showList"></div>
+    
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <h1>Liste des activités pour cette journée</h1>
+            </div>
+            <div class="col-md-2"></div>      
+        </div>
+      
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table class="table table-striped custab">
+                    <thead>
+                        <tr>
+                            <th>HeureDebut</th>
+                            <th>HeureFin</th>
+                            <th>Cout</th>
+                            <th>LongDepart</th>
+                            <th>LatDepart</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="activite in activites">
+                        <td>{{activite.HeureDebut}}</td>
+                        <td>{{activite.HeureFin}}</td>
+                        <td>{{activite.Cout}}</td>
+                        <td>{{activite.Longitude}}</td>
+                        <td>{{activite.Latitude}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-2"></div>      
+        </div>
+  
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <button class="btn btn-primary" ng-click="getRecherche()">Créer une activité</button>
+            </div>
+            <div class="col-md-2"></div>      
+        </div>
+        
+    </div>
+    
+    <div ng-show="showRecherche">
         <section id="geocode">
                 <div class="container">
 
@@ -22,7 +69,7 @@
                             <div class="about-item scrollpoint sp-effect5">
                                 <h3>Résultat</h3>
                                 <p>Adresse formaté : {{belleAdresse}}</p>
-                                <button class="btn btn-primary" ng-click="selectChangeState()" ng-show="rechercheState">Choisir cette activité</button>
+                                <button class="btn btn-primary" ng-click="getAjout()" ng-show="rechercheState">Choisir cette activité</button>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6" >
@@ -54,7 +101,7 @@
                                     <li class="list-group-item" ng-repeat="place in places">
                                         <div class="review-comment">                                                                      
                                             <h3><img ng-src="{{place.icon}}" alt=""> {{place.name}}</h3>
-                                            <button class="btn btn-primary" ng-click="selectChangeState(place)">Choisir cette activité</button>
+                                            <button class="btn btn-primary" ng-click="getAjout(place)">Choisir cette activité</button>
                                         </div>
                                     </li>
                                 </ul>
@@ -69,7 +116,7 @@
     </div>
     
     
-    <div class="container" ng-show="selectState">
+    <div class="container" ng-show="showAjout">
          
         <div class="row" ng-show="!ajoutEffectue">
             <form>
@@ -107,30 +154,7 @@
             <ul id="voyageerror"></ul>           
 <!--            <ul>{{voyageError}}</ul>-->
         </div>
-        <button class="btn btn-primary" ng-click="selectChangeState()">Faire un autre ajout d'activitee</button>
-        <div class="row">
-            <table class="table table-striped custab">
-                <thead>
-                    <tr>
-                        <th>HeureDebut</th>
-                        <th>HeureFin</th>
-                        <th>Cout</th>
-                        <th>LongDepart</th>
-                        <th>LatDepart</th>
-                        <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tr ng-repeat="activite in activites">
-                    <td>{{activite.HeureDebut}}</td>
-                    <td>{{activite.HeureFin}}</td>
-                    <td>{{activite.Cout}}</td>
-                    <td>{{activite.Longitude}}</td>
-                    <td>{{activite.Latitude}}</td>
-                </tr>
-            </table>
-        </div>
-        
-    
+
     </div>
 </div>
 </div>
