@@ -409,7 +409,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     }
     
     //**Les transports du voyage selectionne
-    function getTransportsVoyage() {
+    function getTransportsJour() {
         
         if($rootScope.voyageSelect == null)
         {
@@ -422,7 +422,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     }
     
     //Exécute la methode quand on arrive sur la page Transport.
-    getTransportsJour($rootScope.JourSelect)
+    getTransportsJour($rootScope.JourSelect);
     
     
     //--------------------------------------------
