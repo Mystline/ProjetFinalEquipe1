@@ -84,16 +84,16 @@ angular.module('projetequipe1.transportsService', [])
             url: 'http://localhost:3216/api/Transports/'+transport.Id,
             data:
             {
-                id: transport.Id,
-                Id: transport.Id,
-                Cout: transport.Cout,
-                Type: transport.Type,
-                Transporteur: transport.Transporteur,
-                LatDepart: transport.LatDepart,
-                LongDepart: transport.LongDepart,
-                LatArrive: transport.LatArrive,
-                LongArrive: transport.LongArrive,
-                Jour: transport.Jour
+                id: transport.id,
+                Id: transport.id,
+                Cout: transport.cout,
+                Type: transport.type,
+                Transporteur: transport.transporteur,
+                LatDepart: transport.latDepart,
+                LongDepart: transport.longDepart,
+                LatArrive: transport.latArrive,
+                LongArrive: transport.longArrive,
+                Jour: transport.jour
             }
         }).success(function(data) {
             console.log(data);
