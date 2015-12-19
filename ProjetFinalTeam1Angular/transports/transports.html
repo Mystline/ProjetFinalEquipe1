@@ -3,7 +3,7 @@
         <h1>Transports</h1>
         <button ng-click="afficherPage('Index')" class="btn btn-default">Afficher tous les transports</button>
         <button ng-click="resetValueDansCreation(); afficherPage('Create')" class="btn btn-default">Créer un nouveu transport</button>
-        <button ng-click="afficherPage('Modif')" class="btn btn-default">Modifier un transport</button>
+<!--        <button ng-click="afficherPage('Modif')" class="btn btn-default">Modifier un transport</button>-->
         
         
         <div ng-show="pageIndex" style="margin-bottom:50px">
@@ -36,8 +36,7 @@
                         <td>{{transport.LongArrive}}</td>
                         <td class="text-center">
                             <a ng-click="afficherItineraireAvecCoordonnees(transport.Type, transport.LatDepart, transport.LongDepart, transport.LatArrive, transport.LongArrive)" class='btn btn-primary btn-xs'><span class="glyphicon glyphicon-ok"></span> Afficher</a>
-                            <a ng-click="afficherPage('Modif')" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>
-    <!--                        <a ng-click="selectionnerTransport(transport)" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Gérer</a>-->
+<!--                            <a ng-click="afficherPage('Modif')" class='btn btn-info btn-xs'><span class="glyphicon glyphicon-edit"></span> Modifier</a>-->
                             <a ng-click="afficherPage('Supp')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a>
                         </td>
                     </tr>
@@ -49,8 +48,6 @@
             <div id="mapIndex" style="width:500px;height:400px"></div>
             <button ng-click="afficherItineraireSansCoord('Cégep Édouard Montpetit', '170 Boulevard Taschereau, La Prairie, QC J5R 1S8')" class="btn btn-default">Afficher un itineraire (Hardcode)</button>
             <button ng-click="initPlane(37.772323, -122.214897, -27.46758, 153.027892)" class="btn btn-default">Afficher un itineraire (Avion)(Hardcode)</button>
-            
-            <!--<button ng-click="afficherLesActivites()" class="btn btn-default" value="Salut">Choisir</button>-->
             
         </div>
         

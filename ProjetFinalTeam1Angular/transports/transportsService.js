@@ -23,6 +23,40 @@ angular.module('projetequipe1.transportsService', [])
         });
     };
     
+    //GET TRANSPORTS DE LA JOURNEE
+    this.getTransportsJour = function(jourId) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3216/api/Transports/GetTransportsJour',
+            data:
+            {
+                jourId: jourId
+            }
+        }).success(function (data) {
+            console.log(data);
+            
+            for(var i=0; i<data.length; i++)
+            {
+                DataService.lstTransports.push(data[i]);
+            }
+        });
+//        $.ajax({
+//            type: 'GET',
+//            url: 'http://localhost:3216/api/Transports/GetTransportsJour',
+//            data:
+//            {
+//                jourId: jourId
+//            }
+//        }).success(function (data) {
+//            console.log(data);
+//            
+//            for(var i=0; i<data.length; i++)
+//            {
+//                DataService.lstTransports.push(data[i]);
+//            }
+//        });
+    };
+    
     //**GET TRANSPORTS DU VOYAGES
     this.getTransportsVoyage = function(voyageId) {
         $.ajax({

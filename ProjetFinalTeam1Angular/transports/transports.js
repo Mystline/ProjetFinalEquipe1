@@ -382,10 +382,6 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
         }
     }
     
-    $scope.afficherPageSupprimer = function(transportID) {
-        
-    }
-    
     
     //=====================================================================
     //**************************GESTION TRANSPORT**************************
@@ -394,9 +390,22 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     //--------------------------------------------
     //***INDEX
     //--------------------------------------------
-    //**Tous les transports
+    //Tous les transports
     function getAllTransports() {
         TransportsService.getTransports();
+    }
+    
+    //Les transports de la journee selectionne
+    function getTransportsVoyage() {
+        
+        if($rootScope.voyageSelect == null)
+        {
+            getAllTransports();
+        }
+        else
+        {
+            TransportsService.getTransportsVoyage($rootScope.voyageSelect.Id);
+        }
     }
     
     //**Les transports du voyage selectionne
@@ -413,7 +422,7 @@ function TransportController($scope, $rootScope, $http, $route, $sce, DataServic
     }
     
     //Exécute la methode quand on arrive sur la page Transport.
-    getTransportsVoyage();
+    getTransportsJour($rootScope.JourSelect)
     
     
     //--------------------------------------------
