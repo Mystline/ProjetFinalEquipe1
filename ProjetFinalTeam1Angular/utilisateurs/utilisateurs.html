@@ -1,31 +1,35 @@
 <div ng-controller="UtilisateurController">
-   <div class="col-md-4">
 
-        </div>
+
+
         
-        <div class="col-md-4">
-            <h1>Partage de voyage</h1>
-            
-            <h2>Drop down list ?</h2>
-            
-            <button  class="btn btn-primary">Choisir voyage</button>
-            
-            
-            <div>
-            
-                <h1>Choisir utilisateur pour partage</h1>
-                
-                <h2>Drop down list ? ou Search Bar qui utilise service user(loader au debut)</h2>
-                
-                <button class="btn btn-primary">Partager</button>
-            
-            </div>
+    <div id="content">
+      <div class="col-md-10">
+          <button width="60" height="100" ng-click="Partage()" class="btn btn-primary">Partager</button> 
+                <h1>Choisir Voyage pour partage</h1>
+    <div class="c-item" ng-repeat="x in voyages">
+        <div ng-click="selectionnerVoyage(x)" class="item voyage selectedItem" data-id="{{x.ID}}">
+            <p class="i-name">V</p>
+            <p class="name">{{x.Nom}}</p>
         </div>
-        
-        <div class="col-md-4">
-            
-        
+    </div>       
+        <H1>{{voyageSelected}} </H1>
+</div>
+      <div class="col-md-10">
+
+    <h1>Choisir user pour partage</h1>
+    <div class="c-item" ng-repeat="x in users">
+        <div ng-click="selectionnerUser(x)"  class="item voyage selectedItem" data-id="{{x.ID}}">
+            <p class="i-name">U</p>
+            <p class="name">{{x.Email}}</p>
         </div>
+    </div>  
+        <H1>{{userSelected}} </H1>
+    </div>
+   </div>
+   
+    
+    
 </div>
 
 

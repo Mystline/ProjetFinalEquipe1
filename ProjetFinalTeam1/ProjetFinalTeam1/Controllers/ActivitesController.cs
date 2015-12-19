@@ -22,6 +22,8 @@ namespace ProjetFinalTeam1.Controllers
             return db.Activites;
         }
 
+       
+
         [Route("api/Activites/GetActivitesJour")]
         public List<ActiviteDTO> GetActivitesJour(int jourId)
         {

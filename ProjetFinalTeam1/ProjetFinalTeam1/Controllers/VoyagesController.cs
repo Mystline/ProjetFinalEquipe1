@@ -37,6 +37,37 @@ namespace ProjetFinalTeam1.Controllers
 
             return lstDTO;
         }
+        public class UserModel
+        {
+            public string Id { get; set; }
+            public string Email { get; set; }
+        }
+        [Route("api/Voyages/GetListUser")]
+        public List<UserModel> GetListUser()
+        {
+            List<UserModel> list = new List<UserModel>();
+
+            foreach (ApplicationUser u in db.Users)
+            {
+                UserModel user = new UserModel();
+                user.Id = u.Id;
+                user.Email = u.Email;
+                list.Add(user);
+            }
+
+            return list;
+        }
+
+        [Route("api/Voyages/GetPartage")]
+        public string GetActivitesJour(string userId,int voyageId)
+        {
+            Voyage v = db.Voyages.Find(voyageId);
+
+            db.Users.Find(userId).Voyages.Add(v);
+            db.SaveChanges();
+
+            return "success";
+        }
 
         // GET: api/Voyages/5
         [ResponseType(typeof(Voyage))]
